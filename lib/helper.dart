@@ -10,6 +10,7 @@ class SettingHelper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backC = Theme.of(context).backgroundColor;
     final Data data = Data();
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -18,6 +19,8 @@ class SettingHelper extends StatelessWidget {
           getThemeManager(context).selectThemeAtIndex(index);
         },
         child: ClayContainer(
+          parentColor: backC,
+          surfaceColor: backC,
           height: 50,
           width: 100,
           depth: Theme.of(context).backgroundColor ==

@@ -8,7 +8,7 @@ List<ThemeData> getThemes() {
     ),
     ThemeData(
       brightness: Brightness.dark,
-      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+      backgroundColor: Color.fromRGBO(10, 10, 10, 1),
     ),
     ThemeData(
       brightness: Brightness.dark,
@@ -17,6 +17,26 @@ List<ThemeData> getThemes() {
     ThemeData(
       brightness: Brightness.dark,
       backgroundColor: Color.fromRGBO(40, 20, 25, 1),
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      backgroundColor: Color.fromRGBO(35, 18, 8, 1),
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      backgroundColor: Color.fromRGBO(4, 31, 21, 1),
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      backgroundColor: Color.fromRGBO(57, 0, 0, 1),
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      backgroundColor: Color.fromRGBO(12, 22, 22, 1),
     ),
   ];
 }

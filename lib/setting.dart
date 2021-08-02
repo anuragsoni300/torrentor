@@ -21,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var backC = Theme.of(context).backgroundColor;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
@@ -45,6 +46,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ClayContainer(
+                    parentColor: backC,
+                    surfaceColor: backC,
                     height: 50,
                     width: 50,
                     curveType: CurveType.concave,
@@ -63,6 +66,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   ClayContainer(
+                    parentColor: backC,
+                    surfaceColor: backC,
                     curveType: CurveType.concave,
                     color: Theme.of(context).backgroundColor,
                     borderRadius: 15,
@@ -122,6 +127,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         SettingHelper(index: 1),
                         SettingHelper(index: 2),
                         SettingHelper(index: 3),
+                        SettingHelper(index: 4),
+                        SettingHelper(index: 5),
+                        SettingHelper(index: 6),
+                        SettingHelper(index: 7),
+                        SettingHelper(index: 8),
                       ],
                     ),
                     Padding(

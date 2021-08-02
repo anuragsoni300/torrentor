@@ -7,6 +7,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var backC = Theme.of(context).backgroundColor;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
@@ -20,6 +21,8 @@ class MainPage extends StatelessWidget {
               : Brightness.dark,
     ));
     return ClayContainer(
+      parentColor: backC,
+      surfaceColor: backC,
       curveType: CurveType.concave,
       borderRadius: 50,
       height: 100,

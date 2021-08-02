@@ -67,6 +67,7 @@ class _SecondPageState extends State<SecondPage> {
 
   @override
   Widget build(BuildContext context) {
+    var backC = Theme.of(context).backgroundColor;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
@@ -93,6 +94,8 @@ class _SecondPageState extends State<SecondPage> {
                   Align(
                     alignment: Alignment.topRight,
                     child: ClayContainer(
+                      parentColor: backC,
+                      surfaceColor: backC,
                       emboss: true,
                       spread: 2.5,
                       height: 50,
@@ -116,6 +119,8 @@ class _SecondPageState extends State<SecondPage> {
                   SizedBox(width: 30),
                   Expanded(
                     child: ClayContainer(
+                      parentColor: backC,
+                      surfaceColor: backC,
                       color: Theme.of(context).backgroundColor,
                       height: 50,
                       emboss: true,

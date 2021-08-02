@@ -27,6 +27,7 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
 
   @override
   Widget build(BuildContext context) {
+    var backC = Theme.of(context).backgroundColor;
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: widget.torrents.isEmpty
@@ -40,6 +41,8 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, bottom: 20, top: 15),
                         child: ClayContainer(
+                          parentColor: backC,
+                          surfaceColor: backC,
                           color: Theme.of(context).backgroundColor,
                           curveType: CurveType.convex,
                           borderRadius: 15,

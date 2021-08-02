@@ -48,6 +48,8 @@ class _LottieThanksState extends State<LottieThanks>
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: ClayContainer(
+                  parentColor: backC,
+                  surfaceColor: backC,
                   curveType: CurveType.concave,
                   color: backC,
                   height: 50,
@@ -102,6 +104,8 @@ class _LottieThanksState extends State<LottieThanks>
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: ClayContainer(
+                    parentColor: backC,
+                    surfaceColor: backC,
                     curveType: CurveType.concave,
                     color: backC,
                     depth: 40,

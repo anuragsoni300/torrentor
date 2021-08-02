@@ -43,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var backC = Theme.of(context).backgroundColor;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
@@ -65,6 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 children: [
                   ClayContainer(
+                    parentColor: backC,
+                    surfaceColor: backC,
                     height: 50,
                     width: 50,
                     curveType: CurveType.concave,
@@ -116,6 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 40),
                 Center(
                   child: ClayContainer(
+                    parentColor: backC,
+                    surfaceColor: backC,
                     color: Theme.of(context).backgroundColor,
                     depth: Theme.of(context).backgroundColor ==
                             Color.fromRGBO(242, 242, 242, 1)
@@ -157,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Text(
-                      '  2.3.0',
+                      '  2.3.2',
                       style: GoogleFonts.roboto(
                         fontSize: 15,
                         textStyle: TextStyle(
