@@ -68,7 +68,7 @@ class _AdsState extends State<Ads> {
                       curveType: CurveType.concave,
                     );
                   },
-                  unitId: 'ca-app-pub-3940256099942544/6300978111',
+                  unitId: 'ca-app-pub-5417934580154988/7353912381',
                   size: BannerSize.ADAPTIVE,
                 ),
               ),
