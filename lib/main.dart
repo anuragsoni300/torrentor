@@ -68,26 +68,34 @@ class _MyHomePageState extends State<MyHomePage> {
                   ClayContainer(
                     parentColor: backC,
                     surfaceColor: backC,
+                    color: backC,
+                    curveType: CurveType.convex,
+                    borderRadius: 15,
+                    spread:
+                        Theme.of(context).brightness == Brightness.dark ? 0 : 0,
                     height: 50,
                     width: 50,
-                    curveType: CurveType.concave,
-                    color: Theme.of(context).backgroundColor,
-                    borderRadius: 20,
-                    depth: 20,
                     child: OpenContainer(
                       closedElevation: 0.0,
                       closedColor: Colors.transparent,
-                      transitionDuration: Duration(milliseconds: 500),
+                      transitionDuration: Duration(milliseconds: 400),
+                      closedShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
                       transitionType: ContainerTransitionType.fadeThrough,
-                      openColor: Theme.of(context).backgroundColor,
+                      openColor: backC,
                       openElevation: 0.0,
                       closedBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Icon(
-                          Icons.settings,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.tealAccent
-                              : Colors.black,
+                        padding: EdgeInsets.all(13),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? 'assets/setting_dark.png'
+                                    : 'assets/setting.png',
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       openBuilder: (context, index) => SettingsScreen(),
@@ -122,10 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     parentColor: backC,
                     surfaceColor: backC,
                     color: Theme.of(context).backgroundColor,
-                    depth: Theme.of(context).backgroundColor ==
-                            Color.fromRGBO(242, 242, 242, 1)
-                        ? 40
-                        : 20,
+                    depth: 0,
                     borderRadius: 50,
                     height: 100,
                     width: 100,
@@ -162,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Text(
-                      '  2.3.2',
+                      '  1.0.0',
                       style: GoogleFonts.roboto(
                         fontSize: 15,
                         textStyle: TextStyle(

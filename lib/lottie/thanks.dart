@@ -1,5 +1,3 @@
-import 'package:clay_containers/constants.dart';
-import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -34,89 +32,66 @@ class _LottieThanksState extends State<LottieThanks>
 
   @override
   Widget build(BuildContext context) {
-    var backC = Theme.of(context).backgroundColor;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: ClayContainer(
-                  parentColor: backC,
-                  surfaceColor: backC,
-                  curveType: CurveType.concave,
-                  color: backC,
-                  height: 50,
-                  borderRadius: 10,
-                  depth: 40,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Thanks for downloading our app',
-                          style: GoogleFonts.comfortaa(
-                            textStyle: TextStyle(
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.tealAccent
-                                  : Colors.black,
-                              height: 1.5,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                            ),
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(left: 5, right: 15, top: 8, bottom: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Loving this app?',
+                        style: GoogleFonts.comfortaa(
+                          textStyle: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white60
+                                    : Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 15,
                           ),
                         ),
-                        Text(
-                          'Share it to your friends to support us  ; )',
-                          style: GoogleFonts.comfortaa(
-                            textStyle: TextStyle(
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.tealAccent
-                                  : Colors.black,
-                              height: 1.5,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12,
-                            ),
+                      ),
+                      Text(
+                        'Share it to your friends.',
+                        style: GoogleFonts.comfortaa(
+                          textStyle: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white60
+                                    : Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 15,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: () {
                   Share.share(
-                      '''See this amazing app , it will make your day , download it now ;)
-                      https://play.google.com/store/apps/details?id=com.torrent.tor''');
+                      '''Hey buddy try this app ;)
+                      https://play.google.com/store/apps/details?id=com.torrentor.up''');
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ClayContainer(
-                    parentColor: backC,
-                    surfaceColor: backC,
-                    curveType: CurveType.concave,
-                    color: backC,
-                    depth: 40,
-                    height: 50,
-                    borderRadius: 10,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: LottieShare(),
-                      ),
-                    ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: LottieShare(),
                   ),
                 ),
               ),

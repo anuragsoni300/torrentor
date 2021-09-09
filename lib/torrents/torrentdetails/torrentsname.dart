@@ -8,7 +8,7 @@ class TorrentName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 70,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 4, 4, 0),
         child: Container(
@@ -17,18 +17,17 @@ class TorrentName extends StatelessWidget {
           child: Text(
             data.name.replaceAll('.', ' '),
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.varelaRound(
+            style: GoogleFonts.comfortaa(
               textStyle: TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey
-                    : Colors.black.withAlpha(200),
-                fontWeight: FontWeight.w100,
+                    : Colors.black87,
+                fontWeight: FontWeight.w700,
                 fontSize: 14,
                 height: 1.5,
-                wordSpacing: 2,
               ),
             ),
-            maxLines: 2,
+            maxLines: 3,
           ),
         ),
       ),

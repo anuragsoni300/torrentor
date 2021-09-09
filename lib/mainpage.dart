@@ -23,7 +23,7 @@ class MainPage extends StatelessWidget {
     return ClayContainer(
       parentColor: backC,
       surfaceColor: backC,
-      curveType: CurveType.concave,
+      curveType: CurveType.convex,
       borderRadius: 50,
       height: 100,
       width: 100,

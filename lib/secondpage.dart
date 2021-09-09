@@ -26,10 +26,8 @@ class _SecondPageState extends State<SecondPage> {
   getPirateBayTorrents(query) async {
     pirateBayFetch.welcome.clear();
     await pirateBayFetch.pirateBaySearch(query);
-    if (pirateBayFetch.welcome.length > 8) {
-      for (int i = 8; i < pirateBayFetch.welcome.length; i += 8) {
-        pirateBayFetch.welcome.insert(i, xx);
-      }
+    if (pirateBayFetch.welcome.length > 6) {
+        pirateBayFetch.welcome.insert(5, xx);
     }
     torrents.addAll(pirateBayFetch.welcome);
     if (this.mounted) setState(() {});
@@ -39,10 +37,8 @@ class _SecondPageState extends State<SecondPage> {
     rarbgSearch.welcome.clear();
     await rarbgSearch.rarbgSearch(query);
     if (rarbgSearch.welcome.isNotEmpty) {
-      if (rarbgSearch.welcome.length > 8) {
-        for (int i = 8; i < rarbgSearch.welcome.length; i += 8) {
-          rarbgSearch.welcome.insert(i, xx);
-        }
+      if (rarbgSearch.welcome.length > 6) {
+          rarbgSearch.welcome.insert(5, xx);
       }
       torrents.addAll(rarbgSearch.welcome);
       if (this.mounted) setState(() {});
@@ -54,10 +50,8 @@ class _SecondPageState extends State<SecondPage> {
     while (page < 5) {
       page++;
       var x = await nyaaFetch.nyaaSearch(query.replaceAll("'", ''), page);
-      if (x.length > 8) {
-        for (int i = 8; i < x.length; i += 8) {
-          pirateBayFetch.welcome.insert(i, xx);
-        }
+      if (x.length > 6) {
+        pirateBayFetch.welcome.insert(5, xx);
       }
       torrents.addAll(x);
       x.clear();
@@ -96,13 +90,11 @@ class _SecondPageState extends State<SecondPage> {
                     child: ClayContainer(
                       parentColor: backC,
                       surfaceColor: backC,
-                      emboss: true,
-                      spread: 2.5,
-                      height: 50,
+                      color: backC,
                       curveType: CurveType.convex,
-                      color: Theme.of(context).backgroundColor,
                       borderRadius: 15,
-                      depth: 20,
+                      spread: 0,
+                      height: 50,
                       child: IconButton(
                         splashRadius: 20,
                         icon: Icon(
@@ -121,17 +113,16 @@ class _SecondPageState extends State<SecondPage> {
                     child: ClayContainer(
                       parentColor: backC,
                       surfaceColor: backC,
-                      color: Theme.of(context).backgroundColor,
-                      height: 50,
-                      emboss: true,
+                      color: backC,
                       curveType: CurveType.convex,
-                      spread: 2.5,
                       borderRadius: 15,
-                      depth: 20,
+                      spread: 0,
+                      height: 50,
                       width: double.infinity,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10, top: 2),
                         child: TextField(
+                          keyboardType: TextInputType.visiblePassword,
                           style: GoogleFonts.varelaRound(
                             textStyle: TextStyle(
                               color: Theme.of(context).brightness ==
@@ -158,6 +149,17 @@ class _SecondPageState extends State<SecondPage> {
                             errorBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             hintText: " Search something ...",
+                            hintStyle: GoogleFonts.varelaRound(
+                              textStyle: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.w100,
+                                fontSize: 16,
+                                wordSpacing: 2,
+                              ),
+                            ),
                             icon: Icon(
                               Icons.search_rounded,
                               color: Theme.of(context).brightness ==

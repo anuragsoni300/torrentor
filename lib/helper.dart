@@ -27,6 +27,7 @@ class SettingHelper extends StatelessWidget {
                   Color.fromRGBO(242, 242, 242, 1)
               ? 60
               : 30,
+          spread: Theme.of(context).brightness == Brightness.dark ? 2 : 7,
           borderRadius: 10,
           color: Theme.of(context).backgroundColor,
           child: Padding(
