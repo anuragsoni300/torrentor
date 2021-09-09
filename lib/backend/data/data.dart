@@ -27,6 +27,4 @@ class Data {
     Color.fromRGBO(57, 0, 0, 1),
     Color.fromRGBO(12, 22, 22, 1),
   ];
-  String adsBanner = 'ca-app-pub-3940256099942544/6300978111';
-  String adRewarded = 'ca-app-pub-3940256099942544/5224354917';
 }

@@ -1,4 +1,4 @@
-package com.example.torrentor
+package com.torrentor.up
 
 import io.flutter.embedding.android.FlutterActivity
 

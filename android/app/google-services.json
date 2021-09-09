@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "89942271428",
+    "project_id": "torrentor-31e8e",
+    "storage_bucket": "torrentor-31e8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89942271428:android:87671800c1b6da8f983091",
+        "android_client_info": {
+          "package_name": "com.torrentor.up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89942271428-dhhv516e0e0m3mj6rugkq37r4vsgodag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3Lq5p61d9KkCmTq5qPF3ZTYCRlenIOUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89942271428-dhhv516e0e0m3mj6rugkq37r4vsgodag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

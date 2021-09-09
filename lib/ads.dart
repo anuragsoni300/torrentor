@@ -49,7 +49,7 @@ class _AdsState extends State<Ads> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: BannerAd(
-                  unitId: data.adsBanner,
+                  unitId: 'ca-app-pub-1670058689216989/6561412724',
                   size: BannerSize.MEDIUM_RECTANGLE,
                 ),
               ),
