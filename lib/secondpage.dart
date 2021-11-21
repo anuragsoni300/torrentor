@@ -3,6 +3,7 @@ import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/fetching/nyaa_fetching/nyaa.dart';
 import 'package:torrentor/backend/fetching/piratebay_fetching/piratebay.dart';
 import 'package:torrentor/backend/fetching/rarbg_fetching/rarbg.dart';
@@ -27,7 +28,7 @@ class _SecondPageState extends State<SecondPage> {
     pirateBayFetch.welcome.clear();
     await pirateBayFetch.pirateBaySearch(query);
     if (pirateBayFetch.welcome.length > 6) {
-        pirateBayFetch.welcome.insert(5, xx);
+      pirateBayFetch.welcome.insert(5, xx);
     }
     torrents.addAll(pirateBayFetch.welcome);
     if (this.mounted) setState(() {});
@@ -38,7 +39,7 @@ class _SecondPageState extends State<SecondPage> {
     await rarbgSearch.rarbgSearch(query);
     if (rarbgSearch.welcome.isNotEmpty) {
       if (rarbgSearch.welcome.length > 6) {
-          rarbgSearch.welcome.insert(5, xx);
+        rarbgSearch.welcome.insert(5, xx);
       }
       torrents.addAll(rarbgSearch.welcome);
       if (this.mounted) setState(() {});
@@ -81,7 +82,7 @@ class _SecondPageState extends State<SecondPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 20, right: 25, top: 20),
+              padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -92,11 +93,12 @@ class _SecondPageState extends State<SecondPage> {
                       surfaceColor: backC,
                       color: backC,
                       curveType: CurveType.convex,
-                      borderRadius: 15,
+                      borderRadius: 1.3.h,
                       spread: 0,
-                      height: 50,
+                      height: 100.w / 9,
+                      width: 100.w / 9,
                       child: IconButton(
-                        splashRadius: 20,
+                        splashRadius: 1.w,
                         icon: Icon(
                           Icons.arrow_back_ios_rounded,
                           color:
@@ -108,19 +110,19 @@ class _SecondPageState extends State<SecondPage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 30),
+                  SizedBox(width: 3.h),
                   Expanded(
                     child: ClayContainer(
                       parentColor: backC,
                       surfaceColor: backC,
                       color: backC,
                       curveType: CurveType.convex,
-                      borderRadius: 15,
+                      borderRadius: 1.3.h,
                       spread: 0,
-                      height: 50,
+                      height: 100.w / 9,
                       width: double.infinity,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 2),
+                        padding: EdgeInsets.only(left: 3.w, top: 0.1.h),
                         child: TextField(
                           keyboardType: TextInputType.visiblePassword,
                           style: GoogleFonts.varelaRound(
@@ -130,7 +132,7 @@ class _SecondPageState extends State<SecondPage> {
                                   ? Colors.white
                                   : Colors.black,
                               fontWeight: FontWeight.w100,
-                              fontSize: 16,
+                              fontSize: 10.sp,
                               wordSpacing: 2,
                             ),
                           ),
@@ -156,7 +158,7 @@ class _SecondPageState extends State<SecondPage> {
                                     ? Colors.white
                                     : Colors.black,
                                 fontWeight: FontWeight.w100,
-                                fontSize: 16,
+                                fontSize: 10.sp,
                                 wordSpacing: 2,
                               ),
                             ),
@@ -184,7 +186,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 2.h),
             show
                 ? Expanded(
                     child: MovieTorrentsList(torrents: torrents),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class TorrentLeechers extends StatelessWidget {
   final data;
@@ -24,7 +25,7 @@ class TorrentLeechers extends StatelessWidget {
                   ? Colors.white
                   : Colors.black.withAlpha(230),
               fontWeight: FontWeight.w700,
-              fontSize: 13,
+              fontSize: 10.sp,
               height: 1.5,
               wordSpacing: 2,
             ),

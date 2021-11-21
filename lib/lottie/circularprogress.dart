@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class LottieCircular extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _LottieCircularState extends State<LottieCircular>
     return Center(
       child: Lottie.asset(
         'assets/circularprogress.json',
-        height: 150,
+        height: 14.h,
         reverse: true,
         frameRate: FrameRate.max,
         controller: _controller,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class TorrentName extends StatelessWidget {
   final data;
@@ -8,11 +9,11 @@ class TorrentName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 7.h,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 4, 4, 0),
         child: Container(
-          width: MediaQuery.of(context).size.width - 50,
+          width: 95.w,
           alignment: Alignment.center,
           child: Text(
             data.name.replaceAll('.', ' '),
@@ -23,7 +24,7 @@ class TorrentName extends StatelessWidget {
                     ? Colors.grey
                     : Colors.black87,
                 fontWeight: FontWeight.w700,
-                fontSize: 14,
+                fontSize: 10.sp,
                 height: 1.5,
               ),
             ),

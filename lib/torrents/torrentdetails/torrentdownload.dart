@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TorrentDownload extends StatefulWidget {
@@ -53,8 +54,8 @@ class _TorrentDownloadState extends State<TorrentDownload>
                       color: Colors.transparent,
                       child: Center(
                         child: Container(
-                          width: 300,
-                          height: 150,
+                          width: 70.w,
+                          height: 20.h,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Theme.of(context).backgroundColor,
@@ -68,7 +69,7 @@ class _TorrentDownloadState extends State<TorrentDownload>
                                 "Cannot find any torrent downloader.\n         Download it and try again",
                                 style: GoogleFonts.comfortaa(
                                   textStyle: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 10.sp,
                                     color: Theme.of(context).backgroundColor ==
                                             Color.fromRGBO(242, 242, 242, 1)
                                         ? Colors.black
@@ -84,23 +85,29 @@ class _TorrentDownloadState extends State<TorrentDownload>
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      top: 15, bottom: 4, left: 20, right: 20),
+                                      top: 2.h,
+                                      bottom: 0.4.h,
+                                      left: 4.w,
+                                      right: 4.w),
                                   child: Card(
                                     elevation: 15,
-                                    color: Colors.blueAccent,
+                                    color: Theme.of(context).backgroundColor ==
+                                            Color.fromRGBO(242, 242, 242, 1)
+                                        ? Colors.black
+                                        : Colors.white,
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          top: 12,
-                                          bottom: 12,
-                                          left: 40,
-                                          right: 40),
+                                          top: 1.h,
+                                          bottom: 1.h,
+                                          left: 8.w,
+                                          right: 8.w),
                                       child: Text(
                                         'OK',
                                         style: GoogleFonts.comfortaa(
                                           textStyle: TextStyle(
                                             fontSize: 14,
                                             color: Theme.of(context)
-                                                        .backgroundColor ==
+                                                        .backgroundColor !=
                                                     Color.fromRGBO(
                                                         242, 242, 242, 1)
                                                 ? Colors.black

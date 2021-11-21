@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:sizer/sizer.dart';
 import 'package:torrentor/lottie/share.dart';
 
 class LottieThanks extends StatefulWidget {
@@ -37,15 +38,15 @@ class _LottieThanksState extends State<LottieThanks>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
+          padding: EdgeInsets.only(left: 2.w, right: 2.w, bottom: 1.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 2.w),
                 child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 5, right: 15, top: 8, bottom: 8),
+                  padding: EdgeInsets.only(
+                      left: 1.w, right: 2.w, top: 1.h, bottom: 1.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +61,7 @@ class _LottieThanksState extends State<LottieThanks>
                                     : Colors.black,
                             height: 1.5,
                             fontWeight: FontWeight.w100,
-                            fontSize: 15,
+                            fontSize: 10.sp,
                           ),
                         ),
                       ),
@@ -74,7 +75,7 @@ class _LottieThanksState extends State<LottieThanks>
                                     : Colors.black,
                             height: 1.5,
                             fontWeight: FontWeight.w100,
-                            fontSize: 15,
+                            fontSize: 10.sp,
                           ),
                         ),
                       ),
@@ -84,13 +85,12 @@ class _LottieThanksState extends State<LottieThanks>
               ),
               GestureDetector(
                 onTap: () {
-                  Share.share(
-                      '''Hey buddy try this app ;)
-                      https://play.google.com/store/apps/details?id=com.torrentor.up''');
+                  Share.share('''Hey buddy try this app ;)
+                      https://play.google.com/store/apps/details?id=com.torrentor.iam''');
                 },
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 15),
+                    padding: EdgeInsets.only(top: 1.5.h),
                     child: LottieShare(),
                   ),
                 ),
@@ -101,7 +101,7 @@ class _LottieThanksState extends State<LottieThanks>
         Center(
           child: Lottie.asset(
             'assets/thanks.json',
-            height: 400,
+            height: 40.h,
             reverse: true,
             frameRate: FrameRate.max,
             controller: _controller,

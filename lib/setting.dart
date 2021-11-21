@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 import 'backend/data/data.dart';
 import 'helper.dart';
@@ -38,12 +39,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 5, right: 20),
+              padding: EdgeInsets.only(top: 2.h, left: 2.w, right: 4.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    splashRadius: 10,
+                    splashRadius: 1.w,
                     icon: Icon(
                       Icons.arrow_back_ios_rounded,
                       color: Theme.of(context).brightness == Brightness.light
@@ -65,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     : Colors.black,
                             height: 1.5,
                             fontWeight: FontWeight.w700,
-                            fontSize: 28,
+                            fontSize: 20.sp,
                           ),
                         ),
                       ),
@@ -74,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 1.5.h),
             Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
@@ -84,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 20, bottom: 15, top: 10),
+                          EdgeInsets.only(left: 4.w, bottom: 1.5.h, top: 1.h),
                       child: Text(
                         'Themes',
                         style: GoogleFonts.comfortaa(
@@ -95,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     : Colors.black,
                             height: 1.5,
                             fontWeight: FontWeight.w100,
-                            fontSize: 30,
+                            fontSize: 20.sp,
                           ),
                         ),
                       ),
@@ -114,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      padding: EdgeInsets.only(left: 4.w, top: 2.h),
                       child: Text(
                         'Share',
                         style: GoogleFonts.comfortaa(
@@ -125,7 +126,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     : Colors.black,
                             height: 1.5,
                             fontWeight: FontWeight.w100,
-                            fontSize: 30,
+                            fontSize: 20.sp,
                           ),
                         ),
                       ),

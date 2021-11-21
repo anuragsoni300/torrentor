@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class TorrentSize extends StatefulWidget {
   final data;
@@ -35,7 +36,8 @@ class _TorrentSizeState extends State<TorrentSize>
   Widget build(BuildContext context) {
     double size = ((double.parse(widget.data.size) * 9.31) / 10000000000);
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 4, top: 3),
+      padding:
+          EdgeInsets.only(left: 2.w, right: 2.w, bottom: 0.4.h, top: 0.3.h),
       child: GestureDetector(
         onTap: () {
           if (_controller.isAnimating) {
@@ -52,16 +54,16 @@ class _TorrentSizeState extends State<TorrentSize>
           children: [
             Theme.of(context).brightness == Brightness.dark
                 ? Container(
-                    height: 20,
-                    width: 20,
+                    height: 4.w,
+                    width: 4.w,
                     child: SvgPicture.asset(
                       'assets/size.svg',
                       color: Colors.grey,
                     ),
                   )
                 : Container(
-                    height: 20,
-                    width: 20,
+                    height: 4.w,
+                    width: 4.w,
                     child: SvgPicture.asset(
                       'assets/size.svg',
                       color: Colors.black.withAlpha(200),
@@ -79,7 +81,7 @@ class _TorrentSizeState extends State<TorrentSize>
                       ? Colors.white
                       : Colors.black.withAlpha(230),
                   fontWeight: FontWeight.w700,
-                  fontSize: 13,
+                  fontSize: 10.sp,
                   height: 1.5,
                   wordSpacing: 2,
                 ),

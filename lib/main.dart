@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:native_admob_flutter/native_admob_flutter.dart';
+import 'package:sizer/sizer.dart';
+// import 'package:native_admob_flutter/native_admob_flutter.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/themedata.dart';
 import 'package:torrentor/mainpage.dart';
@@ -15,7 +16,7 @@ import 'package:torrentor/setting.dart';
 Future main() async {
   await ThemeManager.initialise();
   WidgetsFlutterBinding.ensureInitialized();
-  await MobileAds.initialize();
+  //await MobileAds.initialize();
   runApp(MyApp());
 }
 
@@ -24,12 +25,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ThemeBuilder(
       themes: getThemes(),
-      builder: (context, regularTheme, darkTheme, themeMode) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: regularTheme,
-        darkTheme: darkTheme,
-        themeMode: themeMode,
-        home: MyHomePage(),
+      builder: (context, regularTheme, darkTheme, themeMode) => Sizer(
+        builder: (context, orientation, deviceType) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: regularTheme,
+          darkTheme: darkTheme,
+          themeMode: themeMode,
+          home: MyHomePage(),
+        ),
       ),
     );
   }
@@ -62,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20),
+              padding: EdgeInsets.only(top: 2.h, left: 4.w),
               child: Row(
                 children: [
                   ClayContainer(
@@ -70,22 +73,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     surfaceColor: backC,
                     color: backC,
                     curveType: CurveType.convex,
-                    borderRadius: 15,
-                    spread:
-                        Theme.of(context).brightness == Brightness.dark ? 0 : 0,
-                    height: 50,
-                    width: 50,
+                    borderRadius: 1.3.h,
+                    spread: 0,
+                    height: 100.w / 9,
+                    width: 100.w / 9,
                     child: OpenContainer(
                       closedElevation: 0.0,
                       closedColor: Colors.transparent,
                       transitionDuration: Duration(milliseconds: 400),
                       closedShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                          borderRadius: BorderRadius.circular(1.2.h)),
                       transitionType: ContainerTransitionType.fadeThrough,
                       openColor: backC,
                       openElevation: 0.0,
                       closedBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.all(13),
+                        padding: EdgeInsets.all(3.w),
                         child: Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -112,28 +114,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     'TORRENTOR',
                     style: GoogleFonts.bungeeInline(
-                      fontSize: 25,
+                      fontSize: 20.sp,
                       textStyle: TextStyle(
                         color: Theme.of(context).brightness == Brightness.dark
                             ? Colors.grey
                             : Colors.black.withAlpha(200),
                         fontWeight: FontWeight.w100,
-                        fontSize: 14,
                         wordSpacing: 2,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 4.h),
                 Center(
                   child: ClayContainer(
                     parentColor: backC,
                     surfaceColor: backC,
                     color: Theme.of(context).backgroundColor,
                     depth: 0,
-                    borderRadius: 50,
-                    height: 100,
-                    width: 100,
+                    borderRadius: 25.w / 2,
+                    height: 25.w,
+                    width: 25.w,
                     child: OpenContainer(
                       closedElevation: 0.0,
                       closedColor: Colors.transparent,
@@ -149,15 +150,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(2.w),
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 30,
-                      width: 30,
+                      height: 6.w,
+                      width: 6.w,
                       alignment: Alignment.bottomCenter,
                       child: SvgPicture.asset(
                         'assets/app.svg',
@@ -167,15 +168,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Text(
-                      '  1.0.0',
+                      '  1.0.1',
                       style: GoogleFonts.roboto(
-                        fontSize: 15,
+                        fontSize: 12.sp,
                         textStyle: TextStyle(
                           color: Theme.of(context).brightness == Brightness.dark
                               ? Colors.grey
                               : Colors.black.withAlpha(200),
                           fontWeight: FontWeight.w700,
-                          fontSize: 14,
                           wordSpacing: 2,
                         ),
                       ),

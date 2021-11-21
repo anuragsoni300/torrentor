@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class LottieShare extends StatefulWidget {
   @override
@@ -34,8 +35,8 @@ class _LottieShareState extends State<LottieShare>
         Theme.of(context).backgroundColor == Color.fromRGBO(242, 242, 242, 1)
             ? 'assets/share.json'
             : 'assets/share_dark.json',
-        height: 50,
-        width: 50,
+        height: 12.w,
+        width: 12.w,
         reverse: true,
         frameRate: FrameRate.max,
         controller: _controller,

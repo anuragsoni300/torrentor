@@ -1,6 +1,7 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/data.dart';
 
@@ -21,19 +22,16 @@ class SettingHelper extends StatelessWidget {
         child: ClayContainer(
           parentColor: backC,
           surfaceColor: backC,
-          height: 50,
-          width: 100,
-          depth: Theme.of(context).backgroundColor ==
-                  Color.fromRGBO(242, 242, 242, 1)
-              ? 60
-              : 30,
+          height: 12.w,
+          width: 23.w,
+          depth: 30,
           spread: Theme.of(context).brightness == Brightness.dark ? 2 : 7,
-          borderRadius: 10,
+          borderRadius: 1.h,
           color: Theme.of(context).backgroundColor,
           child: Padding(
             padding: EdgeInsets.all(2),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(1.h),
               child: Stack(
                 children: [
                   Container(color: data.colors[index]),
@@ -48,7 +46,7 @@ class SettingHelper extends StatelessWidget {
                               : Colors.tealAccent,
                           height: 1.5,
                           fontWeight: FontWeight.w100,
-                          fontSize: 12,
+                          fontSize: 9.sp,
                         ),
                       ),
                     ),

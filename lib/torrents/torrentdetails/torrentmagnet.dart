@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class TorrentMagnet extends StatefulWidget {
   final data;
@@ -60,8 +61,10 @@ class _TorrentMagnetState extends State<TorrentMagnet>
         );
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.black,
-            margin: EdgeInsets.only(left: 20, right: 20, bottom: 30),
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
+            margin: EdgeInsets.only(left: 4.w, right: 4.w, bottom: 3.h),
             behavior: SnackBarBehavior.floating,
             content: Container(
               height: 15,
@@ -70,9 +73,11 @@ class _TorrentMagnetState extends State<TorrentMagnet>
                   "Magnet Copied",
                   style: GoogleFonts.gruppo(
                     textStyle: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).brightness != Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       fontWeight: FontWeight.w700,
-                      fontSize: 14,
+                      fontSize: 10.sp,
                     ),
                   ),
                 ),
@@ -88,7 +93,7 @@ class _TorrentMagnetState extends State<TorrentMagnet>
                 Color.fromRGBO(242, 242, 242, 1)
             ? Colors.black.withAlpha(200)
             : Colors.grey,
-        size: 20,
+        size: 4.w,
       ),
     );
   }

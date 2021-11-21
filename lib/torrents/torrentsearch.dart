@@ -1,6 +1,7 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
-import 'package:torrentor/ads.dart';
+import 'package:sizer/sizer.dart';
+// import 'package:torrentor/ads.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'package:torrentor/lottie/circularprogress.dart';
 import 'package:torrentor/torrents/torrentdetails/torrentdownload.dart';
@@ -33,25 +34,28 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
           ? Center(child: LottieCircular())
           : ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: widget.torrents.length + 1,
+              itemCount: widget.torrents.length,
               itemBuilder: (context, index) {
                 return widget.torrents[index].infoHash == ''
-                    ? Ads()
+                    ? SizedBox() // Ads()
                     : index == widget.torrents.length
-                        ? SizedBox(height: 100)
+                        ? SizedBox(height: 10.h)
                         : Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 20,bottom: 20),
+                            padding: EdgeInsets.only(
+                                left: 4.w, right: 4.w, top: 2.h, bottom: 2.h),
                             child: ClayContainer(
                               parentColor: backC,
                               surfaceColor: backC,
                               color: backC,
                               curveType: CurveType.convex,
-                              borderRadius: 15,
+                              borderRadius: 1.5.h,
                               spread: 0,
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 40, top: 25, left: 25, right: 25),
+                                padding: EdgeInsets.only(
+                                    bottom: 4.h,
+                                    top: 2.5.h,
+                                    left: 4.w,
+                                    right: 4.w),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -63,7 +67,7 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
                                         ? Container()
                                         : Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 5),
+                                                EdgeInsets.only(top: 0.5.h),
                                             child: Divider(),
                                           ),
                                     widget.torrents[index].name ==
