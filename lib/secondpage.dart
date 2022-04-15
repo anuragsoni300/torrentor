@@ -2,13 +2,17 @@ import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:torrentor/backend/data/data.dart';
 import 'package:torrentor/backend/fetching/nyaa_fetching/nyaa.dart';
 import 'package:torrentor/backend/fetching/piratebay_fetching/piratebay.dart';
 import 'package:torrentor/backend/fetching/rarbg_fetching/rarbg.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'package:torrentor/torrents/torrentsearch.dart';
+
+import 'x.dart';
 
 class SecondPage extends StatefulWidget {
   @override
@@ -16,7 +20,9 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  int i = 0;
   String query = '';
+  String set = 'size';
   bool show = false;
   PirateBayFetch pirateBayFetch = PirateBayFetch();
   RarbgSearch rarbgSearch = RarbgSearch();
@@ -86,28 +92,24 @@ class _SecondPageState extends State<SecondPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: ClayContainer(
-                      parentColor: backC,
-                      surfaceColor: backC,
-                      color: backC,
-                      curveType: CurveType.convex,
-                      borderRadius: 1.3.h,
-                      spread: 0,
-                      height: 100.w / 9,
-                      width: 100.w / 9,
-                      child: IconButton(
-                        splashRadius: 1.w,
-                        icon: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? Colors.black
-                                  : Colors.greenAccent,
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
+                  ClayContainer(
+                    parentColor: backC,
+                    surfaceColor: backC,
+                    color: backC,
+                    curveType: CurveType.convex,
+                    borderRadius: 1.3.h,
+                    spread: 0,
+                    height: 100.w / 9,
+                    width: 100.w / 9,
+                    child: IconButton(
+                      splashRadius: 1.w,
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.greenAccent,
                       ),
+                      onPressed: () => Navigator.of(context).pop(),
                     ),
                   ),
                   SizedBox(width: 3.h),
@@ -124,7 +126,6 @@ class _SecondPageState extends State<SecondPage> {
                       child: Padding(
                         padding: EdgeInsets.only(left: 3.w, top: 0.1.h),
                         child: TextField(
-                          keyboardType: TextInputType.visiblePassword,
                           style: GoogleFonts.varelaRound(
                             textStyle: TextStyle(
                               color: Theme.of(context).brightness ==
@@ -183,6 +184,119 @@ class _SecondPageState extends State<SecondPage> {
                       ),
                     ),
                   ),
+                  SizedBox(width: 3.h),
+                  MyPopupMenuButton(
+                    color: backC,
+                    elevation: 40,
+                    enabled: true,
+                    enableFeedback: true,
+                    shape: const TooltipShape(),
+                    padding: const EdgeInsets.all(0.0),
+                    offset: const Offset(0, 55),
+                    child: ClayContainer(
+                      parentColor: backC,
+                      surfaceColor: backC,
+                      color: backC,
+                      curveType: CurveType.convex,
+                      borderRadius: 1.3.h,
+                      spread: 0,
+                      height: 100.w / 9,
+                      width: 100.w / 9,
+                      child: Icon(
+                        Icons.sort,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.greenAccent,
+                      ),
+                    ),
+                    onSelected: (String sort) {
+                      var temp = int.parse(sort.characters.first);
+                      if (temp == 0) {
+                        sort == '$temp' + 'size'
+                            ? torrents.sort((b, a) =>
+                                int.parse(a.size).compareTo(int.parse(b.size)))
+                            : sort == '$temp' + 'seeders'
+                                ? torrents.sort((b, a) => int.parse(a.seeders)
+                                    .compareTo(int.parse(b.seeders)))
+                                : torrents.sort((b, a) => int.parse(a.leechers)
+                                    .compareTo(int.parse(b.leechers)));
+                      } else {
+                        sort == '$temp' + 'size'
+                            ? torrents.sort((a, b) =>
+                                int.parse(a.size).compareTo(int.parse(b.size)))
+                            : sort == '$temp' + 'seeders'
+                                ? torrents.sort((a, b) => int.parse(a.seeders)
+                                    .compareTo(int.parse(b.seeders)))
+                                : torrents.sort((a, b) => int.parse(a.leechers)
+                                    .compareTo(int.parse(b.leechers)));
+                      }
+                      if (mounted) setState(() {});
+                    },
+                    itemBuilder: (context) {
+                      return Data().sort.map(
+                        (String choices) {
+                          i++;
+                          i %= 2;
+                          return MyPopupMenuItem(
+                              value: '$i$choices',
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 4.w,
+                                        width: 4.w,
+                                        child: choices == 'size'
+                                            ? SvgPicture.asset(
+                                                'assets/size.svg',
+                                                color: Theme.of(context)
+                                                            .brightness ==
+                                                        Brightness.dark
+                                                    ? Colors.grey
+                                                    : Colors.black
+                                                        .withAlpha(200),
+                                              )
+                                            : RotatedBox(
+                                                quarterTurns:
+                                                    choices == 'seeders'
+                                                        ? 2
+                                                        : 4,
+                                                child: Icon(
+                                                  Icons.downloading_rounded,
+                                                  size: 4.w,
+                                                  color: Theme.of(context)
+                                                              .backgroundColor ==
+                                                          Color.fromRGBO(
+                                                              242, 242, 242, 1)
+                                                      ? Colors.black
+                                                          .withAlpha(200)
+                                                      : Colors.grey,
+                                                ),
+                                              ),
+                                      ),
+                                      Text(
+                                        "  ${choices.split('.').first}",
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 4),
+                                  Icon(
+                                    i % 2 != 0
+                                        ? Icons.trending_up_rounded
+                                        : Icons.trending_down_rounded,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.black
+                                        : Colors.greenAccent,
+                                  ),
+                                ],
+                              ));
+                        },
+                      ).toList();
+                    },
+                  )
                 ],
               ),
             ),
@@ -197,4 +311,57 @@ class _SecondPageState extends State<SecondPage> {
       ),
     );
   }
+}
+
+class TooltipShape extends ShapeBorder {
+  const TooltipShape();
+
+  final BorderSide _side = BorderSide.none;
+  final BorderRadiusGeometry _borderRadius = BorderRadius.zero;
+
+  @override
+  EdgeInsetsGeometry get dimensions => EdgeInsets.all(_side.width);
+
+  @override
+  Path getInnerPath(
+    Rect rect, {
+    TextDirection? textDirection,
+  }) {
+    final Path path = Path();
+
+    path.addRRect(
+      _borderRadius.resolve(textDirection).toRRect(rect).deflate(_side.width),
+    );
+
+    return path;
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+    final Path path = Path();
+    final RRect rrect = _borderRadius.resolve(textDirection).toRRect(rect);
+
+    path.moveTo(0, 10);
+    path.quadraticBezierTo(0, 0, 10, 0);
+    path.lineTo(rrect.width - 30, 0);
+    path.lineTo(rrect.width - 20, -10);
+    path.lineTo(rrect.width - 10, 0);
+    path.quadraticBezierTo(rrect.width, 0, rrect.width, 10);
+    path.lineTo(rrect.width, rrect.height - 10);
+    path.quadraticBezierTo(
+        rrect.width, rrect.height, rrect.width - 10, rrect.height);
+    path.lineTo(10, rrect.height);
+    path.quadraticBezierTo(0, rrect.height, 0, rrect.height - 10);
+
+    return path;
+  }
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
+
+  @override
+  ShapeBorder scale(double t) => RoundedRectangleBorder(
+        side: _side.scale(t),
+        borderRadius: _borderRadius * t,
+      );
 }

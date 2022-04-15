@@ -1,11 +1,10 @@
 import 'package:clay_containers/clay_containers.dart';
-import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
-// import 'package:native_admob_flutter/native_admob_flutter.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/themedata.dart';
 import 'package:torrentor/mainpage.dart';
@@ -16,7 +15,17 @@ import 'package:torrentor/setting.dart';
 Future main() async {
   await ThemeManager.initialise();
   WidgetsFlutterBinding.ensureInitialized();
-  //await MobileAds.initialize();
+  final List<DisplayMode> supported = await FlutterDisplayMode.supported;
+  final DisplayMode active = await FlutterDisplayMode.active;
+  final List<DisplayMode> sameResolution = supported
+      .where((DisplayMode m) =>
+          m.width == active.width && m.height == active.height)
+      .toList()
+    ..sort((DisplayMode a, DisplayMode b) =>
+        b.refreshRate.compareTo(a.refreshRate));
+  final DisplayMode mostOptimalMode =
+      sameResolution.isNotEmpty ? sameResolution.first : active;
+  await FlutterDisplayMode.setPreferredMode(mostOptimalMode);
   runApp(MyApp());
 }
 

@@ -29,11 +29,11 @@ class PirateBayFetch {
           infoHash: json["info_hash"] +
               '&dn=${json["name"]}' +
               "&tr=udp://tracker.coppersurfer.tk:6969/announce&tr=udp://9.rarbg.to:2920/announce&tr=udp://tracker.opentrackr.org:1337&tr=udp://tracker.internetwarriors.net:1337/announce&tr=udp://tracker.leechers-paradise.org:6969/announce&tr=udp://tracker.pirateparty.gr:6969/announce&tr=udp://tracker.cyberia.is:6969/announce",
-          leechers: json["leechers"].toString().isEmpty ? '' : json["leechers"],
-          seeders: json["seeders"].toString().isEmpty ? '' : json["seeders"],
+          leechers: json["leechers"].toString().isEmpty ? '0' : json["leechers"],
+          seeders: json["seeders"].toString().isEmpty ? '0' : json["seeders"],
           numFiles:
               json["num_files"].toString().isEmpty ? '' : json["num_files"],
-          size: json["size"].toString().isEmpty ? '' : json["size"],
+          size: json["size"].toString().isEmpty ? '0' : json["size"],
           username: json["username"].toString().isEmpty ? '' : json["username"],
           added: json["added"].toString().isEmpty ? '' : json["added"],
           category: json["category"].toString().isEmpty ? '' : json["category"],

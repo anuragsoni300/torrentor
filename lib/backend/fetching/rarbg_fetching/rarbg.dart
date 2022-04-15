@@ -32,10 +32,15 @@ class RarbgSearch {
 
   getData(String query) async {
     List<TorrentResult> welcome = [];
-    var tokenresponse = await http.get(Uri.parse(
-        'https://torrentapi.org/pubapi_v2.php?get_token=get_token&app_id=NodeTorrentSearchApi'));
-    final tokenjson = jsonDecode(tokenresponse.body);
-    var token = tokenjson['token'];
+    var token = '';
+    try {
+      var tokenresponse = await http.get(Uri.parse(
+          'https://torrentapi.org/pubapi_v2.php?get_token=get_token&app_id=NodeTorrentSearchApi'));
+      final tokenjson = jsonDecode(tokenresponse.body);
+      token = tokenjson['token'];
+    } catch (err) {
+      print('object$err');
+    }
     var jsondata;
     Response response;
     while (true) {

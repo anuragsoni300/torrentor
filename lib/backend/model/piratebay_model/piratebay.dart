@@ -4,10 +4,10 @@ class PirateBay {
     this.id = '',
     this.name = '',
     this.infoHash = '',
-    this.leechers = '',
-    this.seeders = '',
+    this.leechers = '0',
+    this.seeders ='0',
     this.numFiles = '',
-    this.size = '',
+    this.size = '0',
     this.username = '',
     this.added = '',
     this.category = '',
@@ -19,10 +19,10 @@ class PirateBay {
   String? id;
   String? name;
   String? infoHash;
-  String? leechers;
-  String? seeders;
+  String leechers;
+  String seeders;
   String? numFiles;
-  String? size;
+  String size;
   String? username;
   String? added;
   String? category;

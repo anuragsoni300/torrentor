@@ -16,6 +16,16 @@ class Data {
     'Blood',
     'Illuminati',
   ];
+
+  List<String> sort = [
+    'size',
+    'size',
+    'seeders',
+    'seeders',
+    'leechers',
+    'leechers'
+  ];
+
   List<Color> colors = [
     Color.fromRGBO(242, 242, 242, 1),
     Color.fromRGBO(10, 10, 10, 1),
