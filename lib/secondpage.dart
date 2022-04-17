@@ -12,7 +12,7 @@ import 'package:torrentor/backend/fetching/rarbg_fetching/rarbg.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'package:torrentor/torrents/torrentsearch.dart';
 
-import 'x.dart';
+import 'menu.dart';
 
 class SecondPage extends StatefulWidget {
   @override
