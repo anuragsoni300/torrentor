@@ -189,7 +189,7 @@ class SecondPageState extends State<SecondPage> {
                   SizedBox(width: 3.h),
                   MyPopupMenuButton(
                     color: backC,
-                    elevation: 40,
+                    elevation: 30,
                     enabled: true,
                     enableFeedback: true,
                     shape: const TooltipShape(),
@@ -240,61 +240,58 @@ class SecondPageState extends State<SecondPage> {
                           i++;
                           i %= 2;
                           return MyPopupMenuItem(
-                              value: '$i$choices',
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        height: 4.w,
-                                        width: 4.w,
-                                        child: choices == 'size'
-                                            ? SvgPicture.asset(
-                                                'assets/size.svg',
+                            value: '$i$choices',
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 4.w,
+                                      width: 4.w,
+                                      child: choices == 'size'
+                                          ? SvgPicture.asset(
+                                              'assets/size.svg',
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.dark
+                                                  ? Colors.grey
+                                                  : Colors.black.withAlpha(200),
+                                            )
+                                          : RotatedBox(
+                                              quarterTurns:
+                                                  choices == 'seeders' ? 2 : 4,
+                                              child: Icon(
+                                                Icons.downloading_rounded,
+                                                size: 4.w,
                                                 color: Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.dark
-                                                    ? Colors.grey
-                                                    : Colors.black
-                                                        .withAlpha(200),
-                                              )
-                                            : RotatedBox(
-                                                quarterTurns:
-                                                    choices == 'seeders'
-                                                        ? 2
-                                                        : 4,
-                                                child: Icon(
-                                                  Icons.downloading_rounded,
-                                                  size: 4.w,
-                                                  color: Theme.of(context)
-                                                              .backgroundColor ==
-                                                          const Color.fromRGBO(
-                                                              242, 242, 242, 1)
-                                                      ? Colors.black
-                                                          .withAlpha(200)
-                                                      : Colors.grey,
-                                                ),
+                                                            .backgroundColor ==
+                                                        const Color.fromRGBO(
+                                                            242, 242, 242, 1)
+                                                    ? Colors.black
+                                                        .withAlpha(200)
+                                                    : Colors.grey,
                                               ),
-                                      ),
-                                      Text(
-                                        "  ${choices.split('.').first}",
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Icon(
-                                    i % 2 != 0
-                                        ? Icons.trending_up_rounded
-                                        : Icons.trending_down_rounded,
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? Colors.black
-                                        : Colors.greenAccent,
-                                  ),
-                                ],
-                              ));
+                                            ),
+                                    ),
+                                    Text(
+                                      "  ${choices.split('.').first}",
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(width: 4),
+                                Icon(
+                                  i % 2 != 0
+                                      ? Icons.trending_up_rounded
+                                      : Icons.trending_down_rounded,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? Colors.black
+                                      : Colors.greenAccent,
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ).toList();
                     },
