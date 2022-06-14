@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 
 class TorrentLeechers extends StatelessWidget {
-  final data;
+  final PirateBay? data;
   const TorrentLeechers({Key? key, this.data}) : super(key: key);
 
   @override
@@ -13,12 +14,12 @@ class TorrentLeechers extends StatelessWidget {
         Icon(
           Icons.downloading_rounded,
           color: Theme.of(context).backgroundColor ==
-                  Color.fromRGBO(242, 242, 242, 1)
+                  const Color.fromRGBO(242, 242, 242, 1)
               ? Colors.black.withAlpha(200)
               : Colors.grey,
         ),
         Text(
-          data.leechers.toString(),
+          data!.leechers.toString(),
           style: GoogleFonts.gruppo(
             textStyle: TextStyle(
               color: Theme.of(context).brightness == Brightness.dark

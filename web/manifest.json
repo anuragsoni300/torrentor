@@ -1,6 +1,6 @@
 {
-    "name": "temp",
-    "short_name": "temp",
+    "name": "torrentor",
+    "short_name": "torrentor",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

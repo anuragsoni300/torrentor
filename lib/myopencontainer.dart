@@ -1,83 +1,25 @@
-// Copyright 2019 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-/// Signature for `action` callback function provided to [OpenContainer.openBuilder].
-///
-/// Parameter `returnValue` is the value which will be provided to [OpenContainer.onClosed]
-/// when `action` is called.
 typedef CloseContainerActionCallback<S> = void Function({S? returnValue});
-
-/// Signature for a function that creates a [Widget] in open state within an
-/// [OpenContainer].
-///
-/// The `action` callback provided to [OpenContainer.openBuilder] can be used
-/// to close the container.
 typedef OpenContainerBuilder<S> = Widget Function(
   BuildContext context,
   CloseContainerActionCallback<S> action,
 );
-
-/// Signature for a function that creates a [Widget] in closed state within an
-/// [OpenContainer].
-///
-/// The `action` callback provided to [OpenContainer.closedBuilder] can be used
-/// to open the container.
 typedef CloseContainerBuilder = Widget Function(
   BuildContext context,
   VoidCallback action,
 );
 
-/// The [OpenContainer] widget's fade transition type.
-///
-/// This determines the type of fade transition that the incoming and outgoing
-/// contents will use.
 enum ContainerTransitionType {
-  /// Fades the incoming element in over the outgoing element.
   fade,
-
-  /// First fades the outgoing element out, and starts fading the incoming
-  /// element in once the outgoing element has completely faded out.
   fadeThrough,
 }
 
-/// Callback function which is called when the [OpenContainer]
-/// is closed.
 typedef ClosedCallback<S> = void Function(S data);
 
-/// A container that grows to fill the screen to reveal new content when tapped.
-///
-/// While the container is closed, it shows the [Widget] returned by
-/// [closedBuilder]. When the container is tapped it grows to fill the entire
-/// size of the surrounding [Navigator] while fading out the widget returned by
-/// [closedBuilder] and fading in the widget returned by [openBuilder]. When the
-/// container is closed again via the callback provided to [openBuilder] or via
-/// Android's back button, the animation is reversed: The container shrinks back
-/// to its original size while the widget returned by [openBuilder] is faded out
-/// and the widget returned by [openBuilder] is faded back in.
-///
-/// By default, the container is in the closed state. During the transition from
-/// closed to open and vice versa the widgets returned by the [openBuilder] and
-/// [closedBuilder] exist in the tree at the same time. Therefore, the widgets
-/// returned by these builders cannot include the same global key.
-///
-/// `T` refers to the type of data returned by the route when the container
-/// is closed. This value can be accessed in the `onClosed` function.
-///
-///
-/// See also:
-///
-///  * [Transitions with animated containers](https://material.io/design/motion/choreography.html#transformation)
-///    in the Material spec.
 @optionalTypeArgs
 class OpenContainer<T extends Object?> extends StatefulWidget {
-  /// Creates an [OpenContainer].
-  ///
-  /// All arguments except for [key] must not be null. The arguments
-  /// [openBuilder] and [closedBuilder] are required.
   const OpenContainer({
     Key? key,
     this.closedColor = Colors.white,
@@ -100,180 +42,29 @@ class OpenContainer<T extends Object?> extends StatefulWidget {
     this.clipBehavior = Clip.antiAlias,
   }) : super(key: key);
 
-  /// Background color of the container while it is closed.
-  ///
-  /// When the container is opened, it will first transition from this color
-  /// to [middleColor] and then transition from there to [openColor] in one
-  /// smooth animation. When the container is closed, it will transition back to
-  /// this color from [openColor] via [middleColor].
-  ///
-  /// Defaults to [Colors.white].
-  ///
-  /// See also:
-  ///
-  ///  * [Material.color], which is used to implement this property.
   final Color closedColor;
-
-  /// Background color of the container while it is open.
-  ///
-  /// When the container is closed, it will first transition from [closedColor]
-  /// to [middleColor] and then transition from there to this color in one
-  /// smooth animation. When the container is closed, it will transition back to
-  /// [closedColor] from this color via [middleColor].
-  ///
-  /// Defaults to [Colors.white].
-  ///
-  /// See also:
-  ///
-  ///  * [Material.color], which is used to implement this property.
   final Color openColor;
-
-  /// The color to use for the background color during the transition
-  /// with [ContainerTransitionType.fadeThrough].
-  ///
-  /// Defaults to [Theme]'s [ThemeData.canvasColor].
-  ///
-  /// See also:
-  ///
-  ///  * [Material.color], which is used to implement this property.
   final Color? middleColor;
-
-  /// Elevation of the container while it is closed.
-  ///
-  /// When the container is opened, it will transition from this elevation to
-  /// [openElevation]. When the container is closed, it will transition back
-  /// from [openElevation] to this elevation.
-  ///
-  /// Defaults to 1.0.
-  ///
-  /// See also:
-  ///
-  ///  * [Material.elevation], which is used to implement this property.
   final double closedElevation;
-
-  /// Elevation of the container while it is open.
-  ///
-  /// When the container is opened, it will transition to this elevation from
-  /// [closedElevation]. When the container is closed, it will transition back
-  /// from this elevation to [closedElevation].
-  ///
-  /// Defaults to 4.0.
-  ///
-  /// See also:
-  ///
-  ///  * [Material.elevation], which is used to implement this property.
   final double openElevation;
-
-  /// Shape of the container while it is closed.
-  ///
-  /// When the container is opened it will transition from this shape to
-  /// [openShape]. When the container is closed, it will transition back to this
-  /// shape.
-  ///
-  /// Defaults to a [RoundedRectangleBorder] with a [Radius.circular] of 4.0.
-  ///
-  /// See also:
-  ///
-  ///  * [Material.shape], which is used to implement this property.
   final ShapeBorder closedShape;
-
-  /// Shape of the container while it is open.
-  ///
-  /// When the container is opened it will transition from [closedShape] to
-  /// this shape. When the container is closed, it will transition from this
-  /// shape back to [closedShape].
-  ///
-  /// Defaults to a rectangular.
-  ///
-  /// See also:
-  ///
-  ///  * [Material.shape], which is used to implement this property.
   final ShapeBorder openShape;
-
-  /// Called when the container was popped and has returned to the closed state.
-  ///
-  /// The return value from the popped screen is passed to this function as an
-  /// argument.
-  ///
-  /// If no value is returned via [Navigator.pop] or [OpenContainer.openBuilder.action],
-  /// `null` will be returned by default.
   final ClosedCallback<T?>? onClosed;
-
-  /// Called to obtain the child for the container in the closed state.
-  ///
-  /// The [Widget] returned by this builder is faded out when the container
-  /// opens and at the same time the widget returned by [openBuilder] is faded
-  /// in while the container grows to fill the surrounding [Navigator].
-  ///
-  /// The `action` callback provided to the builder can be called to open the
-  /// container.
   final CloseContainerBuilder closedBuilder;
-
-  /// Called to obtain the child for the container in the open state.
-  ///
-  /// The [Widget] returned by this builder is faded in when the container
-  /// opens and at the same time the widget returned by [closedBuilder] is
-  /// faded out while the container grows to fill the surrounding [Navigator].
-  ///
-  /// The `action` callback provided to the builder can be called to close the
-  /// container.
   final OpenContainerBuilder<T> openBuilder;
-
-  /// Whether the entire closed container can be tapped to open it.
-  ///
-  /// Defaults to true.
-  ///
-  /// When this is set to false the container can only be opened by calling the
-  /// `action` callback that is provided to the [closedBuilder].
   final bool tappable;
-
-  /// The time it will take to animate the container from its closed to its
-  /// open state and vice versa.
-  ///
-  /// Defaults to 300ms.
   final Duration transitionDuration;
-
-  /// The type of fade transition that the container will use for its
-  /// incoming and outgoing widgets.
-  ///
-  /// Defaults to [ContainerTransitionType.fade].
   final ContainerTransitionType transitionType;
-
-  /// The [useRootNavigator] argument is used to determine whether to push the
-  /// route for [openBuilder] to the Navigator furthest from or nearest to
-  /// the given context.
-  ///
-  /// By default, [useRootNavigator] is false and the route created will push
-  /// to the nearest navigator.
   final bool useRootNavigator;
-
-  /// Provides additional data to the [openBuilder] route pushed by the Navigator.
   final RouteSettings? routeSettings;
-
-  /// The [closedBuilder] will be clipped (or not) according to this option.
-  ///
-  /// Defaults to [Clip.antiAlias], and must not be null.
-  ///
-  /// See also:
-  ///
-  ///  * [Material.clipBehavior], which is used to implement this property.
   final Clip clipBehavior;
 
   @override
-  _OpenContainertate<T> createState() => _OpenContainertate<T>();
+  OpenContainertate<T> createState() => OpenContainertate<T>();
 }
 
-class _OpenContainertate<T> extends State<OpenContainer<T?>> {
-  // Key used in [_OpenContainerRoute] to hide the widget returned by
-  // [OpenContainer.openBuilder] in the source route while the container is
-  // opening/open. A copy of that widget is included in the
-  // [_OpenContainerRoute] where it fades out. To avoid issues with double
-  // shadows and transparency, we hide it in the source route.
+class OpenContainertate<T> extends State<OpenContainer<T?>> {
   final GlobalKey<_HideableState> _hideableKey = GlobalKey<_HideableState>();
-
-  // Key used to steal the state of the widget returned by
-  // [OpenContainer.openBuilder] from the source route and attach it to the
-  // same widget included in the [_OpenContainerRoute] where it fades out.
   final GlobalKey _closedBuilderKey = GlobalKey();
 
   Future<void> openContainer() async {
@@ -326,18 +117,6 @@ class _OpenContainertate<T> extends State<OpenContainer<T?>> {
     );
   }
 }
-
-/// Controls the visibility of its child.
-///
-/// The child can be in one of three states:
-///
-///  * It is included in the tree and fully visible. (The `placeholderSize` is
-///    null and `isVisible` is true.)
-///  * It is included in the tree, but not visible; its size is maintained.
-///    (The `placeholderSize` is null and `isVisible` is false.)
-///  * It is not included in the tree. Instead a [SizedBox] of dimensions
-///    specified by `placeholderSize` is included in the tree. (The value of
-///    `isVisible` is ignored).
 class _Hideable extends StatefulWidget {
   const _Hideable({
     Key? key,
@@ -351,7 +130,6 @@ class _Hideable extends StatefulWidget {
 }
 
 class _HideableState extends State<_Hideable> {
-  /// When non-null the child is replaced by a [SizedBox] of the set size.
   Size? get placeholderSize => _placeholderSize;
   Size? _placeholderSize;
   set placeholderSize(Size? value) {
@@ -363,10 +141,6 @@ class _HideableState extends State<_Hideable> {
     });
   }
 
-  /// When true the child is not visible, but will maintain its size.
-  ///
-  /// The value of this property is ignored when [placeholderSize] is non-null
-  /// (i.e. [isInTree] returns false).
   bool get isVisible => _visible;
   bool _visible = true;
   set isVisible(bool value) {
@@ -378,9 +152,6 @@ class _HideableState extends State<_Hideable> {
     });
   }
 
-  /// Whether the child is currently included in the tree.
-  ///
-  /// When it is included, it may be visible or not according to [isVisible].
   bool get isInTree => _placeholderSize == null;
 
   @override
@@ -541,11 +312,7 @@ class _OpenContainerRoute<T> extends ModalRoute<T> {
   final ShapeBorder openShape;
   final CloseContainerBuilder closedBuilder;
   final OpenContainerBuilder<T> openBuilder;
-
-  // See [_OpenContainertate._hideableKey].
   final GlobalKey<_HideableState> hideableKey;
-
-  // See [_OpenContainertate._closedBuilderKey].
   final GlobalKey closedBuilderKey;
 
   @override
@@ -577,16 +344,8 @@ class _OpenContainerRoute<T> extends ModalRoute<T> {
     end: Colors.black54,
   );
 
-  // Key used for the widget returned by [OpenContainer.openBuilder] to keep
-  // its state when the shape of the widget tree is changed at the end of the
-  // animation to remove all the craft that was necessary to make the animation
-  // work.
   final GlobalKey _openBuilderKey = GlobalKey();
-
-  // Defines the position and the size of the (opening) [OpenContainer] within
-  // the bounds of the enclosing [Navigator].
   final RectTween _rectTween = RectTween();
-
   AnimationStatus? _lastAnimationStatus;
   AnimationStatus? _currentAnimationStatus;
 
@@ -625,9 +384,7 @@ class _OpenContainerRoute<T> extends ModalRoute<T> {
   @override
   void dispose() {
     if (hideableKey.currentState?.isVisible == false) {
-      // This route may be disposed without dismissing its animation if it is
-      // removed by the navigator.
-      SchedulerBinding.instance!
+      SchedulerBinding.instance
           .addPostFrameCallback((Duration d) => _toggleHideable(hide: false));
     }
     super.dispose();
@@ -661,7 +418,7 @@ class _OpenContainerRoute<T> extends ModalRoute<T> {
     }
 
     if (delayForSourceRoute) {
-      SchedulerBinding.instance!
+      SchedulerBinding.instance
           .addPostFrameCallback(takeMeasurementsInSourceRoute);
     } else {
       takeMeasurementsInSourceRoute();
@@ -673,8 +430,6 @@ class _OpenContainerRoute<T> extends ModalRoute<T> {
     return render.size;
   }
 
-  // Returns the bounds of the [RenderObject] identified by `key` in the
-  // coordinate system of `ancestor`.
   Rect _getRect(GlobalKey key, RenderBox ancestor) {
     assert(key.currentContext != null);
     assert(ancestor.hasSize);
@@ -833,7 +588,6 @@ class _OpenContainerRoute<T> extends ModalRoute<T> {
                             ),
                           ),
 
-                          // Open child fading in.
                           FittedBox(
                             fit: BoxFit.fitWidth,
                             alignment: Alignment.topLeft,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 
 class TorrentName extends StatelessWidget {
-  final data;
+  final PirateBay? data;
 
   const TorrentName({Key? key, this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 7.h,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 4, 4, 0),
@@ -16,7 +17,7 @@ class TorrentName extends StatelessWidget {
           width: 95.w,
           alignment: Alignment.center,
           child: Text(
-            data.name.replaceAll('.', ' '),
+            data!.name!.replaceAll('.', ' '),
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.comfortaa(
               textStyle: TextStyle(

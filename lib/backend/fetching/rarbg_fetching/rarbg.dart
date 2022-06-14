@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -39,9 +40,9 @@ class RarbgSearch {
       final tokenjson = jsonDecode(tokenresponse.body);
       token = tokenjson['token'];
     } catch (err) {
-      print('object$err');
+      log('object$err');
     }
-    var jsondata;
+    dynamic jsondata;
     Response response;
     while (true) {
       try {
@@ -55,7 +56,7 @@ class RarbgSearch {
     jsondata = json.decode(utf8.decode(response.bodyBytes));
     if (jsondata.toString() == '{error: No results found, error_code: 20}') {
       return welcome;
-    } else
+    } else {
       jsondata["torrent_results"].forEach(
         (json) {
           TorrentResult pirateBay = TorrentResult(
@@ -76,6 +77,7 @@ class RarbgSearch {
           welcome.add(pirateBay);
         },
       );
+    }
     return welcome;
   }
 }

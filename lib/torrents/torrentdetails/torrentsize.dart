@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 
 class TorrentSize extends StatefulWidget {
-  final data;
+  final PirateBay? data;
 
   const TorrentSize({Key? key, this.data}) : super(key: key);
   @override
-  _TorrentSizeState createState() => _TorrentSizeState();
+  TorrentSizeState createState() => TorrentSizeState();
 }
 
-class _TorrentSizeState extends State<TorrentSize>
+class TorrentSizeState extends State<TorrentSize>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -20,7 +21,7 @@ class _TorrentSizeState extends State<TorrentSize>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      reverseDuration: Duration(
+      reverseDuration: const Duration(
         microseconds: 800,
       ),
     );
@@ -34,7 +35,7 @@ class _TorrentSizeState extends State<TorrentSize>
 
   @override
   Widget build(BuildContext context) {
-    double size = ((double.parse(widget.data.size) * 9.31) / 10000000000);
+    double size = ((double.parse(widget.data!.size) * 9.31) / 10000000000);
     return Padding(
       padding:
           EdgeInsets.only(left: 2.w, right: 2.w, bottom: 0.4.h, top: 0.3.h),
@@ -53,7 +54,7 @@ class _TorrentSizeState extends State<TorrentSize>
         child: Column(
           children: [
             Theme.of(context).brightness == Brightness.dark
-                ? Container(
+                ? SizedBox(
                     height: 4.w,
                     width: 4.w,
                     child: SvgPicture.asset(
@@ -61,7 +62,7 @@ class _TorrentSizeState extends State<TorrentSize>
                       color: Colors.grey,
                     ),
                   )
-                : Container(
+                : SizedBox(
                     height: 4.w,
                     width: 4.w,
                     child: SvgPicture.asset(
@@ -73,8 +74,8 @@ class _TorrentSizeState extends State<TorrentSize>
               size == 0
                   ? '0 MB'
                   : size.floor() == 0
-                      ? size.toString().substring(2, 5) + ' MB'
-                      : size.toString().substring(0, 4) + ' GB',
+                      ? '${size.toString().substring(2, 5)} MB'
+                      : '${size.toString().substring(0, 4)} GB',
               style: GoogleFonts.gruppo(
                 textStyle: TextStyle(
                   color: Theme.of(context).brightness == Brightness.dark

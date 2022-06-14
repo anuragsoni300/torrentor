@@ -16,10 +16,10 @@ class MovieTorrentsList extends StatefulWidget {
   const MovieTorrentsList({Key? key, required this.torrents}) : super(key: key);
 
   @override
-  _MovieTorrentsListState createState() => _MovieTorrentsListState();
+  MovieTorrentsListState createState() => MovieTorrentsListState();
 }
 
-class _MovieTorrentsListState extends State<MovieTorrentsList> {
+class MovieTorrentsListState extends State<MovieTorrentsList> {
   @override
   void initState() {
     super.initState();
@@ -31,13 +31,13 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: widget.torrents.isEmpty
-          ? Center(child: LottieCircular())
+          ? const Center(child: LottieCircular())
           : ListView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: widget.torrents.length,
               itemBuilder: (context, index) {
                 return widget.torrents[index].infoHash == ''
-                    ? SizedBox() // Ads()
+                    ? const SizedBox() // Ads()
                     : index == widget.torrents.length
                         ? SizedBox(height: 10.h)
                         : Padding(
@@ -68,7 +68,7 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
                                         : Padding(
                                             padding:
                                                 EdgeInsets.only(top: 0.5.h),
-                                            child: Divider(),
+                                            child: const Divider(),
                                           ),
                                     widget.torrents[index].name ==
                                             "No results returned"
@@ -89,7 +89,7 @@ class _MovieTorrentsListState extends State<MovieTorrentsList> {
                                                   data: widget.torrents[index]),
                                             ],
                                           ),
-                                    Divider(),
+                                    const Divider(),
                                   ],
                                 ),
                               ),

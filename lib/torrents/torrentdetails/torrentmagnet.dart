@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 
 class TorrentMagnet extends StatefulWidget {
-  final data;
+  final PirateBay? data;
 
   const TorrentMagnet({Key? key, this.data}) : super(key: key);
   @override
-  _TorrentMagnetState createState() => _TorrentMagnetState();
+  TorrentMagnetState createState() => TorrentMagnetState();
 }
 
-class _TorrentMagnetState extends State<TorrentMagnet>
+class TorrentMagnetState extends State<TorrentMagnet>
     with TickerProviderStateMixin {
   late String myMagnet;
   late AnimationController _controller;
@@ -21,10 +22,10 @@ class _TorrentMagnetState extends State<TorrentMagnet>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(
+      duration: const Duration(
         microseconds: 800,
       ),
-      reverseDuration: Duration(
+      reverseDuration: const Duration(
         microseconds: 800,
       ),
     );
@@ -40,9 +41,9 @@ class _TorrentMagnetState extends State<TorrentMagnet>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        widget.data.infoHash.toString().contains('magnet')
-            ? myMagnet = widget.data.infoHash
-            : myMagnet = 'magnet:?xt=urn:btih:${widget.data.infoHash}';
+        widget.data!.infoHash.toString().contains('magnet')
+            ? myMagnet = widget.data!.infoHash!
+            : myMagnet = 'magnet:?xt=urn:btih:${widget.data!.infoHash}';
         if (_controller.isAnimating) {
           _controller.reset();
           _controller.forward();
@@ -53,10 +54,10 @@ class _TorrentMagnetState extends State<TorrentMagnet>
           _controller.forward();
         }
         Clipboard.setData(
-          new ClipboardData(
-            text: widget.data.infoHash.toString().contains('magnet')
-                ? widget.data.infoHash
-                : 'magnet:?xt=urn:btih:${widget.data.infoHash}',
+          ClipboardData(
+            text: widget.data!.infoHash.toString().contains('magnet')
+                ? widget.data!.infoHash
+                : 'magnet:?xt=urn:btih:${widget.data!.infoHash}',
           ),
         );
         ScaffoldMessenger.of(context).showSnackBar(
@@ -66,7 +67,7 @@ class _TorrentMagnetState extends State<TorrentMagnet>
                 : Colors.black,
             margin: EdgeInsets.only(left: 4.w, right: 4.w, bottom: 3.h),
             behavior: SnackBarBehavior.floating,
-            content: Container(
+            content: SizedBox(
               height: 15,
               child: Center(
                 child: Text(
@@ -83,14 +84,14 @@ class _TorrentMagnetState extends State<TorrentMagnet>
                 ),
               ),
             ),
-            duration: Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 600),
           ),
         );
       },
       child: Icon(
         Icons.copy,
         color: Theme.of(context).backgroundColor ==
-                Color.fromRGBO(242, 242, 242, 1)
+                const Color.fromRGBO(242, 242, 242, 1)
             ? Colors.black.withAlpha(200)
             : Colors.grey,
         size: 4.w,

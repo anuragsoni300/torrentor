@@ -2,7 +2,7 @@
     package="com.torrentor.iam">
    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="temp"
+        android:label="torrentor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -31,7 +31,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <meta-data
+            <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-1670058689216989~7535583042"/>
         <service

@@ -15,11 +15,13 @@ import 'package:torrentor/torrents/torrentsearch.dart';
 import 'menu.dart';
 
 class SecondPage extends StatefulWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
   @override
-  _SecondPageState createState() => _SecondPageState();
+  SecondPageState createState() => SecondPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class SecondPageState extends State<SecondPage> {
   int i = 0;
   String query = '';
   String set = 'size';
@@ -37,7 +39,7 @@ class _SecondPageState extends State<SecondPage> {
       pirateBayFetch.welcome.insert(5, xx);
     }
     torrents.addAll(pirateBayFetch.welcome);
-    if (this.mounted) setState(() {});
+    if (mounted) setState(() {});
   }
 
   getRarbgTorrents(query) async {
@@ -48,7 +50,7 @@ class _SecondPageState extends State<SecondPage> {
         rarbgSearch.welcome.insert(5, xx);
       }
       torrents.addAll(rarbgSearch.welcome);
-      if (this.mounted) setState(() {});
+      if (mounted) setState(() {});
     }
   }
 
@@ -62,7 +64,7 @@ class _SecondPageState extends State<SecondPage> {
       }
       torrents.addAll(x);
       x.clear();
-      if (this.mounted) setState(() {});
+      if (mounted) setState(() {});
     }
   }
 
@@ -137,7 +139,7 @@ class _SecondPageState extends State<SecondPage> {
                               wordSpacing: 2,
                             ),
                           ),
-                          scrollPadding: EdgeInsets.all(2),
+                          scrollPadding: const EdgeInsets.all(2),
                           cursorColor:
                               Theme.of(context).brightness == Brightness.light
                                   ? Colors.black
@@ -145,7 +147,7 @@ class _SecondPageState extends State<SecondPage> {
                           maxLines: 1,
                           enableInteractiveSelection: true,
                           autocorrect: true,
-                          decoration: new InputDecoration(
+                          decoration: InputDecoration(
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -212,19 +214,19 @@ class _SecondPageState extends State<SecondPage> {
                     onSelected: (String sort) {
                       var temp = int.parse(sort.characters.first);
                       if (temp == 0) {
-                        sort == '$temp' + 'size'
+                        sort == '$temp' 'size'
                             ? torrents.sort((b, a) =>
                                 int.parse(a.size).compareTo(int.parse(b.size)))
-                            : sort == '$temp' + 'seeders'
+                            : sort == '$temp' 'seeders'
                                 ? torrents.sort((b, a) => int.parse(a.seeders)
                                     .compareTo(int.parse(b.seeders)))
                                 : torrents.sort((b, a) => int.parse(a.leechers)
                                     .compareTo(int.parse(b.leechers)));
                       } else {
-                        sort == '$temp' + 'size'
+                        sort == '$temp' 'size'
                             ? torrents.sort((a, b) =>
                                 int.parse(a.size).compareTo(int.parse(b.size)))
-                            : sort == '$temp' + 'seeders'
+                            : sort == '$temp' 'seeders'
                                 ? torrents.sort((a, b) => int.parse(a.seeders)
                                     .compareTo(int.parse(b.seeders)))
                                 : torrents.sort((a, b) => int.parse(a.leechers)
@@ -245,7 +247,7 @@ class _SecondPageState extends State<SecondPage> {
                                 children: [
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 4.w,
                                         width: 4.w,
                                         child: choices == 'size'
@@ -268,7 +270,7 @@ class _SecondPageState extends State<SecondPage> {
                                                   size: 4.w,
                                                   color: Theme.of(context)
                                                               .backgroundColor ==
-                                                          Color.fromRGBO(
+                                                          const Color.fromRGBO(
                                                               242, 242, 242, 1)
                                                       ? Colors.black
                                                           .withAlpha(200)
@@ -281,7 +283,7 @@ class _SecondPageState extends State<SecondPage> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: 4),
+                                  const SizedBox(width: 4),
                                   Icon(
                                     i % 2 != 0
                                         ? Icons.trending_up_rounded

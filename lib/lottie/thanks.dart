@@ -6,11 +6,13 @@ import 'package:sizer/sizer.dart';
 import 'package:torrentor/lottie/share.dart';
 
 class LottieThanks extends StatefulWidget {
+  const LottieThanks({Key? key}) : super(key: key);
+
   @override
-  _LottieThanksState createState() => _LottieThanksState();
+  LottieThanksState createState() => LottieThanksState();
 }
 
-class _LottieThanksState extends State<LottieThanks>
+class LottieThanksState extends State<LottieThanks>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -19,7 +21,7 @@ class _LottieThanksState extends State<LottieThanks>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      reverseDuration: Duration(
+      reverseDuration: const Duration(
         microseconds: 800,
       ),
     );
@@ -91,7 +93,7 @@ class _LottieThanksState extends State<LottieThanks>
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.only(top: 1.5.h),
-                    child: LottieShare(),
+                    child: const LottieShare(),
                   ),
                 ),
               ),
@@ -106,7 +108,7 @@ class _LottieThanksState extends State<LottieThanks>
             frameRate: FrameRate.max,
             controller: _controller,
             onLoaded: (composition) {
-              _controller..duration = composition.duration;
+              _controller.duration = composition.duration;
               _controller.repeat();
             },
           ),

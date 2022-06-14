@@ -3,11 +3,13 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 class LottieCircular extends StatefulWidget {
+  const LottieCircular({Key? key}) : super(key: key);
+
   @override
-  _LottieCircularState createState() => _LottieCircularState();
+  LottieCircularState createState() => LottieCircularState();
 }
 
-class _LottieCircularState extends State<LottieCircular>
+class LottieCircularState extends State<LottieCircular>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -16,7 +18,7 @@ class _LottieCircularState extends State<LottieCircular>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      reverseDuration: Duration(
+      reverseDuration: const Duration(
         microseconds: 800,
       ),
     );
@@ -38,7 +40,7 @@ class _LottieCircularState extends State<LottieCircular>
         frameRate: FrameRate.max,
         controller: _controller,
         onLoaded: (composition) {
-          _controller..duration = composition.duration;
+          _controller.duration = composition.duration;
           _controller.repeat();
         },
       ),

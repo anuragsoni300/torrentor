@@ -28,6 +28,11 @@ class MainPage extends StatelessWidget {
       borderRadius: 25.w / 2,
       height: 25.w,
       width: 25.w,
+      color: Theme.of(context).backgroundColor,
+      depth:
+          Theme.of(context).backgroundColor == const Color.fromRGBO(242, 242, 242, 1)
+              ? 40
+              : 20,
       child: Center(
           child: Icon(
         Icons.search_rounded,
@@ -36,11 +41,6 @@ class MainPage extends StatelessWidget {
             : Colors.tealAccent,
         size: 10.w,
       )),
-      color: Theme.of(context).backgroundColor,
-      depth:
-          Theme.of(context).backgroundColor == Color.fromRGBO(242, 242, 242, 1)
-              ? 40
-              : 20,
     );
   }
 }

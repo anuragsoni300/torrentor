@@ -6,8 +6,8 @@ import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/data.dart';
 
 class SettingHelper extends StatelessWidget {
-  final index;
-  SettingHelper({Key? key, this.index}) : super(key: key);
+  final int? index;
+  const SettingHelper({Key? key, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SettingHelper extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: GestureDetector(
         onTap: () {
-          getThemeManager(context).selectThemeAtIndex(index);
+          getThemeManager(context).selectThemeAtIndex(index!);
         },
         child: ClayContainer(
           parentColor: backC,
@@ -29,19 +29,19 @@ class SettingHelper extends StatelessWidget {
           borderRadius: 1.h,
           color: Theme.of(context).backgroundColor,
           child: Padding(
-            padding: EdgeInsets.all(2),
+            padding: const EdgeInsets.all(2),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(1.h),
               child: Stack(
                 children: [
-                  Container(color: data.colors[index]),
+                  Container(color: data.colors[index!]),
                   Center(
                     child: Text(
-                      data.themes[index],
+                      data.themes[index!],
                       style: GoogleFonts.comfortaa(
                         textStyle: TextStyle(
-                          color: data.colors[index] ==
-                                  Color.fromRGBO(242, 242, 242, 1)
+                          color: data.colors[index!] ==
+                                  const Color.fromRGBO(242, 242, 242, 1)
                               ? Colors.black
                               : Colors.tealAccent,
                           height: 1.5,

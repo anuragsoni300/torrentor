@@ -33,7 +33,7 @@ class NyaaFetch {
 
   getData(String q,int page) async {
     List<Nyaa> welcome = [];
-    var response;
+    http.Response response;
     String link = 'https://nyaa.net/api?q=$q&page=$page&limit=300';
     while (true) {
       try {

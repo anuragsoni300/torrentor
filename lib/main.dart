@@ -26,10 +26,12 @@ Future main() async {
   final DisplayMode mostOptimalMode =
       sameResolution.isNotEmpty ? sameResolution.first : active;
   await FlutterDisplayMode.setPreferredMode(mostOptimalMode);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ThemeBuilder(
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
           theme: regularTheme,
           darkTheme: darkTheme,
           themeMode: themeMode,
-          home: MyHomePage(),
+          home: const MyHomePage(),
         ),
       ),
     );
@@ -48,11 +50,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var backC = Theme.of(context).backgroundColor;
@@ -89,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: OpenContainer(
                       closedElevation: 0.0,
                       closedColor: Colors.transparent,
-                      transitionDuration: Duration(milliseconds: 400),
+                      transitionDuration: const Duration(milliseconds: 400),
                       closedShape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(1.2.h)),
                       transitionType: ContainerTransitionType.fadeThrough,
@@ -109,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                       ),
-                      openBuilder: (context, index) => SettingsScreen(),
+                      openBuilder: (context, index) => const SettingsScreen(),
                     ),
                   ),
                 ],
@@ -119,18 +123,16 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  child: Text(
-                    'TORRENTOR',
-                    style: GoogleFonts.bungeeInline(
-                      fontSize: 20.sp,
-                      textStyle: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey
-                            : Colors.black.withAlpha(200),
-                        fontWeight: FontWeight.w100,
-                        wordSpacing: 2,
-                      ),
+                Text(
+                  'TORRENTOR',
+                  style: GoogleFonts.bungeeInline(
+                    fontSize: 20.sp,
+                    textStyle: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey
+                          : Colors.black.withAlpha(200),
+                      fontWeight: FontWeight.w100,
+                      wordSpacing: 2,
                     ),
                   ),
                 ),
@@ -147,12 +149,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: OpenContainer(
                       closedElevation: 0.0,
                       closedColor: Colors.transparent,
-                      closedShape: CircleBorder(side: BorderSide.none),
-                      transitionDuration: Duration(milliseconds: 500),
+                      closedShape: const CircleBorder(side: BorderSide.none),
+                      transitionDuration: const Duration(milliseconds: 500),
                       transitionType: ContainerTransitionType.fadeThrough,
                       openColor: Theme.of(context).backgroundColor,
-                      closedBuilder: (c, a) => MainPage(),
-                      openBuilder: (c, _) => SecondPage(),
+                      closedBuilder: (c, a) => const MainPage(),
+                      openBuilder: (c, _) => const SecondPage(),
                     ),
                   ),
                 ),
@@ -177,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Text(
-                      '  1.0.1',
+                      '  3.0.0',
                       style: GoogleFonts.roboto(
                         fontSize: 12.sp,
                         textStyle: TextStyle(

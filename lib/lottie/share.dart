@@ -3,11 +3,13 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 class LottieShare extends StatefulWidget {
+  const LottieShare({Key? key}) : super(key: key);
+
   @override
-  _LottieShareState createState() => _LottieShareState();
+  LottieShareState createState() => LottieShareState();
 }
 
-class _LottieShareState extends State<LottieShare>
+class LottieShareState extends State<LottieShare>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -16,7 +18,7 @@ class _LottieShareState extends State<LottieShare>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      reverseDuration: Duration(
+      reverseDuration: const Duration(
         microseconds: 800,
       ),
     );
@@ -32,7 +34,7 @@ class _LottieShareState extends State<LottieShare>
   Widget build(BuildContext context) {
     return Center(
       child: Lottie.asset(
-        Theme.of(context).backgroundColor == Color.fromRGBO(242, 242, 242, 1)
+        Theme.of(context).backgroundColor == const Color.fromRGBO(242, 242, 242, 1)
             ? 'assets/share.json'
             : 'assets/share_dark.json',
         height: 12.w,
@@ -41,7 +43,7 @@ class _LottieShareState extends State<LottieShare>
         frameRate: FrameRate.max,
         controller: _controller,
         onLoaded: (composition) {
-          _controller..duration = composition.duration;
+          _controller.duration = composition.duration;
           _controller.repeat();
         },
       ),

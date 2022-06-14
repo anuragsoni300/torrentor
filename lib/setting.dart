@@ -8,11 +8,13 @@ import 'helper.dart';
 import 'lottie/thanks.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
+
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  SettingsScreenState createState() => SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class SettingsScreenState extends State<SettingsScreen> {
   final Data data = Data();
   @override
   void initState() {
@@ -78,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: 1.5.h),
             Expanded(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     Wrap(
-                      children: [
+                      children: const [
                         SettingHelper(index: 0),
                         SettingHelper(index: 1),
                         SettingHelper(index: 2),
@@ -131,7 +133,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ),
                     ),
-                    LottieThanks(),
+                    const LottieThanks(),
                   ],
                 ),
               ),
