@@ -23,7 +23,7 @@ packages:
     source: hosted
     version: "2.1.0"
   change_app_package_name:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: change_app_package_name
       url: "https://pub.dartlang.org"
