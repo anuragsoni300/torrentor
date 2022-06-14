@@ -179,7 +179,7 @@ class MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Text(
-                      '  3.0.0',
+                      '  4.0.0',
                       style: GoogleFonts.roboto(
                         fontSize: 12.sp,
                         textStyle: TextStyle(
