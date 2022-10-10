@@ -7,10 +7,11 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/themedata.dart';
-import 'package:torrentor/mainpage.dart';
 import 'package:torrentor/myopencontainer.dart';
-import 'package:torrentor/secondpage.dart';
-import 'package:torrentor/setting.dart';
+
+import 'searchmodule/mainpage.dart';
+import 'searchmodule/secondpage.dart';
+import 'searchmodule/setting.dart';
 
 Future main() async {
   await ThemeManager.initialise();
@@ -59,21 +60,21 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var backC = Theme.of(context).backgroundColor;
+    var backC = Theme.of(context).colorScheme.background;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).backgroundColor,
-      systemNavigationBarDividerColor: Theme.of(context).backgroundColor,
+      systemNavigationBarColor: Theme.of(context).colorScheme.background,
+      systemNavigationBarDividerColor: Theme.of(context).colorScheme.background,
       systemNavigationBarIconBrightness:
           Theme.of(context).brightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
     ));
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Stack(
           children: [
@@ -141,7 +142,7 @@ class MyHomePageState extends State<MyHomePage> {
                   child: ClayContainer(
                     parentColor: backC,
                     surfaceColor: backC,
-                    color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                     depth: 0,
                     borderRadius: 25.w / 2,
                     height: 25.w,
@@ -152,7 +153,7 @@ class MyHomePageState extends State<MyHomePage> {
                       closedShape: const CircleBorder(side: BorderSide.none),
                       transitionDuration: const Duration(milliseconds: 500),
                       transitionType: ContainerTransitionType.fadeThrough,
-                      openColor: Theme.of(context).backgroundColor,
+                      openColor: Theme.of(context).colorScheme.background,
                       closedBuilder: (c, a) => const MainPage(),
                       openBuilder: (c, _) => const SecondPage(),
                     ),

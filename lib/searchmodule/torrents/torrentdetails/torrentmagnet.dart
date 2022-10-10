@@ -90,7 +90,7 @@ class TorrentMagnetState extends State<TorrentMagnet>
       },
       child: Icon(
         Icons.copy,
-        color: Theme.of(context).backgroundColor ==
+        color: Theme.of(context).colorScheme.background ==
                 const Color.fromRGBO(242, 242, 242, 1)
             ? Colors.black.withAlpha(200)
             : Colors.grey,

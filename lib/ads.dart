@@ -40,7 +40,7 @@
 //         child: Container(
 //           height: 250,
 //           width: 323,
-//           color: Theme.of(context).backgroundColor,
+//           color: Theme.of(context).colorScheme.background,
 //           child: Padding(
 //             padding: const EdgeInsets.all(2.0),
 //             child: Container(

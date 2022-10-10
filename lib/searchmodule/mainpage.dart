@@ -8,14 +8,14 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var backC = Theme.of(context).backgroundColor;
+    var backC = Theme.of(context).colorScheme.background;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).backgroundColor,
-      systemNavigationBarDividerColor: Theme.of(context).backgroundColor,
+      systemNavigationBarColor: Theme.of(context).colorScheme.background,
+      systemNavigationBarDividerColor: Theme.of(context).colorScheme.background,
       systemNavigationBarIconBrightness:
           Theme.of(context).brightness == Brightness.dark
               ? Brightness.light
@@ -28,9 +28,9 @@ class MainPage extends StatelessWidget {
       borderRadius: 25.w / 2,
       height: 25.w,
       width: 25.w,
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       depth:
-          Theme.of(context).backgroundColor == const Color.fromRGBO(242, 242, 242, 1)
+          Theme.of(context).colorScheme.background == const Color.fromRGBO(242, 242, 242, 1)
               ? 40
               : 20,
       child: Center(

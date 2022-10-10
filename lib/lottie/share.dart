@@ -34,7 +34,7 @@ class LottieShareState extends State<LottieShare>
   Widget build(BuildContext context) {
     return Center(
       child: Lottie.asset(
-        Theme.of(context).backgroundColor == const Color.fromRGBO(242, 242, 242, 1)
+        Theme.of(context).colorScheme.background == const Color.fromRGBO(242, 242, 242, 1)
             ? 'assets/share.json'
             : 'assets/share_dark.json',
         height: 12.w,

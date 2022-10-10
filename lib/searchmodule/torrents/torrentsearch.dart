@@ -4,12 +4,13 @@ import 'package:sizer/sizer.dart';
 // import 'package:torrentor/ads.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'package:torrentor/lottie/circularprogress.dart';
-import 'package:torrentor/torrents/torrentdetails/torrentdownload.dart';
-import 'package:torrentor/torrents/torrentdetails/torrentleechers.dart';
-import 'package:torrentor/torrents/torrentdetails/torrentmagnet.dart';
-import 'package:torrentor/torrents/torrentdetails/torrentseeders.dart';
-import 'package:torrentor/torrents/torrentdetails/torrentsize.dart';
-import 'package:torrentor/torrents/torrentdetails/torrentsname.dart';
+
+import 'torrentdetails/torrentdownload.dart';
+import 'torrentdetails/torrentleechers.dart';
+import 'torrentdetails/torrentmagnet.dart';
+import 'torrentdetails/torrentseeders.dart';
+import 'torrentdetails/torrentsize.dart';
+import 'torrentdetails/torrentsname.dart';
 
 class MovieTorrentsList extends StatefulWidget {
   final List<PirateBay> torrents;
@@ -27,9 +28,9 @@ class MovieTorrentsListState extends State<MovieTorrentsList> {
 
   @override
   Widget build(BuildContext context) {
-    var backC = Theme.of(context).backgroundColor;
+    var backC = Theme.of(context).colorScheme.background;
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: widget.torrents.isEmpty
           ? const Center(child: LottieCircular())
           : ListView.builder(

@@ -61,7 +61,7 @@ class TorrentDownloadState extends State<TorrentDownload>
                       height: 20.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Theme.of(context).backgroundColor,
+                        color: Theme.of(context).colorScheme.background,
                       ),
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -73,7 +73,7 @@ class TorrentDownloadState extends State<TorrentDownload>
                             style: GoogleFonts.comfortaa(
                               textStyle: TextStyle(
                                 fontSize: 10.sp,
-                                color: Theme.of(context).backgroundColor ==
+                                color: Theme.of(context).colorScheme.background ==
                                         const Color.fromRGBO(242, 242, 242, 1)
                                     ? Colors.black
                                     : Colors.white,
@@ -94,7 +94,7 @@ class TorrentDownloadState extends State<TorrentDownload>
                                   right: 4.w),
                               child: Card(
                                 elevation: 15,
-                                color: Theme.of(context).backgroundColor ==
+                                color: Theme.of(context).colorScheme.background ==
                                         const Color.fromRGBO(242, 242, 242, 1)
                                     ? Colors.black
                                     : Colors.white,
@@ -110,7 +110,7 @@ class TorrentDownloadState extends State<TorrentDownload>
                                       textStyle: TextStyle(
                                         fontSize: 14,
                                         color:
-                                            Theme.of(context).backgroundColor !=
+                                            Theme.of(context).colorScheme.background !=
                                                     const Color.fromRGBO(
                                                         242, 242, 242, 1)
                                                 ? Colors.black
@@ -135,7 +135,7 @@ class TorrentDownloadState extends State<TorrentDownload>
       },
       child: Icon(
         Icons.download_rounded,
-        color: Theme.of(context).backgroundColor ==
+        color: Theme.of(context).colorScheme.background ==
                 const Color.fromRGBO(242, 242, 242, 1)
             ? Colors.black.withAlpha(200)
             : Colors.grey,

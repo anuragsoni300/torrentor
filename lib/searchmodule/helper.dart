@@ -11,7 +11,7 @@ class SettingHelper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color backC = Theme.of(context).backgroundColor;
+    Color backC = Theme.of(context).colorScheme.background;
     final Data data = Data();
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -27,7 +27,7 @@ class SettingHelper extends StatelessWidget {
           depth: 30,
           spread: Theme.of(context).brightness == Brightness.dark ? 2 : 7,
           borderRadius: 1.h,
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).colorScheme.background,
           child: Padding(
             padding: const EdgeInsets.all(2),
             child: ClipRRect(

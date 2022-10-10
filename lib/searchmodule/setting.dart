@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
-
-import 'backend/data/data.dart';
+import '../backend/data/data.dart';
+import '../lottie/thanks.dart';
 import 'helper.dart';
-import 'lottie/thanks.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -28,15 +27,15 @@ class SettingsScreenState extends State<SettingsScreen> {
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).backgroundColor,
-      systemNavigationBarDividerColor: Theme.of(context).backgroundColor,
+      systemNavigationBarColor: Theme.of(context).colorScheme.background,
+      systemNavigationBarDividerColor: Theme.of(context).colorScheme.background,
       systemNavigationBarIconBrightness:
           Theme.of(context).brightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
     ));
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Column(
           children: [

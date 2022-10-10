@@ -10,9 +10,8 @@ import 'package:torrentor/backend/fetching/nyaa_fetching/nyaa.dart';
 import 'package:torrentor/backend/fetching/piratebay_fetching/piratebay.dart';
 import 'package:torrentor/backend/fetching/rarbg_fetching/rarbg.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
-import 'package:torrentor/torrents/torrentsearch.dart';
-
 import 'menu.dart';
+import 'torrents/torrentsearch.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -70,14 +69,14 @@ class SecondPageState extends State<SecondPage> {
 
   @override
   Widget build(BuildContext context) {
-    var backC = Theme.of(context).backgroundColor;
+    var backC = Theme.of(context).colorScheme.background;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).backgroundColor,
-      systemNavigationBarDividerColor: Theme.of(context).backgroundColor,
+      systemNavigationBarColor: Theme.of(context).colorScheme.background,
+      systemNavigationBarDividerColor: Theme.of(context).colorScheme.background,
       systemNavigationBarIconBrightness:
           Theme.of(context).brightness == Brightness.dark
               ? Brightness.light
@@ -85,7 +84,7 @@ class SecondPageState extends State<SecondPage> {
     ));
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
