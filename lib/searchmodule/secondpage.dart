@@ -264,7 +264,7 @@ class SecondPageState extends State<SecondPage> {
                                                 Icons.downloading_rounded,
                                                 size: 4.w,
                                                 color: Theme.of(context)
-                                                            .backgroundColor ==
+                                                            .colorScheme.background ==
                                                         const Color.fromRGBO(
                                                             242, 242, 242, 1)
                                                     ? Colors.black
