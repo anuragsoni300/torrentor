@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:torrentor/backend/model/notifier/changenotifier.dart';
 import 'package:torrentor/common/settingbutton.dart';
 import 'package:torrentor/pages/page1.dart';
 import 'package:torrentor/pages/page2.dart';

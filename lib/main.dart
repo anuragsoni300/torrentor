@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/themedata.dart';
 import 'package:torrentor/pages/pageviw.dart';
-
 import 'backend/model/notifier/changenotifier.dart';
 
 Future main() async {
   await ThemeManager.initialise();
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   final List<DisplayMode> supported = await FlutterDisplayMode.supported;
   final DisplayMode active = await FlutterDisplayMode.active;
   final List<DisplayMode> sameResolution = supported
