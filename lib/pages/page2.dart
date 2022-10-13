@@ -28,11 +28,9 @@ class _PageTwoState extends State<PageTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView.builder(
-        itemCount: infoHash.length,
-        itemBuilder: (_, index) => Text(infoHash[index]),
-      ),
+    return ListView.builder(
+      itemCount: infoHash.length,
+      itemBuilder: (_, index) => Text(infoHash[index]),
     );
   }
 }
