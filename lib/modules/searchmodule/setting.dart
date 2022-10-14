@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
-import '../backend/data/data.dart';
-import '../lottie/thanks.dart';
+import '../../backend/data/data.dart';
+import '../../lottie/thanks.dart';
 import 'helper.dart';
 
 class SettingsScreen extends StatefulWidget {

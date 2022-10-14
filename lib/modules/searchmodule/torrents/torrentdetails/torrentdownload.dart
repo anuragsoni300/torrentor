@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
-import '../../../backend/model/notifier/changenotifier.dart';
-import '../../../backend/model/storgae/basestorage.dart';
+import '../../../../backend/model/notifier/changenotifier.dart';
+import '../../../../backend/model/storgae/basestorage.dart';
 
 class TorrentDownload extends StatefulWidget {
   final PirateBay? data;

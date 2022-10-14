@@ -1,8 +1,8 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../searchmodule/mainpage.dart';
-import '../searchmodule/secondpage.dart';
+import '../modules/searchmodule/mainpage.dart';
+import '../modules/searchmodule/secondpage.dart';
 import 'package:torrentor/myopencontainer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';

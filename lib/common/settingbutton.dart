@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../myopencontainer.dart';
-import '../searchmodule/setting.dart';
+import '../modules/searchmodule/setting.dart';
 
 class SettingButton extends StatelessWidget {
   const SettingButton({super.key});
