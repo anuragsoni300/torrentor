@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
