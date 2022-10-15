@@ -22,16 +22,16 @@ class _TorrentDownloadState extends State<TorrentDownload> {
 
   torrentStarter() async {
     String path = await commonModel.savePathFetcher();
-    torrentRepository = TorrentRepository(path, widget.infoHash);
+    List<dynamic> metaData = await commonModel.metaData(widget.infoHash);
+    torrentRepository =
+        TorrentRepository(path, widget.infoHash, metaData[0], metaData[1]);
+    torrentRepository.torrentInit();
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView.builder(
-        itemCount: 0,
-        itemBuilder: (_, index) => const Text(''),
-      ),
+      child: Text(widget.infoHash),
     );
   }
 }

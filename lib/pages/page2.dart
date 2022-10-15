@@ -29,10 +29,9 @@ class _PageTwoState extends State<PageTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return const TorrentDownload(infoHash: '');
-    // ListView.builder(
-    //   itemCount: infoHash.length,
-    //   itemBuilder: (_, index) => TorrentDownload(infoHash: infoHash[index]),
-    // );
+    return ListView.builder(
+      itemCount: infoHash.length,
+      itemBuilder: (_, index) => TorrentDownload(infoHash: infoHash[index]),
+    );
   }
 }
