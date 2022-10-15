@@ -45,7 +45,7 @@ class SettingHelper extends StatelessWidget {
                               ? Colors.black
                               : Colors.tealAccent,
                           height: 1.5,
-                          fontWeight: FontWeight.w100,
+                          fontWeight: FontWeight.w300,
                           fontSize: 9.sp,
                         ),
                       ),

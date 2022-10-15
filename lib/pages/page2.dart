@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:torrentor/backend/model/storgae/basestorage.dart';
+import 'package:torrentor/modules/downloadmodule/downloadtorrent.dart';
 
 class PageTwo extends StatefulWidget {
   const PageTwo({super.key});
@@ -28,9 +29,10 @@ class _PageTwoState extends State<PageTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: infoHash.length,
-      itemBuilder: (_, index) => Text(infoHash[index]),
-    );
+    return const TorrentDownload(infoHash: '');
+    // ListView.builder(
+    //   itemCount: infoHash.length,
+    //   itemBuilder: (_, index) => TorrentDownload(infoHash: infoHash[index]),
+    // );
   }
 }

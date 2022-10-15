@@ -158,7 +158,7 @@ class Torrent {
   }
 }
 
-/// IO操作太耗时间，用隔离来做
+/// Io operation is too time-consuming, use isolation to do it
 Future<T> _compution<T>(
     Function(Map<String, dynamic>) mainMethod, dynamic data) {
   var complete = Completer<T>();
@@ -377,7 +377,7 @@ Torrent? parseTorrentFileContent(Uint8List fileBytes) {
   return torrentModel;
 }
 
-/// 用torrent模型生成map，然后encode出byte buffer
+/// Use torrent model to generate map, then encode out byte buffer
 Uint8List? _torrentModel2Bytebuffer(Torrent torrentModel) {
   var torrent = {'info': torrentModel.info};
   var announce = torrentModel.announces;

@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -13,9 +11,9 @@ import 'tracker.dart';
 /// UDP Tracker
 class UDPTracker extends Tracker with UDPTrackerBase {
   String? _currentEvent;
-  UDPTracker(Uri _uri, Uint8List infoHashBuffer,
+  UDPTracker(Uri uri, Uint8List infoHashBuffer,
       {AnnounceOptionsProvider? provider})
-      : super('udp:${_uri.host}:${_uri.port}', _uri, infoHashBuffer,
+      : super('udp:${uri.host}:${uri.port}', uri, infoHashBuffer,
             provider: provider);
   String? get currentEvent {
     return _currentEvent;

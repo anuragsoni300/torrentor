@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, constant_identifier_names, no_leading_underscores_for_local_identifiers
+// ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
 import 'dart:async';
 import 'dart:io';
@@ -683,7 +683,7 @@ class PeersManager with Holepunch, PEX {
     _remoteRequest.clear();
     _pausedRequest.clear();
     _pausedRemoteRequest.clear();
-    _disposePeers(Set<Peer>? peers) async {
+    disposePeers(Set<Peer>? peers) async {
       if (peers != null && peers.isNotEmpty) {
         for (var i = 0; i < peers.length; i++) {
           var peer = peers.elementAt(i);
@@ -694,7 +694,7 @@ class PeersManager with Holepunch, PEX {
       peers?.clear();
     }
 
-    await _disposePeers(_activePeers);
+    await disposePeers(_activePeers);
   }
 
   @override

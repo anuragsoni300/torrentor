@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import 'dart:typed_data';
 
 const MAX_UINT16 = 65535;

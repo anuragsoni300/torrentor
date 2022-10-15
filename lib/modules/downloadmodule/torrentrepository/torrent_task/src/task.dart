@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names, avoid_print
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:developer';
@@ -232,7 +232,7 @@ class _TorrentTask implements TorrentTask, AnnounceOptionsProvider {
   }
 
   void _processLSDPeerEvent(CompactAddress address, String infoHash) {
-    print('居然有LSD');
+    // Print('There is lsd');
   }
 
   void _processNewPeerFound(CompactAddress url) {

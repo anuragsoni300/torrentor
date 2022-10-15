@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
@@ -19,10 +17,10 @@ import 'tracker.dart';
 class HttpTracker extends Tracker with HttpTrackerBase {
   String? _trackerId;
   String? _currentEvent;
-  HttpTracker(Uri _uri, Uint8List infoHashBuffer,
+  HttpTracker(Uri uri, Uint8List infoHashBuffer,
       {AnnounceOptionsProvider? provider})
       : super(
-            'http:${_uri.host}:${_uri.port}${_uri.path}', _uri, infoHashBuffer,
+            'http:${uri.host}:${uri.port}${uri.path}', uri, infoHashBuffer,
             provider: provider);
 
   String? get currentTrackerId {

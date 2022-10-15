@@ -28,7 +28,7 @@ class PageOne extends StatelessWidget {
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey
                         : Colors.black.withAlpha(200),
-                    fontWeight: FontWeight.w100,
+                    fontWeight: FontWeight.w700,
                     wordSpacing: 2,
                   ),
                 ),

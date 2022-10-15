@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -226,7 +224,7 @@ Future<List<Uri>> _getTrackerFrom(String trackerUrlStr,
     return [];
   }
   HttpClient? client;
-  _access() async {
+  access() async {
     var alist = <Uri>[];
     Uri aurl;
     aurl = Uri.parse(trackerUrlStr);
@@ -252,7 +250,7 @@ Future<List<Uri>> _getTrackerFrom(String trackerUrlStr,
   }
 
   try {
-    var re = await _access();
+    var re = await access();
     client?.close();
     return re;
   } catch (e) {

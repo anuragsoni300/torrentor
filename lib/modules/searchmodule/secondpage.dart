@@ -133,7 +133,7 @@ class SecondPageState extends State<SecondPage> {
                                       Brightness.dark
                                   ? Colors.white
                                   : Colors.black,
-                              fontWeight: FontWeight.w100,
+                              fontWeight: FontWeight.w300,
                               fontSize: 10.sp,
                               wordSpacing: 2,
                             ),
@@ -159,7 +159,7 @@ class SecondPageState extends State<SecondPage> {
                                         Brightness.dark
                                     ? Colors.white
                                     : Colors.black,
-                                fontWeight: FontWeight.w100,
+                                fontWeight: FontWeight.w300,
                                 fontSize: 10.sp,
                                 wordSpacing: 2,
                               ),

@@ -62,7 +62,7 @@ class LottieThanksState extends State<LottieThanks>
                                     ? Colors.white60
                                     : Colors.black,
                             height: 1.5,
-                            fontWeight: FontWeight.w100,
+                            fontWeight: FontWeight.w300,
                             fontSize: 10.sp,
                           ),
                         ),
@@ -76,7 +76,7 @@ class LottieThanksState extends State<LottieThanks>
                                     ? Colors.white60
                                     : Colors.black,
                             height: 1.5,
-                            fontWeight: FontWeight.w100,
+                            fontWeight: FontWeight.w300,
                             fontSize: 10.sp,
                           ),
                         ),

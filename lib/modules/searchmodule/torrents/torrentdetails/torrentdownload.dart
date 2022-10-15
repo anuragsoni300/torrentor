@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
+import 'package:torrentor/common/permissions/storagepermission.dart';
 import '../../../../backend/model/notifier/changenotifier.dart';
 import '../../../../backend/model/storgae/basestorage.dart';
 
@@ -39,12 +40,13 @@ class TorrentDownloadState extends State<TorrentDownload>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
+      onTap: () {
         widget.data!.infoHash.toString().contains('magnet')
             ? myMagnet = widget.data!.infoHash!
             : myMagnet = 'magnet:?xt=urn:btih:${widget.data!.infoHash}';
         putListofInfoHash(myMagnet);
         Provider.of<Change>(context, listen: false).getchanged(myMagnet);
+        showMyDialog(context);
       },
       child: Icon(
         Icons.download_rounded,

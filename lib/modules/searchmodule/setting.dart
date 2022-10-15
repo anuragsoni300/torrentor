@@ -96,7 +96,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                     ? Colors.deepOrange
                                     : Colors.black,
                             height: 1.5,
-                            fontWeight: FontWeight.w100,
+                            fontWeight: FontWeight.w300,
                             fontSize: 20.sp,
                           ),
                         ),
@@ -126,7 +126,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                     ? Colors.deepOrange
                                     : Colors.black,
                             height: 1.5,
-                            fontWeight: FontWeight.w100,
+                            fontWeight: FontWeight.w300,
                             fontSize: 20.sp,
                           ),
                         ),
