@@ -36,8 +36,8 @@ class HttpScrape extends Scrape with HttpTrackerBase {
       throw Exception(String.fromCharCodes(result['failure reason']));
     }
     var event = ScrapeEvent(url);
-    // 把file的key值转成Hex
-    // var files = <String, Map>{};
+    // Convert the key value of the file to Hex
+// var files = <String, Map>{};
     result.forEach((key, value) {
       if (key == 'files') {
         var list = value;
@@ -75,7 +75,7 @@ class HttpScrape extends Scrape with HttpTrackerBase {
 
   @override
   Future scrape(Map<String, dynamic> options) async {
-    // 目前scrape是不需要提供访问参数的
+    // Currently scrape does not need to provide access parameters
     try {
       var re = await httpGet(options);
       return re;

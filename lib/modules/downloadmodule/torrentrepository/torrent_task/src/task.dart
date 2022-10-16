@@ -92,12 +92,12 @@ abstract class TorrentTask {
 
   bool offResume(void Function() handler);
 
-  /// 增加DHT node，一般是将torrent文件中的nodes加入进去。
+  /// To add DHT nodes, generally add the nodes in the torrent file into it.
   ///
-  /// 当然也可以直接添加已知的node地址
+  /// Of course, you can also add known node addresses directly
   void addDHTNode(Uri uri);
 
-  /// 添加已知的Peer地址
+  /// Add a known peer address
   void addPeer(CompactAddress address,
       [PeerType type = PeerType.TCP, Socket socket]);
 }

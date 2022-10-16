@@ -9,6 +9,7 @@ class TaskTorrent extends BaseTaskTorrent {
   final TorrentTask _task;
   final List<int> _infoHashBuffer;
   final Torrent _model;
+  Torrent get model => _model;
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
   @override
   Future<void> start() async {
