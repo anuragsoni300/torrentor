@@ -1269,6 +1269,7 @@ class _UTPSocket extends UTPSocket {
       return 0;
     });
     var len = _receivePacketBuffer.last.seq_nr! - lastRemoteSeq!;
+    if (len < 0) return null;
     var c = len ~/ 32;
     var r = len.remainder(32);
     if (r != 0) c++;

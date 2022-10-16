@@ -282,7 +282,7 @@ class _TorrentTask implements TorrentTask, AnnounceOptionsProvider {
 
   @override
   Future start() async {
-    // 进入的peer：
+    // Incoming peer:
     _serverSocket ??= await ServerSocket.bind(InternetAddress.anyIPv4, 0);
     await _init(_metaInfo, _savePath);
     _serverSocket?.listen(_hookInPeer);
@@ -298,7 +298,7 @@ class _TorrentTask implements TorrentTask, AnnounceOptionsProvider {
     map['downloaded'] = _stateFile!.downloaded;
     map['uploaded'] = _stateFile!.uploaded;
     map['total_length'] = _metaInfo?.length;
-    // 主动访问的peer:
+    // Actively accessed peers:
     _tracker?.onPeerEvent(_processTrackerPeerEvent);
     _peersManager?.onAllComplete(_whenTaskDownloadComplete);
     _fileManager?.onFileComplete(_whenFileDownloadComplete);
@@ -306,7 +306,6 @@ class _TorrentTask implements TorrentTask, AnnounceOptionsProvider {
     _lsd?.onLSDPeer(_processLSDPeerEvent);
     _lsd?.port = _serverSocket!.port;
     _lsd?.start();
-
     _dht?.announce(
         String.fromCharCodes(_metaInfo!.infoHashBuffer!), _serverSocket!.port);
     _dht?.onNewPeer(_processDHTPeer);
@@ -346,7 +345,7 @@ class _TorrentTask implements TorrentTask, AnnounceOptionsProvider {
     _tracker?.offPeerEvent(_processTrackerPeerEvent);
     _peersManager?.offAllComplete(_whenTaskDownloadComplete);
     _fileManager?.offFileComplete(_whenFileDownloadComplete);
-    // 这是有顺序的,先停止tracker运行,然后停止监听serversocket以及所有的peer,最后关闭文件系统
+    // This is in order, first stop the tracker running, then stop listening to the serversocket and all peers, and finally close the file system
     await _tracker?.dispose();
     _tracker = null;
     await _peersManager?.dispose();

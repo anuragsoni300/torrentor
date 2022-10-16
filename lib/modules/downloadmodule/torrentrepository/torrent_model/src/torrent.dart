@@ -245,7 +245,6 @@ Torrent? parseTorrentFileContent(Uint8List fileBytes) {
   if (torrent == null) return null;
   // check the file is correct
   _checkFile(torrent);
-
   var torrentName =
       _decodeString((torrent['info']['name.utf-8'] ?? torrent['info']['name']));
 

@@ -72,7 +72,7 @@ mixin Holepunch {
       }
       err = ByteData.view(e.buffer).getUint32(0);
       if (err >= 1000) {
-        err = e[0]; // 有些客户端把错误码放在第一位
+        err = e[0]; // Some clients put error codes first
       }
       err--;
       var errMsg = 'Unknown error';

@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:torrentor/backend/model/common/commonmodel.dart';
@@ -16,7 +19,8 @@ class TorrentDownload extends StatefulWidget {
   State<TorrentDownload> createState() => _TorrentDownloadState();
 }
 
-class _TorrentDownloadState extends State<TorrentDownload> {
+class _TorrentDownloadState extends State<TorrentDownload>
+    with AutomaticKeepAliveClientMixin {
   late final TorrentRepository torrentRepository;
   late final TaskTorrent taskTorrent;
   CommonModel commonModel = CommonModel();
@@ -31,18 +35,20 @@ class _TorrentDownloadState extends State<TorrentDownload> {
     List<dynamic> metaData = await commonModel.metaData(widget.infoHash);
     torrentRepository =
         TorrentRepository(path, widget.infoHash, metaData[0], metaData[1]);
+    // print(utf8.decode(metaData[0]['files'][0]['path'][0]));
     File torrentFile = await torrentRepository.torrentSave();
     Torrent model = await Torrent.parse(torrentFile.path);
-    taskTorrent =
-        TaskTorrent(TorrentTask.newTask(model, '$path/'), metaData[1], model);
-    await taskTorrent.start();
+    TorrentTask newTask = TorrentTask.newTask(model, '$path/');
+    taskTorrent = TaskTorrent(newTask, metaData[1], model);
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
+    await taskTorrent.start();
     return taskTorrent;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MultiProvider(
       providers: [
         FutureProvider<TaskTorrent?>(
@@ -53,4 +59,7 @@ class _TorrentDownloadState extends State<TorrentDownload> {
       child: const DownloadStart(),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

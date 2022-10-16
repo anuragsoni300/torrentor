@@ -327,13 +327,13 @@ abstract class Peer
   }
 
   void _processReceiveData(dynamic data) {
-    // 不管收到什么消息，只要不是空的，重置倒计时:
+    // No matter what message is received, as long as it is not empty, reset the countdown:
     if (data != null && data.isNotEmpty) _startToCountdown();
-    // if (data.isNotEmpty) log('收到数据 $data');
-    if (data != null) _cacheBuffer?.addAll(data); // 接受remote发送数据。缓冲到一处
+    // if (data.isNotEmpty) log('received data $data');
+    if (data != null) _cacheBuffer?.addAll(data); // Accept remote to send data. buffer to one place
     if (_cacheBuffer == null) return;
     if (_cacheBuffer!.isEmpty) return;
-    // 查看是不是handshake头
+    // Check if it is a handshake header
     if (_cacheBuffer?[0] == 19 && _cacheBuffer!.length >= 68) {
       if (_isHandShakeHead(_cacheBuffer)) {
         if (_validateInfoHash(_cacheBuffer)) {
@@ -360,7 +360,7 @@ abstract class Peer
       List<Uint8List>? piecesMessage;
       List<Uint8List>? haveMessages;
       while (_cacheBuffer!.length - start - 4 >= length) {
-        if (length == 0) {
+        if (length <= 0) {
           Timer.run(() => _processMessage(null, null));
         } else {
           var messageBuffer = Uint8List(length - 1);

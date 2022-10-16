@@ -128,7 +128,7 @@ class MetadataDownloader
     if (address == null) return;
     if (address.address == localExtenelIP) return;
     if (socket != null) {
-      // 说明是主动连接的peer,目前只允许一个ip连一次
+      // The description is an actively connected peer, currently only one ip is allowed to connect once
       if (!_incomingAddress.add(address.address!)) {
         return;
       }
@@ -141,7 +141,7 @@ class MetadataDownloader
       }
       if (type == PeerType.UTP) {
         peer = Peer.newUTPPeer(
-            _localPeerId, address, _infoHashBuffer!, 0, socket as UTPSocket);
+            _localPeerId, address, _infoHashBuffer!, 0, socket as UTPSocket?);
       }
       if (peer != null) _hookPeer(peer);
     }
