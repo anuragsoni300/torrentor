@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/model/storgae/basestorage.dart';
 import 'package:torrentor/modules/downloadmodule/downloadtorrent.dart';
 
@@ -31,7 +32,10 @@ class _PageTwoState extends State<PageTwo> {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: infoHash.length,
-      itemBuilder: (_, index) => TorrentDownload(infoHash: infoHash[index]),
+      itemBuilder: (_, index) => Padding(
+        padding: EdgeInsets.only(top: index == 0 ? 6.h : 0.h),
+        child: TorrentDownload(infoHash: infoHash[index]),
+      ),
     );
   }
 }
