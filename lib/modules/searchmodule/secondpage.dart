@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/data/data.dart';
-import 'package:torrentor/backend/fetching/nyaa_fetching/nyaa.dart';
 import 'package:torrentor/backend/fetching/piratebay_fetching/piratebay.dart';
 import 'package:torrentor/backend/fetching/rarbg_fetching/rarbg.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
@@ -27,7 +26,6 @@ class SecondPageState extends State<SecondPage> {
   bool show = false;
   PirateBayFetch pirateBayFetch = PirateBayFetch();
   RarbgSearch rarbgSearch = RarbgSearch();
-  NyaaFetch nyaaFetch = NyaaFetch();
   List<PirateBay> torrents = [];
   PirateBay xx = PirateBay();
 
@@ -49,20 +47,6 @@ class SecondPageState extends State<SecondPage> {
         rarbgSearch.welcome.insert(5, xx);
       }
       torrents.addAll(rarbgSearch.welcome);
-      if (mounted) setState(() {});
-    }
-  }
-
-  getnyaaTorrents(query) async {
-    int page = 0;
-    while (page < 5) {
-      page++;
-      var x = await nyaaFetch.nyaaSearch(query.replaceAll("'", ''), page);
-      if (x.length > 6) {
-        pirateBayFetch.welcome.insert(5, xx);
-      }
-      torrents.addAll(x);
-      x.clear();
       if (mounted) setState(() {});
     }
   }
@@ -178,7 +162,6 @@ class SecondPageState extends State<SecondPage> {
                               torrents.clear();
                               getPirateBayTorrents(text);
                               getRarbgTorrents(text);
-                              getnyaaTorrents(text);
                             });
                           },
                         ),
