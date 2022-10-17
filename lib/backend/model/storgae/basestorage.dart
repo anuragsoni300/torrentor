@@ -1,33 +1,51 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../common/commonmodel.dart';
 
 abstract class BaseStorageRepository {
   Future<Box> openBox();
-  List<String> getInfoHash(Box box);
-  Future<void> addInfoHash(Box box, String infoHash);
-  Future<void> removeInfoHash(Box box, String infoHash);
+  List<dynamic> getInfoHash();
+  Future<void> addInfoHash(String infoHash);
+  Future<void> removeInfoHash(String infoHash);
+  ValueListenable<Box<dynamic>> listenToBox();
 }
 
 class StorageRepository extends BaseStorageRepository {
+  CommonModel commonModel = CommonModel();
+  Box? box;
   String boxname = 'infohash';
+
+  StorageRepository() {
+    openBox();
+  }
+
   @override
   Future<Box> openBox() async {
-    Box box = await Hive.openBox<String>(boxname);
-    return box;
+    box = await Hive.openBox<dynamic>(boxname);
+    return box!;
   }
 
   @override
-  List<String> getInfoHash(Box box) {
-    return box.values.toList() as List<String>;
+  List<dynamic> getInfoHash() {
+    return box!.values.toList();
   }
 
   @override
-  Future<void> addInfoHash(Box box, String infoHash) async {
+  Future<void> addInfoHash(String infoHash) async {
     String info = infoHash.split(':btih:').last.split('&').first;
-    await box.put(info, info);
+    await box!.put(info, null);
+    List<dynamic> metaData = await commonModel.metaData(info);
+    await box!.put(info, metaData);
   }
 
   @override
-  Future<void> removeInfoHash(Box box, String infoHash) async {
-    await box.delete(infoHash);
+  Future<void> removeInfoHash(String infoHash) async {
+    await box!.delete(infoHash);
+  }
+
+  @override
+  ValueListenable<Box> listenToBox() {
+    var data = box!.listenable();
+    return data;
   }
 }

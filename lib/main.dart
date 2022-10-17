@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/themedata.dart';
+import 'package:torrentor/backend/model/storgae/basestorage.dart';
 import 'package:torrentor/pages/pageviw.dart';
 import 'backend/model/notifier/changenotifier.dart';
 
@@ -13,6 +14,8 @@ Future main() async {
   await ThemeManager.initialise();
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  StorageRepository storageRepository = StorageRepository();
+  await storageRepository.openBox();
   final List<DisplayMode> supported = await FlutterDisplayMode.supported;
   final DisplayMode active = await FlutterDisplayMode.active;
   final List<DisplayMode> sameResolution = supported
@@ -26,7 +29,10 @@ Future main() async {
   await FlutterDisplayMode.setPreferredMode(mostOptimalMode);
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider<Change>(create: (_) => Change())],
+      providers: [
+        ChangeNotifierProvider<Change>(create: (_) => Change()),
+        Provider(create: (_) => storageRepository),
+      ],
       child: const MyApp(),
     ),
   );

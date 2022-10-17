@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'package:torrentor/common/permissions/storagepermission.dart';
-import '../../../../backend/model/notifier/changenotifier.dart';
 import '../../../../backend/model/storgae/basestorage.dart';
 
 class TorrentDownload extends StatefulWidget {
@@ -16,7 +14,6 @@ class TorrentDownload extends StatefulWidget {
 
 class TorrentDownloadState extends State<TorrentDownload>
     with TickerProviderStateMixin {
-  final StorageRepository storageRepository = StorageRepository();
   late String myMagnet;
   late AnimationController _controller;
 
@@ -24,11 +21,6 @@ class TorrentDownloadState extends State<TorrentDownload>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-  }
-
-  putListofInfoHash(infohash) async {
-    Box box = await storageRepository.openBox();
-    await storageRepository.addInfoHash(box, infohash);
   }
 
   @override
@@ -44,8 +36,8 @@ class TorrentDownloadState extends State<TorrentDownload>
         widget.data!.infoHash.toString().contains('magnet')
             ? myMagnet = widget.data!.infoHash!
             : myMagnet = 'magnet:?xt=urn:btih:${widget.data!.infoHash}';
-        putListofInfoHash(myMagnet);
-        Provider.of<Change>(context, listen: false).getchanged(myMagnet);
+        Provider.of<StorageRepository>(context, listen: false)
+            .addInfoHash(myMagnet);
         showMyDialog(context);
       },
       child: Icon(

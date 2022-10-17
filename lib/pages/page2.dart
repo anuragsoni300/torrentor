@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/model/storgae/basestorage.dart';
 import 'package:torrentor/modules/downloadmodule/downloadtorrent.dart';
@@ -12,29 +13,31 @@ class PageTwo extends StatefulWidget {
 }
 
 class _PageTwoState extends State<PageTwo> {
-  final StorageRepository storageRepository = StorageRepository();
-  List<String> infoHash = [];
   @override
   void initState() {
-    getListofInfoHash();
     super.initState();
-  }
-
-  getListofInfoHash() async {
-    Box box = await storageRepository.openBox();
-    List<String> list = storageRepository.getInfoHash(box);
-    setState(() {
-      infoHash = list;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: infoHash.length,
-      itemBuilder: (_, index) => Padding(
-        padding: EdgeInsets.only(top: index == 0 ? 6.h : 0.h),
-        child: TorrentDownload(infoHash: infoHash[index]),
+    return Padding(
+      padding: EdgeInsets.only(top: 6.h),
+      child: ValueListenableBuilder(
+        valueListenable: Provider.of<StorageRepository>(context).listenToBox(),
+        builder: (_, Box box, __) {
+          return ListView(
+            children: box.toMap().entries.map((entry) {
+              if (entry.value == null) {
+                Provider.of<StorageRepository>(context).addInfoHash(entry.key);
+              }
+              return TorrentDownload(
+                infoHash: entry.key,
+                metaData: entry.value?[0],
+                infoBuffer: entry.value?[1],
+              );
+            }).toList(),
+          ); // keys.toList();
+        }, // ListView.builder(
       ),
     );
   }

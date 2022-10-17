@@ -281,7 +281,7 @@ class DHT {
       InternetAddress address, int port, dynamic data) {
     var qid = ID.createID(idBytes, 0, 20);
     if (_canAdd(qid)) {
-      // 不放过任何一个机会
+      // don't miss any chance
       _tryToGetNode(address, port);
     } else {
       var node = _root?.findNode(qid);
@@ -296,7 +296,7 @@ class DHT {
     var infoHashStr = String.fromCharCodes(infohash);
     var peers = _resourceTable[infoHashStr];
     var token = String.fromCharCodes(_createToken(address));
-    // 这里要返回Peers
+    // Here to return peers
     _krpc?.responseGetPeers(tid, infoHashStr, address, port, token,
         nodes: nodes, peers: peers as Iterable<CompactAddress>);
   }
@@ -320,7 +320,7 @@ class DHT {
       log('Inner Error',
           error: 'InfoHash didn\'t record', name: runtimeType.toString());
     }
-    // 如果没有宣布，就宣布一次
+    // If not announced, announce it once
     if (infoHash != null &&
         (node.announced[infoHash] == null || !node.announced[infoHash]!) &&
         token != null) {

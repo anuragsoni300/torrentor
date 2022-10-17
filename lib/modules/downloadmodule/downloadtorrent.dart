@@ -10,7 +10,13 @@ import 'package:torrentor/modules/downloadmodule/torrentrepository/torrent_task/
 
 class TorrentDownload extends StatefulWidget {
   final String infoHash;
-  const TorrentDownload({super.key, required this.infoHash});
+  final dynamic metaData;
+  final List<int>? infoBuffer;
+  const TorrentDownload(
+      {super.key,
+      required this.infoHash,
+      required this.metaData,
+      required this.infoBuffer});
 
   @override
   State<TorrentDownload> createState() => _TorrentDownloadState();
@@ -29,32 +35,32 @@ class _TorrentDownloadState extends State<TorrentDownload>
 
   Future<TaskTorrent> torrentStarter() async {
     String path = await commonModel.savePathFetcher();
-    List<dynamic> metaData = await commonModel.metaData(widget.infoHash);
-    torrentRepository =
-        TorrentRepository(path, widget.infoHash, metaData[0], metaData[1]);
-    // print(utf8.decode(metaData[0]['files'][0]['path'][0]));
+    torrentRepository = TorrentRepository(
+        path, widget.infoHash, widget.metaData, widget.infoBuffer!);
     File torrentFile = await torrentRepository.torrentSave();
     Torrent model = await Torrent.parse(torrentFile.path);
     TorrentTask newTask = TorrentTask.newTask(model, '$path/');
-    taskTorrent = TaskTorrent(newTask, metaData[1], model);
+    taskTorrent = TaskTorrent(newTask, widget.infoBuffer!, model);
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
-    await taskTorrent.start();
+    // await taskTorrent.start();
     return taskTorrent;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return MultiProvider(
-      providers: [
-        FutureProvider<TaskTorrent?>(
-          initialData: null,
-          create: (context) => torrentStarter(),
-        ),
-      ],
-      child: const DownloadStart(),
-    );
+    return widget.metaData == null
+        ? const Text('Loading')
+        : MultiProvider(
+            providers: [
+              FutureProvider<TaskTorrent?>(
+                initialData: null,
+                create: (context) => torrentStarter(),
+              ),
+            ],
+            child: const DownloadStart(),
+          );
   }
 
   @override
