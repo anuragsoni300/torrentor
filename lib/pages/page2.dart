@@ -30,7 +30,7 @@ class _PageTwoState extends State<PageTwo> {
             itemCount: box.length,
             itemBuilder: (_, index) {
               if (box.getAt(index) == null &&
-                  checkMetaFetchRunning[box.keyAt(index)] == false) {
+                  checkMetaFetchRunning[box.keyAt(index)] != true) {
                 checkMetaFetchRunning[box.keyAt(index)] = true;
                 Provider.of<StorageRepository>(context)
                     .addInfoHash(box.keyAt(index));
@@ -42,7 +42,7 @@ class _PageTwoState extends State<PageTwo> {
               );
             },
           );
-        }, // ListView.builder(
+        },
       ),
     );
   }

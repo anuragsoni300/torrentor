@@ -54,7 +54,8 @@ class _TorrentDownloadState extends State<TorrentDownload>
       providers: [
         FutureProvider<TaskTorrent?>(
           initialData: null,
-          create: (context) => torrentStarter(),
+          create: (context) =>
+              widget.metaData == null ? null : torrentStarter(),
         ),
       ],
       child: DownloadStart(infoHash: widget.infoHash),
