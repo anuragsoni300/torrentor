@@ -8,7 +8,6 @@ import 'package:stacked_themes/stacked_themes.dart';
 import 'package:torrentor/backend/data/themedata.dart';
 import 'package:torrentor/backend/model/storgae/basestorage.dart';
 import 'package:torrentor/pages/pageviw.dart';
-import 'backend/model/notifier/changenotifier.dart';
 
 Future main() async {
   await ThemeManager.initialise();
@@ -30,7 +29,6 @@ Future main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<Change>(create: (_) => Change()),
         Provider(create: (_) => storageRepository),
       ],
       child: const MyApp(),

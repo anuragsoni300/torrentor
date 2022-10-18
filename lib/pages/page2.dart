@@ -13,6 +13,7 @@ class PageTwo extends StatefulWidget {
 }
 
 class _PageTwoState extends State<PageTwo> {
+  Map<String, bool> checkMetaFetchRunning = {};
   @override
   void initState() {
     super.initState();
@@ -25,18 +26,22 @@ class _PageTwoState extends State<PageTwo> {
       child: ValueListenableBuilder(
         valueListenable: Provider.of<StorageRepository>(context).listenToBox(),
         builder: (_, Box box, __) {
-          return ListView(
-            children: box.toMap().entries.map((entry) {
-              if (entry.value == null) {
-                Provider.of<StorageRepository>(context).addInfoHash(entry.key);
+          return ListView.builder(
+            itemCount: box.length,
+            itemBuilder: (_, index) {
+              if (box.getAt(index) == null &&
+                  checkMetaFetchRunning[box.keyAt(index)] == false) {
+                checkMetaFetchRunning[box.keyAt(index)] = true;
+                Provider.of<StorageRepository>(context)
+                    .addInfoHash(box.keyAt(index));
               }
               return TorrentDownload(
-                infoHash: entry.key,
-                metaData: entry.value?[0],
-                infoBuffer: entry.value?[1],
+                infoHash: box.keyAt(index),
+                metaData: box.getAt(index)?[0],
+                infoBuffer: box.getAt(index)?[1],
               );
-            }).toList(),
-          ); // keys.toList();
+            },
+          );
         }, // ListView.builder(
       ),
     );

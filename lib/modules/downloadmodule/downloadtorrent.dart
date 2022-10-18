@@ -24,8 +24,8 @@ class TorrentDownload extends StatefulWidget {
 
 class _TorrentDownloadState extends State<TorrentDownload>
     with AutomaticKeepAliveClientMixin {
-  late final TorrentRepository torrentRepository;
-  late final TaskTorrent taskTorrent;
+  late TorrentRepository torrentRepository;
+  late TaskTorrent taskTorrent;
   CommonModel commonModel = CommonModel();
 
   @override

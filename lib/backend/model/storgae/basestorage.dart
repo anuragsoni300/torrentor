@@ -1,3 +1,4 @@
+import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../common/commonmodel.dart';
@@ -11,7 +12,6 @@ abstract class BaseStorageRepository {
 }
 
 class StorageRepository extends BaseStorageRepository {
-  CommonModel commonModel = CommonModel();
   Box? box;
   String boxname = 'infohash';
 
@@ -34,7 +34,12 @@ class StorageRepository extends BaseStorageRepository {
   Future<void> addInfoHash(String infoHash) async {
     String info = infoHash.split(':btih:').last.split('&').first;
     await box!.put(info, null);
-    List<dynamic> metaData = await commonModel.metaData(info);
+    ReceivePort myReceivePort = ReceivePort();
+    Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
+    SendPort mikeSendPort = await myReceivePort.first;
+    ReceivePort mikeResponseReceivePort = ReceivePort();
+    mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
+    final metaData = await mikeResponseReceivePort.first;
     await box!.put(info, metaData);
   }
 
@@ -47,5 +52,17 @@ class StorageRepository extends BaseStorageRepository {
   ValueListenable<Box> listenToBox() {
     var data = box!.listenable();
     return data;
+  }
+}
+
+Future<void> heavyComputationTask(SendPort mySendPort) async {
+  CommonModel commonModel = CommonModel();
+  ReceivePort mikeReceivePort = ReceivePort();
+  mySendPort.send(mikeReceivePort.sendPort);
+  await for (var message in mikeReceivePort) {
+    final String info = message[0];
+    final SendPort mikeResponseSendPort = message[1];
+    List<dynamic> metaData = await commonModel.metaData(info);
+    mikeResponseSendPort.send(metaData);
   }
 }
