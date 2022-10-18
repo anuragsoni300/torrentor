@@ -50,17 +50,15 @@ class _TorrentDownloadState extends State<TorrentDownload>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return widget.metaData == null
-        ? const Text('Loading')
-        : MultiProvider(
-            providers: [
-              FutureProvider<TaskTorrent?>(
-                initialData: null,
-                create: (context) => torrentStarter(),
-              ),
-            ],
-            child: const DownloadStart(),
-          );
+    return MultiProvider(
+      providers: [
+        FutureProvider<TaskTorrent?>(
+          initialData: null,
+          create: (context) => torrentStarter(),
+        ),
+      ],
+      child: DownloadStart(infoHash: widget.infoHash),
+    );
   }
 
   @override
