@@ -43,7 +43,8 @@ class _TorrentDownloadState extends State<TorrentDownload>
     taskTorrent = TaskTorrent(newTask, widget.infoBuffer!, model);
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
-    // await taskTorrent.start();
+    taskTorrent.values();
+    await taskTorrent.start();
     return taskTorrent;
   }
 

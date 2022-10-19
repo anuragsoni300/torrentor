@@ -1,11 +1,10 @@
 import 'dart:math';
-
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../../backend/model/torrent/tasktorrent.dart';
+import 'package:torrentor/modules/downloadmodule/downloadhelper/details/divider.dart';
+import 'package:torrentor/modules/downloadmodule/downloadhelper/details/extradetails.dart/extradetails.dart';
+import 'package:torrentor/modules/downloadmodule/downloadhelper/details/name.dart';
 
 class DownloadStart extends StatefulWidget {
   final String infoHash;
@@ -22,7 +21,7 @@ class _DownloadStartState extends State<DownloadStart> {
     return Padding(
       padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h),
       child: ClayContainer(
-        height: 70,
+        height: 100,
         width: 92.w,
         parentColor: backC,
         surfaceColor: backC,
@@ -35,31 +34,15 @@ class _DownloadStartState extends State<DownloadStart> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 75.w,
-                child: Text(
-                  Provider.of<TaskTorrent?>(context) == null
-                      ? widget.infoHash
-                      : Provider.of<TaskTorrent>(context).model.name,
-                  style: GoogleFonts.comfortaa(
-                    textStyle: TextStyle(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey
-                          : Colors.black87,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 10.sp,
-                      height: 1.5,
-                    ),
-                  ),
-                  maxLines: 1,
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Name(infoHash: widget.infoHash, width: 75.w),
+                  MyDivider(width: 75.w),
+                  ExtraDetails(width: 75.w)
+                ],
               ),
-              VerticalDivider(
-                  color: Theme.of(context).colorScheme.brightness ==
-                          Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
-                  thickness: 0.1),
+              const MyVerticalDivider(),
               SizedBox(
                 width: 9.w,
                 child: Icon(
@@ -70,22 +53,6 @@ class _DownloadStartState extends State<DownloadStart> {
                       : Colors.black,
                 ),
               ),
-              // Text(
-              //   formatBytes(
-              //       Provider.of<TaskTorrent>(context).model.length!, 2),
-              //   style: GoogleFonts.comfortaa(
-              //     textStyle: TextStyle(
-              //       color:
-              //           Theme.of(context).brightness == Brightness.dark
-              //               ? Colors.grey
-              //               : Colors.black87,
-              //       fontWeight: FontWeight.w700,
-              //       fontSize: 8.sp,
-              //       height: 1.5,
-              //     ),
-              //   ),
-              //   maxLines: 1,
-              // ),
             ],
           ),
         ),
