@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:torrentor/modules/downloadmodule/downloadhelper/details/extradetails.dart/details/downloadspeed.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/details/extradetails.dart/details/filescount.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/details/extradetails.dart/details/size.dart';
 
@@ -15,10 +15,11 @@ class ExtraDetails extends StatelessWidget {
       width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: const [
           MySize(),
           CurrentSeeders(),
-          const FilesCount()
+          FilesCount(),
+          DownloadSpeed(),
         ],
       ),
     );

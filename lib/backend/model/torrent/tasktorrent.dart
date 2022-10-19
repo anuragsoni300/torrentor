@@ -12,6 +12,9 @@ class TaskTorrent extends BaseTaskTorrent {
   final List<int> _infoHashBuffer;
   final Torrent _model;
   ValueNotifier seedersValue = ValueNotifier(0);
+  ValueNotifier progressValue = ValueNotifier('0.00 %');
+  ValueNotifier downloadSpeedValue = ValueNotifier('0 kb/s');
+  ValueNotifier ulploadSpeedValue = ValueNotifier('0 kb/s');
   Torrent get model => _model;
   TorrentTask get task => _task;
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
@@ -59,7 +62,6 @@ class TaskTorrent extends BaseTaskTorrent {
       var aps = ((task.averageUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
       var ds = ((task.currentDownloadSpeed) * 1000 / 1024).toStringAsFixed(2);
       var ps = ((task.uploadSpeed) * 1000 / 1024).toStringAsFixed(2);
-
       var utpd = ((task.utpDownloadSpeed) * 1000 / 1024).toStringAsFixed(2);
       var utpu = ((task.utpUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
       var utpc = task.utpPeerCount;
@@ -68,6 +70,9 @@ class TaskTorrent extends BaseTaskTorrent {
       var seeders = task.seederNumber;
       var all = task.allPeersNumber;
       seedersValue.value = seeders;
+      progressValue.value = progress;
+      downloadSpeedValue.value = '$ds kb/s';
+      ulploadSpeedValue.value = '$utpu)($aps/$ps)kb/s';
       log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) . Download speed : ($utpd)($ads/$ds)kb/s , upload speed : ($utpu)($aps/$ps)kb/s');
     });
   }
