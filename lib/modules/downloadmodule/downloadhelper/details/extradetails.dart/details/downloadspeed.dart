@@ -25,13 +25,11 @@ class _DownloadSpeedState extends State<DownloadSpeed> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 6),
-          child: Provider.of<TaskTorrent?>(context) == null
-              ? const Text('0 kb/s')
-              : ValueListenableBuilder(
-                  valueListenable:
-                      Provider.of<TaskTorrent?>(context)!.downloadSpeedValue,
-                  builder: (_, c, __) => Text(
-                    c.toString(),
+          child: SizedBox(
+            width: 12.w,
+            child: Provider.of<TaskTorrent?>(context) == null
+                ? Text(
+                    '0 B',
                     style: GoogleFonts.comfortaa(
                       textStyle: TextStyle(
                         color: Theme.of(context).brightness == Brightness.dark
@@ -43,8 +41,26 @@ class _DownloadSpeedState extends State<DownloadSpeed> {
                       ),
                     ),
                     maxLines: 1,
+                  )
+                : ValueListenableBuilder(
+                    valueListenable:
+                        Provider.of<TaskTorrent?>(context)!.downloadSpeedValue,
+                    builder: (_, c, __) => Text(
+                      c.toString(),
+                      style: GoogleFonts.comfortaa(
+                        textStyle: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey
+                              : Colors.black87,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 8.sp,
+                          height: 1.5,
+                        ),
+                      ),
+                      maxLines: 1,
+                    ),
                   ),
-                ),
+          ),
         ),
       ],
     );
