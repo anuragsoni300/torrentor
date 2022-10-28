@@ -53,8 +53,8 @@ class MovieTorrentsListState extends State<MovieTorrentsList> {
                               spread: 0,
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                    bottom: 4.h,
-                                    top: 2.5.h,
+                                    bottom: 2.h,
+                                    top: 0.h,
                                     left: 4.w,
                                     right: 4.w),
                                 child: Column(
@@ -66,11 +66,7 @@ class MovieTorrentsListState extends State<MovieTorrentsList> {
                                     widget.torrents[index].name ==
                                             "No results returned"
                                         ? Container()
-                                        : Padding(
-                                            padding:
-                                                EdgeInsets.only(top: 0.5.h),
-                                            child: const Divider(),
-                                          ),
+                                        : const Divider(),
                                     widget.torrents[index].name ==
                                             "No results returned"
                                         ? Container()
@@ -90,7 +86,7 @@ class MovieTorrentsListState extends State<MovieTorrentsList> {
                                                   data: widget.torrents[index]),
                                             ],
                                           ),
-                                    const Divider(),
+                                    // const Divider(),
                                   ],
                                 ),
                               ),

@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'package:torrentor/backend/model/rarbg_model/rarbg.dart';
-import 'package:torrentor/common/functions.dart';
 
 class RarbgSearch {
   List<PirateBay> welcome = [];
@@ -18,7 +17,7 @@ class RarbgSearch {
         leechers: rarbg[i].leechers.toString(),
         seeders: rarbg[i].seeders.toString(),
         numFiles: 1.toString(),
-        size: formatBytes(rarbg[i].size!, 2),
+        size: rarbg[i].size.toString(),
         username: '',
         added: '',
         category: rarbg[i].category!.replaceAll(r'\', r''),

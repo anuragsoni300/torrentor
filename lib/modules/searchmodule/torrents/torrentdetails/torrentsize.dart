@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
+import 'package:torrentor/common/functions.dart';
 
 class TorrentSize extends StatefulWidget {
   final PirateBay? data;
@@ -70,7 +71,7 @@ class TorrentSizeState extends State<TorrentSize>
                     ),
                   ),
             Text(
-              widget.data!.size,
+              formatBytes(int.parse(widget.data!.size), 2),
               style: GoogleFonts.gruppo(
                 textStyle: TextStyle(
                   color: Theme.of(context).brightness == Brightness.dark

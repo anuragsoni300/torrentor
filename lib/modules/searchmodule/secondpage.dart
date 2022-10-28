@@ -43,11 +43,11 @@ class SecondPageState extends State<SecondPage> {
 
   getTorrentz2Torrents(query) async {
     torrentz2fetch.welcome.clear();
-    List<PirateBay> tor = await torrentz2fetch.torrentz2Search(query);
+    await torrentz2fetch.torrentz2Search(query);
     // if (torrentz2fetch.welcome.length > 6) {
     //   torrentz2fetch.welcome.insert(5, xx);
     // }
-    torrents.addAll(tor);
+    torrents.addAll(torrentz2fetch.welcome);
     if (mounted) setState(() {});
   }
 
@@ -172,8 +172,8 @@ class SecondPageState extends State<SecondPage> {
                             setState(() {
                               show = true;
                               torrents.clear();
-                              // getPirateBayTorrents(text);
-                              // getRarbgTorrents(text);
+                              getPirateBayTorrents(text);
+                              getRarbgTorrents(text);
                               getTorrentz2Torrents(text);
                             });
                           },
