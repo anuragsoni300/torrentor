@@ -5,8 +5,8 @@ import 'package:torrentor/backend/model/common/commonmodel.dart';
 import 'package:torrentor/backend/model/torrent/tasktorrent.dart';
 import 'package:torrentor/backend/model/torrent/torrentmodel.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/downloadstart.dart';
-import 'package:torrentor/modules/downloadmodule/torrentrepository/torrent_model/torrent_model.dart';
-import 'package:torrentor/modules/downloadmodule/torrentrepository/torrent_task/torrent_task.dart';
+import 'torrentrepository/model/torrent.dart';
+import 'torrentrepository/task/torrent_task_base.dart';
 
 class TorrentDownload extends StatefulWidget {
   final String infoHash;

@@ -16,7 +16,7 @@ class Name extends StatelessWidget {
       child: Text(
         Provider.of<TaskTorrent?>(context) == null
             ? infoHash
-            : Provider.of<TaskTorrent>(context).model.name,
+            : Provider.of<TaskTorrent>(context).model.name.toString(),
         style: GoogleFonts.comfortaa(
           textStyle: TextStyle(
             color: Theme.of(context).brightness == Brightness.dark

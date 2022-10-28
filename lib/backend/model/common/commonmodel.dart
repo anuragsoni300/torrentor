@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
-import '../../../modules/downloadmodule/torrentrepository/bencode_dart/bencode_dart.dart';
-import '../../../modules/downloadmodule/torrentrepository/dartorrent_common/dartorrent_common.dart';
-import '../../../modules/downloadmodule/torrentrepository/torrent_task/src/metadata/metadata_downloader.dart';
-import '../../../modules/downloadmodule/torrentrepository/torrent_tracker/torrent_tracker.dart';
+import '../../../modules/downloadmodule/torrentrepository/bencode_base.dart';
+import '../../../modules/downloadmodule/torrentrepository/dartorrent_common_base.dart';
+import '../../../modules/downloadmodule/torrentrepository/task/metadata/metadata_downloader.dart';
+import '../../../modules/downloadmodule/torrentrepository/tracker/torrent_tracker_base.dart';
 import 'base/basecommonmodel.dart';
 
 class CommonModel extends BaseCommonModel {
@@ -25,7 +25,7 @@ class CommonModel extends BaseCommonModel {
     var tracker = TorrentAnnounceTracker(metadata);
     dynamic msg;
     metadata.onDownloadComplete((data) {
-      msg = decode(Uint8List.fromList(data));
+      msg = decode(Uint8List.fromList(data!));
       tracker.stop(true);
       completer.complete([msg, metadata.infoHashBuffer]);
     });
@@ -33,7 +33,7 @@ class CommonModel extends BaseCommonModel {
     var u8List = Uint8List.fromList(metadata.infoHashBuffer!);
 
     tracker.onPeerEvent((source, event) {
-      var peers = event.peers;
+      var peers = event?.peers;
       peers?.forEach((element) {
         metadata.addNewPeerAddress(element);
       });

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import '../../../modules/downloadmodule/torrentrepository/torrent_model/torrent_model.dart';
+import '../../../modules/downloadmodule/torrentrepository/model/torrent.dart';
 import 'base/basetorrent.dart';
 
 class TorrentRepository extends BaseTorrentRepository {
