@@ -464,7 +464,8 @@ class _KRPC implements KRPC {
       tid = String.fromCharCodes(data[TRANSACTION_KEY], 0, 2);
     } catch (e) {
       log('解析Tid出错', error: e, name: runtimeType.toString());
-    } //I don't know why some Tids are 4 bytes
+    }
+    //I don't know why some Tids are 4 bytes
     // print('Request response $tid , the current number of pending requests: $_pendingQuery');
     if (tid == null || tid.length != 2) {
       _fireError(
