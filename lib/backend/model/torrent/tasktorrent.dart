@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:torrentor/backend/model/torrent/base/basetasktorrent.dart';
-import 'package:torrentor/modules/downloadmodule/downloadhelper/downloadstart.dart';
+import '../../../common/functions.dart';
 import '../../../modules/downloadmodule/torrentrepository/dartorrent_common_base.dart';
 import '../../../modules/downloadmodule/torrentrepository/model/torrent.dart';
 import '../../../modules/downloadmodule/torrentrepository/task/torrent_task_base.dart';

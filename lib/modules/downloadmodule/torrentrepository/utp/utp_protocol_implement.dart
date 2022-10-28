@@ -568,7 +568,7 @@ class _UTPSocket extends UTPSocket {
   /// Timer triggers to send an ST_STATE message, seq_nr is the next seq sent, and ack_nr is the last received remote seq-1
   void startKeepAlive() {
     _keepAliveTimer?.cancel();
-    _keepAliveTimer = Timer(Duration(seconds: 30), () {
+    _keepAliveTimer = Timer(const Duration(seconds: 30), () {
       var ack = 0;
       ack = (_lastRemoteSeq - 1) & MAX_UINT16;
       // dev.log('Send keepalive message', name: runtimeType.toString());

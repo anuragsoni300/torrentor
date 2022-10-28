@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../../backend/model/torrent/tasktorrent.dart';
+import '../../../../../../common/functions.dart';
 import '../../../downloadstart.dart';
 
 class MySize extends StatelessWidget {
@@ -41,7 +42,7 @@ class MySize extends StatelessWidget {
               textStyle: TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey
-                    : Colors.black87,
+                    : const Color.fromARGB(221, 53, 52, 52),
                 fontWeight: FontWeight.w700,
                 fontSize: 8.sp,
                 height: 1.5,

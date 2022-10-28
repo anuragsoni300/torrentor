@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/data/data.dart';
 import 'package:torrentor/backend/fetching/piratebay_fetching/piratebay.dart';
 import 'package:torrentor/backend/fetching/rarbg_fetching/rarbg.dart';
+import 'package:torrentor/backend/fetching/torrentz2/torrentz2.dart';
 import 'package:torrentor/backend/model/piratebay_model/piratebay.dart';
 import 'menu.dart';
 import 'torrents/torrentsearch.dart';
@@ -26,16 +27,27 @@ class SecondPageState extends State<SecondPage> {
   bool show = false;
   PirateBayFetch pirateBayFetch = PirateBayFetch();
   RarbgSearch rarbgSearch = RarbgSearch();
+  Torrentz2Fetch torrentz2fetch = Torrentz2Fetch();
   List<PirateBay> torrents = [];
   PirateBay xx = PirateBay();
 
   getPirateBayTorrents(query) async {
     pirateBayFetch.welcome.clear();
     await pirateBayFetch.pirateBaySearch(query);
-    if (pirateBayFetch.welcome.length > 6) {
-      pirateBayFetch.welcome.insert(5, xx);
-    }
+    // if (pirateBayFetch.welcome.length > 6) {
+    //   pirateBayFetch.welcome.insert(5, xx);
+    // }
     torrents.addAll(pirateBayFetch.welcome);
+    if (mounted) setState(() {});
+  }
+
+  getTorrentz2Torrents(query) async {
+    torrentz2fetch.welcome.clear();
+    List<PirateBay> tor = await torrentz2fetch.torrentz2Search(query);
+    // if (torrentz2fetch.welcome.length > 6) {
+    //   torrentz2fetch.welcome.insert(5, xx);
+    // }
+    torrents.addAll(tor);
     if (mounted) setState(() {});
   }
 
@@ -43,9 +55,9 @@ class SecondPageState extends State<SecondPage> {
     rarbgSearch.welcome.clear();
     await rarbgSearch.rarbgSearch(query);
     if (rarbgSearch.welcome.isNotEmpty) {
-      if (rarbgSearch.welcome.length > 6) {
-        rarbgSearch.welcome.insert(5, xx);
-      }
+      // if (rarbgSearch.welcome.length > 6) {
+      //   rarbgSearch.welcome.insert(5, xx);
+      // }
       torrents.addAll(rarbgSearch.welcome);
       if (mounted) setState(() {});
     }
@@ -160,8 +172,9 @@ class SecondPageState extends State<SecondPage> {
                             setState(() {
                               show = true;
                               torrents.clear();
-                              getPirateBayTorrents(text);
-                              getRarbgTorrents(text);
+                              // getPirateBayTorrents(text);
+                              // getRarbgTorrents(text);
+                              getTorrentz2Torrents(text);
                             });
                           },
                         ),
@@ -247,7 +260,8 @@ class SecondPageState extends State<SecondPage> {
                                                 Icons.downloading_rounded,
                                                 size: 4.w,
                                                 color: Theme.of(context)
-                                                            .colorScheme.background ==
+                                                            .colorScheme
+                                                            .background ==
                                                         const Color.fromRGBO(
                                                             242, 242, 242, 1)
                                                     ? Colors.black

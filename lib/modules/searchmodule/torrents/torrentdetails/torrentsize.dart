@@ -35,7 +35,6 @@ class TorrentSizeState extends State<TorrentSize>
 
   @override
   Widget build(BuildContext context) {
-    double size = ((double.parse(widget.data!.size) * 9.31) / 10000000000);
     return Padding(
       padding:
           EdgeInsets.only(left: 2.w, right: 2.w, bottom: 0.4.h, top: 0.3.h),
@@ -71,11 +70,7 @@ class TorrentSizeState extends State<TorrentSize>
                     ),
                   ),
             Text(
-              size == 0
-                  ? '0 MB'
-                  : size.floor() == 0
-                      ? '${size.toString().substring(2, 5)} MB'
-                      : '${size.toString().substring(0, 4)} GB',
+              widget.data!.size,
               style: GoogleFonts.gruppo(
                 textStyle: TextStyle(
                   color: Theme.of(context).brightness == Brightness.dark
