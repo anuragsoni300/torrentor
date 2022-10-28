@@ -21,8 +21,8 @@ class HttpTracker extends Tracker with HttpTrackerBase {
   String? _currentEvent;
   HttpTracker(Uri? _uri, Uint8List? infoHashBuffer,
       {AnnounceOptionsProvider? provider})
-      : super(
-            'http:${_uri?.host}:${_uri?.port}${_uri?.path}', _uri, infoHashBuffer,
+      : super('http:${_uri?.host}:${_uri?.port}${_uri?.path}', _uri,
+            infoHashBuffer,
             provider: provider);
 
   String? get currentTrackerId {
@@ -55,7 +55,8 @@ class HttpTracker extends Tracker with HttpTrackerBase {
 
   @override
   Future<PeerEvent?> announce(String? eventType, Map<String, dynamic> options) {
-    _currentEvent = eventType; // Modifying the current event, stop and complete will also call this method, so record the current event type here
+    _currentEvent =
+        eventType; // Modifying the current event, stop and complete will also call this method, so record the current event type here
     return httpGet<PeerEvent?>(options);
   }
 
@@ -80,7 +81,8 @@ class HttpTracker extends Tracker with HttpTrackerBase {
   /// -no_peer_id : This field is ignored if compact is specified. My compact here is always 1, so this value is not set
   ///
   @override
-  Map<String?, dynamic> generateQueryParameters(Map<String?, dynamic>? options) {
+  Map<String?, dynamic> generateQueryParameters(
+      Map<String?, dynamic>? options) {
     var params = <String?, String?>{};
     params['compact'] = options?['compact'].toString();
     params['downloaded'] = options?['downloaded'].toString();
@@ -118,19 +120,19 @@ class HttpTracker extends Tracker with HttpTrackerBase {
   /// - Sometimes , the remote will return 'failer reason', then need to throw a exception
   @override
   PeerEvent processResponseData(Uint8List data) {
-    var result = decode(data) as Map;
+    var result = decode(data) as Map?;
     // You cuo wu , jiu tao chu qu
-    if (result['failure reason'] != null) {
+    if (result != null && result['failure reason'] != null) {
       var errorMsg = String.fromCharCodes(result['failure reason']);
       throw errorMsg;
     }
     // If 'tracker id' is existed, record it
-    if (result['tracker id'] != null) {
+    if (result != null && result['tracker id'] != null) {
       _trackerId = result['tracker id'];
     }
 
     var event = PeerEvent(infoHash, url);
-    result.forEach((key, value) {
+    result?.forEach((key, value) {
       if (key == 'min interval') {
         event.minInterval = value;
         return;

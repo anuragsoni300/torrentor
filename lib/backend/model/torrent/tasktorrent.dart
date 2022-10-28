@@ -43,16 +43,16 @@ class TaskTorrent extends BaseTaskTorrent {
   @override
   void findingPublicTrackers() {
     findPublicTrackers().listen((alist) {
-      for (var element in alist) {
-        _task.startAnnounceUrl(element, Uint8List.fromList(_infoHashBuffer));
+      for (var i = 0; i < alist.length; i++) {
+        _task.startAnnounceUrl(alist[i], Uint8List.fromList(_infoHashBuffer));
       }
     });
   }
 
   @override
   void addDhtNodes() {
-    for (var element in _model.nodes) {
-      _task.addDHTNode(element);
+    for (var i = 0; i < model.nodes.length; i++) {
+      _task.addDHTNode(model.nodes[i]);
     }
   }
 
@@ -73,7 +73,7 @@ class TaskTorrent extends BaseTaskTorrent {
       progressValue.value = progress;
       downloadSpeedValue.value = formatBytes((ds).toInt(), 2);
       ulploadSpeedValue.value = formatBytes((ps).toInt(), 2);
-      if(progress == '100.00%') timer.cancel();
+      if (progress == '100.00%') timer.cancel();
       log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');
     });
   }

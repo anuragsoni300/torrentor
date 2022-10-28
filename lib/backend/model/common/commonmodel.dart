@@ -39,8 +39,8 @@ class CommonModel extends BaseCommonModel {
       });
     });
     findPublicTrackers().listen((alist) {
-      for (var element in alist) {
-        tracker.runTracker(element, u8List);
+      for (var i = 0; i < alist.length; i++) {
+        tracker.runTracker(alist[i], u8List);
       }
     });
     return completer.future;

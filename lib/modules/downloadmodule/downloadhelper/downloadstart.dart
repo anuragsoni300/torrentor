@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,17 +50,27 @@ class _DownloadStartState extends State<DownloadStart> {
                 width: 9.w,
                 child: IconButton(
                   onPressed: () {
-                    status
-                        ? Provider.of<TaskTorrent?>(context)!.pause()
-                        : Provider.of<TaskTorrent?>(context)!.start();
+                    if (Provider.of<TaskTorrent?>(context, listen: false) !=
+                        null) {
+                      status
+                          ? Provider.of<TaskTorrent?>(context, listen: false)!
+                              .pause()
+                          : Provider.of<TaskTorrent?>(context, listen: false)!
+                              .resume();
+                      setState(() {
+                        status = !status;
+                      });
+                    }
                   },
-                  icon: Icon(
-                    status ? Icons.pause : Icons.start_rounded,
-                    color: Theme.of(context).colorScheme.brightness ==
-                            Brightness.dark
-                        ? Colors.grey
-                        : Colors.black,
-                  ),
+                  icon: Provider.of<TaskTorrent?>(context) == null
+                      ? const CircularProgressIndicator()
+                      : Icon(
+                          status ? Icons.pause : Icons.play_arrow_rounded,
+                          color: Theme.of(context).colorScheme.brightness ==
+                                  Brightness.dark
+                              ? Colors.grey
+                              : Colors.black,
+                        ),
                 ),
               ),
             ],

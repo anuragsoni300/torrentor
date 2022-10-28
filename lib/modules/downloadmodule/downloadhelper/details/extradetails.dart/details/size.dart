@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../../backend/model/torrent/tasktorrent.dart';
 import '../../../../../../common/functions.dart';
-import '../../../downloadstart.dart';
 
 class MySize extends StatelessWidget {
   const MySize({super.key});

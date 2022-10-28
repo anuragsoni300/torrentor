@@ -344,8 +344,8 @@ class PeersManager with Holepunch, PEX {
       }
     }
     if (dindex.isNotEmpty) {
-      for (var i in dindex) {
-        _remoteRequest.removeAt(i);
+      for (var i = 0; i < dindex.length; i++) {
+        _remoteRequest.removeAt(dindex[i]);
       }
       if (_uploadedNotifySize >= MAX_UPLOADED_NOTIFY_SIZE) {
         _uploadedNotifySize = 0;
@@ -410,8 +410,8 @@ class PeersManager with Holepunch, PEX {
         tempIndex.add(i);
       }
     }
-    for (var index in tempIndex) {
-      _pausedRequest.removeAt(index);
+    for (var i = 0; i < tempIndex.length; i++) {
+      _pausedRequest.removeAt(tempIndex[i]);
     }
 
     if (reason is TCPConnectException) {
