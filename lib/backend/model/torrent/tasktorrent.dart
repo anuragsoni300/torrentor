@@ -19,6 +19,7 @@ class TaskTorrent extends BaseTaskTorrent {
   Torrent get model => _model;
   TorrentTask get task => _task;
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
+
   @override
   Future<void> start() async {
     await _task.start();
@@ -72,7 +73,15 @@ class TaskTorrent extends BaseTaskTorrent {
       progressValue.value = progress;
       downloadSpeedValue.value = formatBytes((ds).toInt(), 2);
       ulploadSpeedValue.value = formatBytes((ps).toInt(), 2);
+      if(progress == '100.00%') timer.cancel();
       log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');
+    });
+  }
+
+  @override
+  void stopOnTaskComplete() {
+    task.onTaskComplete(() {
+      task.stop();
     });
   }
 }

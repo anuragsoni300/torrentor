@@ -20,7 +20,7 @@ class TorrentRepository extends BaseTorrentRepository {
       _infoHash,
       Uint8List.fromList(_infoBuffer),
     );
-    File file = await model.saveAs('$_path/$_infoHash.torrent', true);
+    File file = await model.saveAs('$_path/.$_infoHash.torrent', true);
     return file;
   }
 

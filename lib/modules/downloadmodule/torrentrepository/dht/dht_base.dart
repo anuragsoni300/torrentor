@@ -66,7 +66,7 @@ class DHT {
         'incorrect parameters');
     _generateXorToken();
     _tokenGenerateTimer?.cancel();
-    _tokenGenerateTimer = Timer.periodic(Duration(minutes: 10), (timer) {
+    _tokenGenerateTimer = Timer.periodic(const Duration(minutes: 10), (timer) {
       _generateXorToken();
     });
     var id = ID.randomID();
@@ -218,7 +218,8 @@ class DHT {
     index = 159 - index;
     var id = ID.randomID(20);
     var n = index ~/ 8; //same number of numbers
-    var offset = index.remainder(8); // How many bits are the same before the first different number
+    var offset = index.remainder(
+        8); // How many bits are the same before the first different number
     var newId = List<int?>.filled(20, null, growable: true);
     var j = 0;
     for (; j < n; j++) {
@@ -467,7 +468,9 @@ class DHT {
     assert(port != null && port <= 65535 && port >= 0, 'Incorrect port');
     _announceTable[infohash] = port;
     _root?.forEach((node) {
-      if (node?.announced[infohash] != null && node!.announced[infohash]!) return;
+      if (node?.announced[infohash] != null && node!.announced[infohash]!) {
+        return;
+      }
       var token = node?.token[infohash];
       if (token == null) {
         // The token has not been obtained yet:

@@ -6,4 +6,5 @@ abstract class BaseTaskTorrent {
   void findingPublicTrackers();
   void addDhtNodes();
   void values();
+  void stopOnTaskComplete();
 }
