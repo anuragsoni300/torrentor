@@ -61,7 +61,7 @@ class _TorrentDownloadState extends State<TorrentDownload>
       ],
       child: DownloadStart(
         infoHash: widget.infoHash,
-        name: widget.metaData?["name"] == null
+        name: widget.metaData == null
             ? widget.infoHash
             : String.fromCharCodes(widget.metaData["name"]),
       ),

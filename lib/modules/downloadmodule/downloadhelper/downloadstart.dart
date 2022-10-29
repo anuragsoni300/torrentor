@@ -22,7 +22,6 @@ class DownloadStart extends StatefulWidget {
 class _DownloadStartState extends State<DownloadStart> {
   @override
   Widget build(BuildContext context) {
-    log(widget.name);
     var backC = Theme.of(context).colorScheme.background;
     return Padding(
       padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h),
