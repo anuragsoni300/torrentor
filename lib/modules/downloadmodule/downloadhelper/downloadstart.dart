@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,8 @@ import '../../../backend/model/torrent/tasktorrent.dart';
 
 class DownloadStart extends StatefulWidget {
   final String infoHash;
-  const DownloadStart({super.key, required this.infoHash});
+  final String name;
+  const DownloadStart({super.key, required this.infoHash, required this.name});
 
   @override
   State<DownloadStart> createState() => _DownloadStartState();
@@ -19,6 +22,7 @@ class DownloadStart extends StatefulWidget {
 class _DownloadStartState extends State<DownloadStart> {
   @override
   Widget build(BuildContext context) {
+    log(widget.name);
     var backC = Theme.of(context).colorScheme.background;
     return Padding(
       padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h),
@@ -39,7 +43,7 @@ class _DownloadStartState extends State<DownloadStart> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Name(infoHash: widget.infoHash, width: 75.w),
+                  Name(name: widget.name, width: 75.w),
                   MyDivider(width: 75.w),
                   ExtraDetails(width: 75.w)
                 ],

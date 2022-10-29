@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +50,6 @@ class _TorrentDownloadState extends State<TorrentDownload>
 
   @override
   Widget build(BuildContext context) {
-    log(widget.metaData.toString());
     super.build(context);
     return MultiProvider(
       providers: [
@@ -61,7 +59,12 @@ class _TorrentDownloadState extends State<TorrentDownload>
               widget.metaData == null ? null : torrentStarter(),
         ),
       ],
-      child: DownloadStart(infoHash: widget.infoHash),
+      child: DownloadStart(
+        infoHash: widget.infoHash,
+        name: widget.metaData?["name"] == null
+            ? widget.infoHash
+            : String.fromCharCodes(widget.metaData["name"]),
+      ),
     );
   }
 
