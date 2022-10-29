@@ -17,7 +17,6 @@ class DownloadStart extends StatefulWidget {
 }
 
 class _DownloadStartState extends State<DownloadStart> {
-  bool status = true;
   @override
   Widget build(BuildContext context) {
     var backC = Theme.of(context).colorScheme.background;
@@ -52,20 +51,19 @@ class _DownloadStartState extends State<DownloadStart> {
                   onPressed: () {
                     if (Provider.of<TaskTorrent?>(context, listen: false) !=
                         null) {
-                      status
+                      Provider.of<TaskTorrent?>(context)!.isPaused
                           ? Provider.of<TaskTorrent?>(context, listen: false)!
-                              .pause()
+                              .resume()
                           : Provider.of<TaskTorrent?>(context, listen: false)!
-                              .resume();
-                      setState(() {
-                        status = !status;
-                      });
+                              .pause();
                     }
                   },
                   icon: Provider.of<TaskTorrent?>(context) == null
                       ? const CircularProgressIndicator()
                       : Icon(
-                          status ? Icons.pause : Icons.play_arrow_rounded,
+                          Provider.of<TaskTorrent?>(context)!.isPaused
+                              ? Icons.pause
+                              : Icons.play_arrow_rounded,
                           color: Theme.of(context).colorScheme.brightness ==
                                   Brightness.dark
                               ? Colors.grey

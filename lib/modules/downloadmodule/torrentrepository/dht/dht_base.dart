@@ -398,7 +398,7 @@ class DHT {
     }
     node ??= Node(qid, CompactAddress(address, port), _cleanNodeTime);
     node.queried = true;
-    if (_root!.add(node)) {
+    if (_root != null && _root!.add(node)) {
       if (_announceTable.keys.isNotEmpty) {
         // Newly joined nodes to request peers
         for (var infoHash in _announceTable.keys) {

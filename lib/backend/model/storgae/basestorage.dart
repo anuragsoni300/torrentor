@@ -33,14 +33,16 @@ class StorageRepository extends BaseStorageRepository {
   @override
   Future<void> addInfoHash(String infoHash) async {
     String info = infoHash.split(':btih:').last.split('&').first;
-    await box!.put(info, null);
-    ReceivePort myReceivePort = ReceivePort();
-    Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
-    SendPort mikeSendPort = await myReceivePort.first;
-    ReceivePort mikeResponseReceivePort = ReceivePort();
-    mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
-    final metaData = await mikeResponseReceivePort.first;
-    await box!.put(info, metaData);
+    if (box!.get(info) == null) {
+      await box!.put(info, null);
+      ReceivePort myReceivePort = ReceivePort();
+      Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
+      SendPort mikeSendPort = await myReceivePort.first;
+      ReceivePort mikeResponseReceivePort = ReceivePort();
+      mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
+      final metaData = await mikeResponseReceivePort.first;
+      await box!.put(info, metaData);
+    }
   }
 
   @override

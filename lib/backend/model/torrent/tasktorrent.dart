@@ -18,6 +18,8 @@ class TaskTorrent extends BaseTaskTorrent {
   ValueNotifier ulploadSpeedValue = ValueNotifier('0 B');
   Torrent get model => _model;
   TorrentTask get task => _task;
+  bool get isPaused => _task.isPaused;
+
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
 
   @override

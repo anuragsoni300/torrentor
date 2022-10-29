@@ -50,26 +50,29 @@ class RarbgSearch {
     if (jsondata.toString() == '{error: No results found, error_code: 20}') {
       return welcome;
     } else {
-      jsondata["torrent_results"].forEach(
-        (json) {
-          TorrentResult pirateBay = TorrentResult(
-            title: json["title"].toString().isEmpty ? '' : json["title"],
-            category:
-                json["category"].toString().isEmpty ? '' : json["category"],
-            download:
-                json["download"].toString().isEmpty ? '' : json["download"],
-            seeders: json["seeders"].toString().isEmpty ? 0 : json["seeders"],
-            leechers:
-                json["leechers"].toString().isEmpty ? 0 : json["leechers"],
-            size: json["size"].toString().isEmpty ? 0 : json["size"],
-            pubdate: json["pubdate"].toString().isEmpty ? '' : json["pubdate"],
-            ranked: json["ranked"].toString().isEmpty ? 0 : json["ranked"],
-            infoPage:
-                json["info_page"].toString().isEmpty ? '' : json["info_page"],
-          );
-          welcome.add(pirateBay);
-        },
-      );
+      if (jsondata["torrent_results"] != null) {
+        jsondata["torrent_results"].forEach(
+          (json) {
+            TorrentResult pirateBay = TorrentResult(
+              title: json["title"].toString().isEmpty ? '' : json["title"],
+              category:
+                  json["category"].toString().isEmpty ? '' : json["category"],
+              download:
+                  json["download"].toString().isEmpty ? '' : json["download"],
+              seeders: json["seeders"].toString().isEmpty ? 0 : json["seeders"],
+              leechers:
+                  json["leechers"].toString().isEmpty ? 0 : json["leechers"],
+              size: json["size"].toString().isEmpty ? 0 : json["size"],
+              pubdate:
+                  json["pubdate"].toString().isEmpty ? '' : json["pubdate"],
+              ranked: json["ranked"].toString().isEmpty ? 0 : json["ranked"],
+              infoPage:
+                  json["info_page"].toString().isEmpty ? '' : json["info_page"],
+            );
+            welcome.add(pirateBay);
+          },
+        );
+      }
     }
     return welcome;
   }

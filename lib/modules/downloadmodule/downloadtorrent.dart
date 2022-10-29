@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,12 +45,13 @@ class _TorrentDownloadState extends State<TorrentDownload>
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
     taskTorrent.values();
-    await taskTorrent.start();
+    // await taskTorrent.start();
     return taskTorrent;
   }
 
   @override
   Widget build(BuildContext context) {
+    log(widget.metaData.toString());
     super.build(context);
     return MultiProvider(
       providers: [
