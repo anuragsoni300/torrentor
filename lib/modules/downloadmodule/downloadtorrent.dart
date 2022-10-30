@@ -41,7 +41,7 @@ class _TorrentDownloadState extends State<TorrentDownload>
     File torrentFile = await torrentRepository.torrentSave();
     Torrent model = await Torrent.parse(torrentFile.path);
     TorrentTask newTask = TorrentTask.newTask(model, '$path/');
-    log('${widget.infoBuffer?.length}');
+    log('torrentStarter');
     taskTorrent = TaskTorrent(newTask, widget.infoBuffer!, model);
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
@@ -53,16 +53,15 @@ class _TorrentDownloadState extends State<TorrentDownload>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return MultiProvider(
-      providers: [
-        FutureProvider<TaskTorrent?>(
-          initialData: null,
-          create: (context) =>
-              widget.metaData == null || widget.infoBuffer == null
-                  ? null
-                  : torrentStarter(),
-        ),
-      ],
+    return FutureProvider<TaskTorrent?>(
+      initialData: null,
+      create: (context) {
+        log(widget.metaData == null ? 'FUCK YOU' : 'FUCK ME');
+        log(widget.infoBuffer == null ? 'SUCK YOU' : 'SUCK ME');
+        return widget.metaData == null || widget.infoBuffer == null
+            ? null
+            : torrentStarter();
+      },
       child: DownloadStart(
         infoHash: widget.infoHash,
         name: widget.metaData == null

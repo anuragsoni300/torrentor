@@ -35,10 +35,14 @@ class _PageTwoState extends State<PageTwo> {
                 Provider.of<StorageRepository>(context)
                     .metaData(box.keyAt(index));
               }
+              String infoHash = box.keyAt(index);
+              dynamic data = box.getAt(index);
+              dynamic metaData = data?[0];
+              List<int>? infoBuffer = data?[1];
               return TorrentDownload(
-                infoHash: box.keyAt(index),
-                metaData: box.getAt(index)?[0],
-                infoBuffer: box.getAt(index)?[1],
+                infoHash: infoHash,
+                metaData: metaData,
+                infoBuffer: infoBuffer,
               );
             },
           );
