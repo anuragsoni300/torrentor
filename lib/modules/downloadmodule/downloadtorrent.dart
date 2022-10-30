@@ -44,7 +44,7 @@ class _TorrentDownloadState extends State<TorrentDownload>
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
     taskTorrent.values();
-    // await taskTorrent.start();
+    await taskTorrent.start().then((value) => taskTorrent.pause());
     return taskTorrent;
   }
 

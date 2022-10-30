@@ -499,6 +499,10 @@ abstract class Peer
   List<int>? _removeRequestFromBuffer(int index, int begin, int length) {
     var i = _findRequestIndexFromBuffer(index, begin, length);
     if (i != -1) {
+      if (_requestBuffer.length < i) {
+        dev.log(
+            '--------------------------FUCKED1--------------------------------');
+      }
       return _requestBuffer.removeAt(i);
     }
     return null;
@@ -861,6 +865,10 @@ abstract class Peer
     }
     if (requestIndex == null) {
       return false;
+    }
+    if (_remoteRequestBuffer.length < requestIndex) {
+      dev.log(
+          '--------------------------FUCKED2--------------------------------');
     }
     _remoteRequestBuffer.removeAt(requestIndex);
     var bytes = <int>[];

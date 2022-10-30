@@ -76,7 +76,7 @@ class TaskTorrent extends BaseTaskTorrent {
       downloadSpeedValue.value = formatBytes((ds).toInt(), 2);
       ulploadSpeedValue.value = formatBytes((ps).toInt(), 2);
       if (progress == '100.00%') timer.cancel();
-      log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');
+      // log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');
     });
   }
 

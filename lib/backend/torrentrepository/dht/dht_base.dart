@@ -110,7 +110,7 @@ class DHT {
     _port = null;
     _root?.dispose();
     _root = null;
-    await _krpc?.stop('DHT stopped');
+    await _krpc?.stop('DHT stopped-------');
     _krpc = null;
   }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import '../../dartorrent_common_base.dart';
 import '../../model/torrent.dart';
@@ -345,7 +346,11 @@ class PeersManager with Holepunch, PEX {
     }
     if (dindex.isNotEmpty) {
       for (var i = 0; i < dindex.length; i++) {
-        _remoteRequest.removeAt(dindex[i]);
+        try {
+          _remoteRequest.removeAt(dindex[i]);
+        } catch (e) {
+          log('FUCKED3-------------------------------$e');
+        }
       }
       if (_uploadedNotifySize >= MAX_UPLOADED_NOTIFY_SIZE) {
         _uploadedNotifySize = 0;
@@ -411,7 +416,9 @@ class PeersManager with Holepunch, PEX {
       }
     }
     for (var i = 0; i < tempIndex.length; i++) {
-      _pausedRequest.removeAt(tempIndex[i]);
+      if (tempIndex[i] < _pausedRequest.length) {
+        _pausedRequest.removeAt(tempIndex[i]);
+      }
     }
 
     if (reason is TCPConnectException) {
