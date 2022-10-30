@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../common/commonmodel.dart';
@@ -33,19 +35,19 @@ class StorageRepository extends BaseStorageRepository {
 
   @override
   Future<void> metaData(String infoHash) async {
-    List<dynamic> metaData = await commonModel.metaData(infoHash);
-    await box!.put(infoHash, metaData);
-    // if (box!.get(info) == null) {
-    //   await box!.put(info, null);
-    //   // ReceivePort myReceivePort = ReceivePort();
-    //   // Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
-    //   // SendPort mikeSendPort = await myReceivePort.first;
-    //   // ReceivePort mikeResponseReceivePort = ReceivePort();
-    //   // mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
-    //   // final metaData = await mikeResponseReceivePort.first;
-    //   List<dynamic> metaData = await commonModel.metaData(info);
-    //   await box!.put(info, metaData);
-    // }
+    String info = infoHash.split(':btih:').last.split('&').first;
+    // await box!.put(info, metaData);
+    if (box!.get(info) == null) {
+      await box!.put(info, null);
+      ReceivePort myReceivePort = ReceivePort();
+      Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
+      SendPort mikeSendPort = await myReceivePort.first;
+      ReceivePort mikeResponseReceivePort = ReceivePort();
+      mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
+      final metaData = await mikeResponseReceivePort.first;
+      // List<dynamic> metaData = await commonModel.metaData(info);
+      await box!.put(info, metaData);
+    }
   }
 
   @override
@@ -66,14 +68,14 @@ class StorageRepository extends BaseStorageRepository {
   }
 }
 
-// Future<void> heavyComputationTask(SendPort mySendPort) async {
-//   CommonModel commonModel = CommonModel();
-//   ReceivePort mikeReceivePort = ReceivePort();
-//   mySendPort.send(mikeReceivePort.sendPort);
-//   await for (var message in mikeReceivePort) {
-//     final String info = message[0];
-//     final SendPort mikeResponseSendPort = message[1];
-//     List<dynamic> metaData = await commonModel.metaData(info);
-//     mikeResponseSendPort.send(metaData);
-//   }
-// }
+Future<void> heavyComputationTask(SendPort mySendPort) async {
+  CommonModel commonModel = CommonModel();
+  ReceivePort mikeReceivePort = ReceivePort();
+  mySendPort.send(mikeReceivePort.sendPort);
+  await for (var message in mikeReceivePort) {
+    final String info = message[0];
+    final SendPort mikeResponseSendPort = message[1];
+    List<dynamic> metaData = await commonModel.metaData(info);
+    mikeResponseSendPort.send(metaData);
+  }
+}
