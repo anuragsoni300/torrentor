@@ -413,7 +413,7 @@ class _KRPC implements KRPC {
                 datagram?.address, datagram?.port, datagram?.data);
           } catch (e) {
             log('Process Receive Message Error $e',
-                error: e, name: runtimeType.toString());
+                name: runtimeType.toString());
           }
         });
       }
@@ -463,10 +463,10 @@ class _KRPC implements KRPC {
     try {
       tid = String.fromCharCodes(data[TRANSACTION_KEY], 0, 2);
     } catch (e) {
-      log('解析Tid出错', error: e, name: runtimeType.toString());
+      log('Error parsing tid', error: e, name: runtimeType.toString());
+      //I don't know why some Tids are 4 bytes
+      // print('Request response $tid , the current number of pending requests: $_pendingQuery');
     }
-    //I don't know why some Tids are 4 bytes
-    // print('Request response $tid , the current number of pending requests: $_pendingQuery');
     if (tid == null || tid.length != 2) {
       _fireError(
           Protocal_Error, null, 'Incorret Transaction ID', address, port);
@@ -521,6 +521,7 @@ class _KRPC implements KRPC {
       if (queryKey == ANNOUNCE_PEER) {
         event = EVENT.ANNOUNCE_PEER;
       }
+      if (event == null) log('FUCKEDUP');
       log('Received a Query request: $event , from $address : $port');
       var arguments = data[ARGUMENTS_KEY];
       _fireQuery(event!, idBytes, tid, address, port, arguments);
@@ -587,7 +588,7 @@ class _KRPC implements KRPC {
   Future stop([dynamic reason]) async {
     if (_stopped) return;
     _stopped = true;
-    log('KRPC stopped , reason:$reason', error: reason, name: runtimeType.toString());
+    log('KRPC stopped , reason:$reason', name: runtimeType.toString());
 
     _socket?.close();
     _socket = null;

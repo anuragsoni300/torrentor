@@ -26,7 +26,7 @@ class CommonModel extends BaseCommonModel {
     dynamic msg;
     metadata.onDownloadComplete((data) {
       msg = decode(Uint8List.fromList(data!));
-      tracker.stop(true);
+      // tracker.stop(true);
       completer.complete([msg, metadata.infoHashBuffer]);
     });
 

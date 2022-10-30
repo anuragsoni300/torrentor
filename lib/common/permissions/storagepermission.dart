@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sizer/sizer.dart';
 
-showMyDialog(BuildContext context) async {
+Future showMyDialog(BuildContext context) async {
   var status = await Permission.manageExternalStorage.status;
   if (status != PermissionStatus.granted) {
     return showGeneralDialog(
@@ -91,5 +91,7 @@ showMyDialog(BuildContext context) async {
         );
       },
     );
+  } else {
+    return false;
   }
 }

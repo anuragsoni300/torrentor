@@ -145,7 +145,7 @@ class DownloadFile {
   /// Get the corresponding file, if the file does not exist, a new file will be created
   Future<File?> _getOrCreateFile() async {
     if (filePath == null) return null;
-    _file ??= File(filePath!);
+    _file ??= File(filePath!.replaceAll('//', '/'));
     var exists = await _file!.exists();
     if (!exists) {
       _file = await _file!.create(recursive: true);

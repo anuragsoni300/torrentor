@@ -315,8 +315,7 @@ class DHT {
       token = String.fromCharCodes(data['token']);
     }
     if (token == null) {
-      log('Response Error',
-          error: 'Dont include Token', name: runtimeType.toString());
+      log('Response Error: Dont include Token', name: runtimeType.toString());
     }
     var infoHash = data['__additional'];
     if (infoHash == null) {

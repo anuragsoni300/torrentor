@@ -148,7 +148,13 @@ class DownloadFileManager {
   void _initFileMap(String directory) {
     for (var i = 0; i < metainfo!.files.length; i++) {
       var file = metainfo!.files[i];
-      var df = DownloadFile(directory + file.path, file.offset, file.length);
+      String newPath;
+      if (metainfo!.files[i].path == '/${metainfo!.files[i].name}') {
+        newPath = '$directory/${metainfo!.files[i].name}${file.path}';
+      } else {
+        newPath = directory + file.path;
+      }
+      var df = DownloadFile(newPath, file.offset, file.length);
       _files.add(df);
       var fs = df.start;
       var fe = df.end;

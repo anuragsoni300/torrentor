@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ class _TorrentDownloadState extends State<TorrentDownload>
     File torrentFile = await torrentRepository.torrentSave();
     Torrent model = await Torrent.parse(torrentFile.path);
     TorrentTask newTask = TorrentTask.newTask(model, '$path/');
+    log('${widget.infoBuffer?.length}');
     taskTorrent = TaskTorrent(newTask, widget.infoBuffer!, model);
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
