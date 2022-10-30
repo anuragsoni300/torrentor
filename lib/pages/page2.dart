@@ -33,7 +33,7 @@ class _PageTwoState extends State<PageTwo> {
                   checkMetaFetchRunning[box.keyAt(index)] != true) {
                 checkMetaFetchRunning[box.keyAt(index)] = true;
                 Provider.of<StorageRepository>(context)
-                    .addInfoHash(box.keyAt(index));
+                    .metaData(box.keyAt(index));
               }
               return TorrentDownload(
                 infoHash: box.keyAt(index),

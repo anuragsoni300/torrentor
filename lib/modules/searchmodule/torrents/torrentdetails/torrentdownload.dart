@@ -37,7 +37,7 @@ class TorrentDownloadState extends State<TorrentDownload>
             ? myMagnet = widget.data!.infoHash!
             : myMagnet = 'magnet:?xt=urn:btih:${widget.data!.infoHash}';
         Provider.of<StorageRepository>(context, listen: false)
-            .addInfoHash(myMagnet);
+            .addInfoHashOnly(myMagnet);
         showMyDialog(context);
       },
       child: Icon(

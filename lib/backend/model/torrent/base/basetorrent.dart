@@ -1,5 +1,6 @@
 import 'dart:io';
-import '../../../../modules/downloadmodule/torrentrepository/model/torrent.dart';
+
+import '../../../torrentrepository/model/torrent.dart';
 
 abstract class BaseTorrentRepository {
   Future<File> torrentSave();

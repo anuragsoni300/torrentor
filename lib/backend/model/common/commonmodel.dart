@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
-import '../../../modules/downloadmodule/torrentrepository/bencode_base.dart';
-import '../../../modules/downloadmodule/torrentrepository/dartorrent_common_base.dart';
-import '../../../modules/downloadmodule/torrentrepository/task/metadata/metadata_downloader.dart';
-import '../../../modules/downloadmodule/torrentrepository/tracker/torrent_tracker_base.dart';
+import '../../torrentrepository/bencode_base.dart';
+import '../../torrentrepository/dartorrent_common_base.dart';
+import '../../torrentrepository/task/metadata/metadata_downloader.dart';
+import '../../torrentrepository/tracker/torrent_tracker_base.dart';
 import 'base/basecommonmodel.dart';
 
 class CommonModel extends BaseCommonModel {

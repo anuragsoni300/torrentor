@@ -5,7 +5,8 @@ import '../common/commonmodel.dart';
 abstract class BaseStorageRepository {
   Future<Box> openBox();
   List<dynamic> getInfoHash();
-  Future<void> addInfoHash(String infoHash);
+  Future<void> metaData(String infoHash);
+  Future<void> addInfoHashOnly(String infoHash);
   Future<void> removeInfoHash(String infoHash);
   ValueListenable<Box<dynamic>> listenToBox();
 }
@@ -31,19 +32,26 @@ class StorageRepository extends BaseStorageRepository {
   }
 
   @override
-  Future<void> addInfoHash(String infoHash) async {
+  Future<void> metaData(String infoHash) async {
+    List<dynamic> metaData = await commonModel.metaData(infoHash);
+    await box!.put(infoHash, metaData);
+    // if (box!.get(info) == null) {
+    //   await box!.put(info, null);
+    //   // ReceivePort myReceivePort = ReceivePort();
+    //   // Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
+    //   // SendPort mikeSendPort = await myReceivePort.first;
+    //   // ReceivePort mikeResponseReceivePort = ReceivePort();
+    //   // mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
+    //   // final metaData = await mikeResponseReceivePort.first;
+    //   List<dynamic> metaData = await commonModel.metaData(info);
+    //   await box!.put(info, metaData);
+    // }
+  }
+
+  @override
+  Future<void> addInfoHashOnly(String infoHash) async {
     String info = infoHash.split(':btih:').last.split('&').first;
-    if (box!.get(info) == null) {
-      await box!.put(info, null);
-      // ReceivePort myReceivePort = ReceivePort();
-      // Isolate.spawn<SendPort>(heavyComputationTask, myReceivePort.sendPort);
-      // SendPort mikeSendPort = await myReceivePort.first;
-      // ReceivePort mikeResponseReceivePort = ReceivePort();
-      // mikeSendPort.send([info, mikeResponseReceivePort.sendPort]);
-      // final metaData = await mikeResponseReceivePort.first;
-      List<dynamic> metaData = await commonModel.metaData(info);
-      await box!.put(info, metaData);
-    }
+    await box!.put(info, null);
   }
 
   @override
