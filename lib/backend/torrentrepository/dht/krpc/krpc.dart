@@ -412,7 +412,7 @@ class _KRPC implements KRPC {
             _processReceiveData(
                 datagram?.address, datagram?.port, datagram?.data);
           } catch (e) {
-            log('Process Receive Message Error',
+            log('Process Receive Message Error $e',
                 error: e, name: runtimeType.toString());
           }
         });
@@ -587,7 +587,7 @@ class _KRPC implements KRPC {
   Future stop([dynamic reason]) async {
     if (_stopped) return;
     _stopped = true;
-    log('KRPC stopped , reason:', error: reason, name: runtimeType.toString());
+    log('KRPC stopped , reason:$reason', error: reason, name: runtimeType.toString());
 
     _socket?.close();
     _socket = null;

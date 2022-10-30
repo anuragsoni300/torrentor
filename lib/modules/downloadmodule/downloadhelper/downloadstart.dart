@@ -11,13 +11,15 @@ import '../../../backend/model/torrent/tasktorrent.dart';
 class DownloadStart extends StatefulWidget {
   final String infoHash;
   final String name;
-  const DownloadStart({super.key, required this.infoHash, required this.name});
+  const DownloadStart({Key? key, required this.infoHash, required this.name})
+      : super(key: key);
 
   @override
   State<DownloadStart> createState() => _DownloadStartState();
 }
 
 class _DownloadStartState extends State<DownloadStart> {
+  bool isPaused = false;
   @override
   Widget build(BuildContext context) {
     var backC = Theme.of(context).colorScheme.background;
@@ -48,29 +50,29 @@ class _DownloadStartState extends State<DownloadStart> {
               const MyVerticalDivider(),
               SizedBox(
                 width: 9.w,
-                child: IconButton(
-                  onPressed: () {
-                    if (Provider.of<TaskTorrent?>(context, listen: false) !=
-                        null) {
-                      Provider.of<TaskTorrent?>(context)!.isPaused
-                          ? Provider.of<TaskTorrent?>(context, listen: false)!
-                              .resume()
-                          : Provider.of<TaskTorrent?>(context, listen: false)!
-                              .pause();
-                    }
-                  },
-                  icon: Provider.of<TaskTorrent?>(context) == null
-                      ? const CircularProgressIndicator()
-                      : Icon(
-                          Provider.of<TaskTorrent?>(context)!.isPaused
-                              ? Icons.pause
-                              : Icons.play_arrow_rounded,
+                child: Provider.of<TaskTorrent?>(context) == null
+                    ? const CircularProgressIndicator()
+                    : IconButton(
+                        onPressed: () {
+                          isPaused
+                              ? Provider.of<TaskTorrent?>(context,
+                                      listen: false)!
+                                  .resume()
+                              : Provider.of<TaskTorrent?>(context,
+                                      listen: false)!
+                                  .pause();
+                          setState(() {
+                            isPaused = !isPaused;
+                          });
+                        },
+                        icon: Icon(
+                          isPaused ? Icons.play_arrow_rounded : Icons.pause,
                           color: Theme.of(context).colorScheme.brightness ==
                                   Brightness.dark
                               ? Colors.grey
                               : Colors.black,
                         ),
-                ),
+                      ),
               ),
             ],
           ),
