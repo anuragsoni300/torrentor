@@ -1,6 +1,5 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/details/divider.dart';
