@@ -12,7 +12,7 @@ class PercentIndicator extends StatelessWidget {
       radius: 4.w,
       addAutomaticKeepAlive: false,
       animation: true,
-      animationDuration: 2000,
+      animationDuration: 0,
       curve: Curves.elasticInOut,
       circularStrokeCap: CircularStrokeCap.round,
       percent: progress / 100,
