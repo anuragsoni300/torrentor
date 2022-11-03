@@ -67,6 +67,9 @@ class _TorrentDownloadState extends State<TorrentDownload>
   Widget build(BuildContext context) {
     super.build(context);
     var backC = Theme.of(context).colorScheme.background;
+    String name = widget.metaData == null
+        ? widget.infoHash
+        : String.fromCharCodes(widget.metaData["name"]);
     return FutureProvider<TaskTorrent?>(
       initialData: null,
       create: (context) {
@@ -81,14 +84,11 @@ class _TorrentDownloadState extends State<TorrentDownload>
           closedColor: backC,
           closedShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(1.3.h)),
-          closedBuilder: (BuildContext c, VoidCallback action) => DownloadStart(
+          closedBuilder: (c, action) => DownloadStart(
             infoHash: widget.infoHash,
-            name: widget.metaData == null
-                ? widget.infoHash
-                : String.fromCharCodes(widget.metaData["name"]),
+            name: name,
           ),
-          openBuilder: (BuildContext c, VoidCallback action) =>
-              const DetailScreen(),
+          openBuilder: (c, action) => DetailScreen(name: name),
           tappable: true,
         ),
       ),

@@ -6,7 +6,7 @@ import '../../torrentrepository/dartorrent_common_base.dart';
 import '../../torrentrepository/model/torrent.dart';
 import '../../torrentrepository/task/task.dart';
 
-class TaskTorrent extends BaseTaskTorrent {
+class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   final TorrentTask _task;
   final List<int> _infoHashBuffer;
   final Torrent _model;
