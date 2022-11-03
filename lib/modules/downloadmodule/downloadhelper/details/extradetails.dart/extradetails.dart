@@ -15,11 +15,11 @@ class ExtraDetails extends StatelessWidget {
       width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          MySize(),
-          CurrentSeeders(),
-          FilesCount(),
-          DownloadSpeed(),
+        children: [
+          SizedBox(width: width / 4, child: const MySize()),
+          SizedBox(width: width / 4, child: const CurrentSeeders()),
+          SizedBox(width: width / 4, child: const FilesCount()),
+          SizedBox(width: width / 4, child: const DownloadSpeed()),
         ],
       ),
     );

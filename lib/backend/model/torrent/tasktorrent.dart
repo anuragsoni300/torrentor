@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:torrentor/backend/model/torrent/base/basetasktorrent.dart';
 import '../../../common/functions.dart';
@@ -62,14 +61,14 @@ class TaskTorrent extends BaseTaskTorrent {
     Timer.periodic(const Duration(seconds: 2), (timer) async {
       var progress = '${(task.progress * 100).toStringAsFixed(2)}%';
       // var ads = ((task.averageDownloadSpeed) * 1000 / 1024).toStringAsFixed(2);
-      var aps = ((task.averageUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
+      // var aps = ((task.averageUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
       var ds = ((task.currentDownloadSpeed) * 1000);
       var ps = ((task.uploadSpeed) * 1000);
-      var utpu = ((task.utpUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
-      var utpc = task.utpPeerCount;
-      var active = task.connectedPeersNumber;
+      // var utpu = ((task.utpUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
+      // var utpc = task.utpPeerCount;
+      // var active = task.connectedPeersNumber;
       var seeders = task.seederNumber;
-      var all = task.allPeersNumber;
+      // var all = task.allPeersNumber;
       seedersValue.value = seeders;
       progressValue.value = progress;
       downloadSpeedValue.value = formatBytes((ds).toInt(), 2);
@@ -78,7 +77,7 @@ class TaskTorrent extends BaseTaskTorrent {
         _task.stop();
         timer.cancel();
       }
-      log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');
+      // log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');
     });
   }
 

@@ -2,13 +2,16 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/model/common/commonmodel.dart';
 import 'package:torrentor/backend/model/torrent/tasktorrent.dart';
 import 'package:torrentor/backend/model/torrent/torrentmodel.dart';
+import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreen.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/downloadstart.dart';
 import '../../backend/model/storgae/basestorage.dart';
 import '../../backend/torrentrepository/model/torrent.dart';
 import '../../backend/torrentrepository/task/task.dart';
+import '../../myopencontainer.dart';
 
 class TorrentDownload extends StatefulWidget {
   final String infoHash;
@@ -65,16 +68,31 @@ class _TorrentDownloadState extends State<TorrentDownload>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    var backC = Theme.of(context).colorScheme.background;
     return FutureProvider<TaskTorrent?>(
       initialData: null,
       create: (context) {
         return torrentStarter();
       },
-      child: DownloadStart(
-        infoHash: widget.infoHash,
-        name: widget.metaData == null
-            ? widget.infoHash
-            : String.fromCharCodes(widget.metaData["name"]),
+      child: Padding(
+        padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h),
+        child: OpenContainer(
+          transitionDuration: const Duration(milliseconds: 400),
+          transitionType: ContainerTransitionType.fadeThrough,
+          openColor: backC,
+          closedColor: backC,
+          closedShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(1.3.h)),
+          closedBuilder: (BuildContext c, VoidCallback action) => DownloadStart(
+            infoHash: widget.infoHash,
+            name: widget.metaData == null
+                ? widget.infoHash
+                : String.fromCharCodes(widget.metaData["name"]),
+          ),
+          openBuilder: (BuildContext c, VoidCallback action) =>
+              const DetailScreen(),
+          tappable: true,
+        ),
       ),
     );
   }
