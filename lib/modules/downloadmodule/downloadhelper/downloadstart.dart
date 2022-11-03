@@ -1,5 +1,6 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/details/divider.dart';
@@ -7,6 +8,7 @@ import 'package:torrentor/modules/downloadmodule/downloadhelper/details/extradet
 import 'package:torrentor/modules/downloadmodule/downloadhelper/details/name.dart';
 
 import '../../../backend/model/torrent/tasktorrent.dart';
+import '../../../common/percentindicator.dart';
 
 class DownloadStart extends StatefulWidget {
   final String infoHash;
@@ -48,29 +50,46 @@ class _DownloadStartState extends State<DownloadStart> {
             const MyVerticalDivider(),
             SizedBox(
               width: 9.w,
-              child: Provider.of<TaskTorrent?>(context) == null
-                  ? const CircularProgressIndicator()
-                  : IconButton(
-                      onPressed: () {
-                        isPaused
-                            ? Provider.of<TaskTorrent?>(context,
-                                    listen: false)!
-                                .resume()
-                            : Provider.of<TaskTorrent?>(context,
-                                    listen: false)!
-                                .pause();
-                        setState(() {
-                          isPaused = !isPaused;
-                        });
-                      },
-                      icon: Icon(
-                        isPaused ? Icons.play_arrow_rounded : Icons.pause,
-                        color: Theme.of(context).colorScheme.brightness ==
-                                Brightness.dark
-                            ? Colors.grey
-                            : Colors.black,
-                      ),
-                    ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Provider.of<TaskTorrent?>(context) == null
+                      ? const CircularProgressIndicator()
+                      : IconButton(
+                          onPressed: () {
+                            isPaused
+                                ? Provider.of<TaskTorrent?>(context,
+                                        listen: false)!
+                                    .resume()
+                                : Provider.of<TaskTorrent?>(context,
+                                        listen: false)!
+                                    .pause();
+                            setState(() {
+                              isPaused = !isPaused;
+                            });
+                          },
+                          icon: Icon(
+                            isPaused ? Icons.play_arrow_rounded : Icons.pause,
+                            color: Theme.of(context).colorScheme.brightness ==
+                                    Brightness.dark
+                                ? Colors.grey
+                                : Colors.black,
+                          ),
+                        ),
+                  Provider.of<TaskTorrent?>(context) == null
+                      ? const PercentIndicator(progress: 0.00)
+                      : ValueListenableBuilder<String>(
+                          valueListenable:
+                              Provider.of<TaskTorrent?>(context)!.progressValue,
+                          builder: (_, c, __) {
+                            double progress =
+                                double.parse(c.replaceAll('%', ''));
+                            return PercentIndicator(progress: progress);
+                          },
+                        ),
+                ],
+              ),
             ),
           ],
         ),

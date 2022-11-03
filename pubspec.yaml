@@ -28,6 +28,7 @@ dependencies:
   crypto: ^3.0.2
   permission_handler: ^10.1.0
   web_scraper: ^0.1.4
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:

@@ -11,7 +11,7 @@ class TaskTorrent extends BaseTaskTorrent {
   final List<int> _infoHashBuffer;
   final Torrent _model;
   ValueNotifier seedersValue = ValueNotifier(0);
-  ValueNotifier progressValue = ValueNotifier('0.00 %');
+  ValueNotifier<String> progressValue = ValueNotifier<String>('0.00 %');
   ValueNotifier downloadSpeedValue = ValueNotifier('0 B');
   ValueNotifier ulploadSpeedValue = ValueNotifier('0 B');
   Torrent get model => _model;
