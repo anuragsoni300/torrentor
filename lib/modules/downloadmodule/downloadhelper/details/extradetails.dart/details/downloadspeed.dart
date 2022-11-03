@@ -14,7 +14,7 @@ class DownloadSpeed extends StatefulWidget {
 class _DownloadSpeedState extends State<DownloadSpeed> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
         Icon(
           Icons.download_rounded,
@@ -23,45 +23,39 @@ class _DownloadSpeedState extends State<DownloadSpeed> {
               ? Colors.grey
               : Colors.black,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 6),
-          child: SizedBox(
-            width: 12.w,
-            child: Provider.of<TaskTorrent?>(context) == null
-                ? Text(
-                    '0 B',
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey
-                            : Colors.black87,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 8.sp,
-                        height: 1.5,
-                      ),
-                    ),
-                    maxLines: 1,
-                  )
-                : ValueListenableBuilder(
-                    valueListenable:
-                        Provider.of<TaskTorrent?>(context)!.downloadSpeedValue,
-                    builder: (_, c, __) => Text(
-                      c.toString(),
-                      style: GoogleFonts.comfortaa(
-                        textStyle: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey
-                              : Colors.black87,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 8.sp,
-                          height: 1.5,
-                        ),
-                      ),
-                      maxLines: 1,
+        Provider.of<TaskTorrent?>(context) == null
+            ? Text(
+                '0 B',
+                style: GoogleFonts.comfortaa(
+                  textStyle: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey
+                        : Colors.black87,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 8.sp,
+                    height: 1.5,
+                  ),
+                ),
+                maxLines: 1,
+              )
+            : ValueListenableBuilder(
+                valueListenable:
+                    Provider.of<TaskTorrent?>(context)!.downloadSpeedValue,
+                builder: (_, c, __) => Text(
+                  c.toString(),
+                  style: GoogleFonts.comfortaa(
+                    textStyle: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey
+                          : Colors.black87,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 8.sp,
+                      height: 1.5,
                     ),
                   ),
-          ),
-        ),
+                  maxLines: 1,
+                ),
+              ),
       ],
     );
   }

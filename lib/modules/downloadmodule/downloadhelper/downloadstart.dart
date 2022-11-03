@@ -24,7 +24,7 @@ class _DownloadStartState extends State<DownloadStart> {
   Widget build(BuildContext context) {
     var backC = Theme.of(context).colorScheme.background;
     return ClayContainer(
-      height: 100,
+      height: 130,
       width: 92.w,
       parentColor: backC,
       surfaceColor: backC,

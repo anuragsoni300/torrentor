@@ -10,7 +10,7 @@ class FilesCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
         Icon(
           Icons.folder,
@@ -19,28 +19,25 @@ class FilesCount extends StatelessWidget {
               ? Colors.grey
               : Colors.black,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 6),
-          child: Text(
-            Provider.of<TaskTorrent?>(context) == null
-                ? '?'
-                : Provider.of<TaskTorrent?>(context)!
-                    .model
-                    .files
-                    .length
-                    .toString(),
-            style: GoogleFonts.comfortaa(
-              textStyle: TextStyle(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey
-                    : Colors.black87,
-                fontWeight: FontWeight.w700,
-                fontSize: 8.sp,
-                height: 1.5,
-              ),
+        Text(
+          Provider.of<TaskTorrent?>(context) == null
+              ? '?'
+              : Provider.of<TaskTorrent?>(context)!
+                  .model
+                  .files
+                  .length
+                  .toString(),
+          style: GoogleFonts.comfortaa(
+            textStyle: TextStyle(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey
+                  : Colors.black87,
+              fontWeight: FontWeight.w700,
+              fontSize: 8.sp,
+              height: 1.5,
             ),
-            maxLines: 1,
           ),
+          maxLines: 1,
         ),
       ],
     );

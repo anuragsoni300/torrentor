@@ -1218,10 +1218,10 @@ class _UTPSocket extends UTPSocket {
       _rtoTimer?.cancel();
       if (_inflightPackets.isEmpty) return;
       if (times + 1 >= MAX_TIMEOUT) {
-        dev.log('Socket closed :',
-            error: 'Send data timeout (${times + 1}/$MAX_TIMEOUT)',
-            name: runtimeType.toString());
-        addError('Send data timeout');
+        // dev.log('Socket closed :',
+        //     error: 'Send data timeout (${times + 1}/$MAX_TIMEOUT)',
+        //     name: runtimeType.toString());
+        // addError('Send data timeout');
         _closeCompleter ??= Completer();
         closeForce();
         await _closeCompleter!.future;

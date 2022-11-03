@@ -14,7 +14,7 @@ class CurrentSeeders extends StatefulWidget {
 class _CurrentSeedersState extends State<CurrentSeeders> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
         Icon(
           Icons.upload_rounded,
@@ -23,11 +23,26 @@ class _CurrentSeedersState extends State<CurrentSeeders> {
               ? Colors.grey
               : Colors.black,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 6),
-          child: Provider.of<TaskTorrent?>(context) == null
-              ? Text(
-                  '0',
+        Provider.of<TaskTorrent?>(context) == null
+            ? Text(
+                '0',
+                style: GoogleFonts.comfortaa(
+                  textStyle: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey
+                        : Colors.black87,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 8.sp,
+                    height: 1.5,
+                  ),
+                ),
+                maxLines: 1,
+              )
+            : ValueListenableBuilder(
+                valueListenable:
+                    Provider.of<TaskTorrent?>(context)!.seedersValue,
+                builder: (_, c, __) => Text(
+                  c.toString(),
                   style: GoogleFonts.comfortaa(
                     textStyle: TextStyle(
                       color: Theme.of(context).brightness == Brightness.dark
@@ -39,26 +54,8 @@ class _CurrentSeedersState extends State<CurrentSeeders> {
                     ),
                   ),
                   maxLines: 1,
-                )
-              : ValueListenableBuilder(
-                  valueListenable:
-                      Provider.of<TaskTorrent?>(context)!.seedersValue,
-                  builder: (_, c, __) => Text(
-                    c.toString(),
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey
-                            : Colors.black87,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 8.sp,
-                        height: 1.5,
-                      ),
-                    ),
-                    maxLines: 1,
-                  ),
                 ),
-        ),
+              ),
       ],
     );
   }
