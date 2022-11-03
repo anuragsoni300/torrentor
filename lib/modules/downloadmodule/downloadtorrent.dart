@@ -43,7 +43,6 @@ class _TorrentDownloadState extends State<TorrentDownload>
     late List<dynamic> metaData;
     if (widget.metaData == null || widget.infoBuffer == null) {
       metaData = await getMetaData();
-      log(metaData.toString());
     }
     torrentRepository = TorrentRepository(path, widget.infoHash,
         widget.metaData ?? metaData[0], widget.infoBuffer ?? metaData[1]);
