@@ -222,7 +222,7 @@ Future<List<Uri>> _getTrackerFrom(String trackerUrlStr,
     [int retryTime = 0]) async {
   if (retryTime >= 3) return [];
   dynamic client;
-  _access() async {
+  access() async {
     var alist = <Uri>[];
     dynamic aurl;
     aurl = Uri.parse(trackerUrlStr);
@@ -249,7 +249,7 @@ Future<List<Uri>> _getTrackerFrom(String trackerUrlStr,
   }
 
   try {
-    var re = await _access();
+    var re = await access();
     client?.close();
     return re;
   } catch (e) {

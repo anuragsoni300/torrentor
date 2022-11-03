@@ -6,6 +6,7 @@ import 'package:torrentor/backend/model/common/commonmodel.dart';
 import 'package:torrentor/backend/model/torrent/tasktorrent.dart';
 import 'package:torrentor/backend/model/torrent/torrentmodel.dart';
 import 'package:torrentor/modules/downloadmodule/downloadhelper/downloadstart.dart';
+import '../../backend/model/storgae/basestorage.dart';
 import '../../backend/torrentrepository/model/torrent.dart';
 import '../../backend/torrentrepository/task/task.dart';
 
@@ -36,12 +37,16 @@ class _TorrentDownloadState extends State<TorrentDownload>
 
   Future<TaskTorrent> torrentStarter() async {
     String path = await commonModel.savePathFetcher();
-    torrentRepository = TorrentRepository(
-        path, widget.infoHash, widget.metaData, widget.infoBuffer!);
+    late List<dynamic> metaData;
+    if (widget.metaData == null || widget.infoBuffer == null) {
+      metaData = await getMetaData();
+      log(metaData.toString());
+    }
+    torrentRepository = TorrentRepository(path, widget.infoHash,
+        widget.metaData ?? metaData[0], widget.infoBuffer ?? metaData[1]);
     File torrentFile = await torrentRepository.torrentSave();
     Torrent model = await Torrent.parse(torrentFile.path);
     TorrentTask newTask = TorrentTask.newTask(model, '$path/');
-    log('torrentStarter');
     taskTorrent = TaskTorrent(newTask, widget.infoBuffer!, model);
     taskTorrent.findingPublicTrackers();
     taskTorrent.addDhtNodes();
@@ -50,17 +55,20 @@ class _TorrentDownloadState extends State<TorrentDownload>
     return taskTorrent;
   }
 
+  Future<List<dynamic>> getMetaData() async {
+    List<dynamic> metaData =
+        await Provider.of<StorageRepository>(context, listen: false)
+            .metaData(widget.infoHash);
+    return metaData;
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return FutureProvider<TaskTorrent?>(
       initialData: null,
       create: (context) {
-        log(widget.metaData == null ? 'FUCK YOU' : 'FUCK ME');
-        log(widget.infoBuffer == null ? 'SUCK YOU' : 'SUCK ME');
-        return widget.metaData == null || widget.infoBuffer == null
-            ? null
-            : torrentStarter();
+        return torrentStarter();
       },
       child: DownloadStart(
         infoHash: widget.infoHash,

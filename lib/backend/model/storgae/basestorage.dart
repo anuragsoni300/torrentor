@@ -34,7 +34,7 @@ class StorageRepository extends BaseStorageRepository {
   }
 
   @override
-  Future<void> metaData(String infoHash) async {
+  Future<dynamic> metaData(String infoHash) async {
     String info = infoHash.split(':btih:').last.split('&').first;
     // await box!.put(info, metaData);
     if (box!.get(info) == null) {
@@ -48,6 +48,7 @@ class StorageRepository extends BaseStorageRepository {
       // List<dynamic> metaData = await commonModel.metaData(info);
       await box!.put(info, metaData);
     }
+    return box!.get(info);
   }
 
   @override

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:torrentor/backend/model/torrent/base/basetasktorrent.dart';
 import '../../../common/functions.dart';

@@ -13,7 +13,6 @@ class PageTwo extends StatefulWidget {
 }
 
 class _PageTwoState extends State<PageTwo> {
-  Map<String, bool> checkMetaFetchRunning = {};
   @override
   void initState() {
     super.initState();
@@ -29,12 +28,6 @@ class _PageTwoState extends State<PageTwo> {
           return ListView.builder(
             itemCount: box.length,
             itemBuilder: (_, index) {
-              if (box.getAt(index) == null &&
-                  checkMetaFetchRunning[box.keyAt(index)] != true) {
-                checkMetaFetchRunning[box.keyAt(index)] = true;
-                Provider.of<StorageRepository>(context)
-                    .metaData(box.keyAt(index));
-              }
               String infoHash = box.keyAt(index);
               dynamic data = box.getAt(index);
               dynamic metaData = data?[0];
