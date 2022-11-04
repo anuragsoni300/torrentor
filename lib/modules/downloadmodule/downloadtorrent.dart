@@ -29,7 +29,7 @@ class TorrentDownload extends StatefulWidget {
 class _TorrentDownloadState extends State<TorrentDownload>
     with AutomaticKeepAliveClientMixin {
   late TorrentRepository torrentRepository;
-  late TaskTorrent taskTorrent;
+  TaskTorrent? taskTorrent;
   CommonModel commonModel = CommonModel();
 
   @override
@@ -49,11 +49,11 @@ class _TorrentDownloadState extends State<TorrentDownload>
     Torrent model = await Torrent.parse(torrentFile.path);
     TorrentTask newTask = TorrentTask.newTask(model, '$path/');
     taskTorrent = TaskTorrent(newTask, widget.infoBuffer!, model);
-    taskTorrent.findingPublicTrackers();
-    taskTorrent.addDhtNodes();
-    taskTorrent.values();
-    await taskTorrent.start();
-    return taskTorrent;
+    taskTorrent!.findingPublicTrackers();
+    taskTorrent!.addDhtNodes();
+    taskTorrent!.values();
+    await taskTorrent!.start();
+    return taskTorrent!;
   }
 
   Future<List<dynamic>> getMetaData() async {
@@ -84,11 +84,14 @@ class _TorrentDownloadState extends State<TorrentDownload>
           closedColor: backC,
           closedShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(1.3.h)),
-          closedBuilder: (c, action) => DownloadStart(
+          closedBuilder: (__, _) => DownloadStart(
             infoHash: widget.infoHash,
             name: name,
           ),
-          openBuilder: (c, action) => DetailScreen(name: name),
+          openBuilder: (__, _) => ListenableProvider<TaskTorrent?>.value(
+            value: taskTorrent,
+            child: DetailScreen(name: name),
+          ),
           tappable: true,
         ),
       ),

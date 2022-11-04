@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,10 +11,9 @@ class Files extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var backC = Theme.of(context).colorScheme.background;
-    var x = Provider.of<TaskTorrent?>(context);
     var files = Provider.of<TaskTorrent?>(context)?.model.files;
-    log(x.toString());
     return ClayContainer(
+      height: 300,
       width: 92.w,
       parentColor: backC,
       surfaceColor: backC,

@@ -10,19 +10,21 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 5.h, left: 4.w, right: 4.w),
-            child: Column(
-              children: [
-                MyName(name: name),
-                const Files(),
-              ],
+      child: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 5.h, left: 4.w, right: 4.w),
+              child: Column(
+                children: [
+                  MyName(name: name),
+                  const Files(),
+                ],
+              ),
             ),
-          ),
-          const BackButton(),
-        ],
+            const BackButton(),
+          ],
+        ),
       ),
     );
   }
