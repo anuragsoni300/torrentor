@@ -15,17 +15,11 @@ class _DownloadMoreSpeedState extends State<DownloadMoreSpeed> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Icon(
-          Icons.download_rounded,
-          size: 7.w,
-          color: Theme.of(context).colorScheme.brightness == Brightness.dark
-              ? Colors.grey
-              : Colors.black,
-        ),
         Provider.of<TaskTorrent?>(context) == null
             ? Text(
-                '  0 B',
+                '0 B',
                 style: GoogleFonts.comfortaa(
                   textStyle: TextStyle(
                     color: Theme.of(context).brightness == Brightness.dark
@@ -42,7 +36,7 @@ class _DownloadMoreSpeedState extends State<DownloadMoreSpeed> {
                 valueListenable:
                     Provider.of<TaskTorrent?>(context)!.downloadSpeedValue,
                 builder: (_, c, __) => Text(
-                  '  $c',
+                  '  $c ',
                   style: GoogleFonts.comfortaa(
                     textStyle: TextStyle(
                       color: Theme.of(context).brightness == Brightness.dark
@@ -56,6 +50,13 @@ class _DownloadMoreSpeedState extends State<DownloadMoreSpeed> {
                   maxLines: 1,
                 ),
               ),
+        Icon(
+          Icons.download_rounded,
+          size: 7.w,
+          color: Theme.of(context).colorScheme.brightness == Brightness.dark
+              ? Colors.grey
+              : Colors.black,
+        ),
       ],
     );
   }

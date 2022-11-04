@@ -42,7 +42,7 @@ class _CurrentMoreSeedersState extends State<CurrentMoreSeeders> {
                 valueListenable:
                     Provider.of<TaskTorrent?>(context)!.seedersValue,
                 builder: (_, c, __) => Text(
-                  ' $c',
+                  '  $c',
                   style: GoogleFonts.comfortaa(
                     textStyle: TextStyle(
                       color: Theme.of(context).brightness == Brightness.dark

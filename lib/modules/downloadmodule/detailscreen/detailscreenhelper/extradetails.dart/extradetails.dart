@@ -29,6 +29,22 @@ class MoreDetails extends StatelessWidget {
         ),
         SizedBox(
           width: width / 3,
+          child: Provider.of<TaskTorrent?>(context) == null
+              ? const PercentIndicator(progress: 0.00)
+              : ValueListenableBuilder<String>(
+                  valueListenable:
+                      Provider.of<TaskTorrent?>(context)!.progressValue,
+                  builder: (_, c, __) {
+                    double progress = double.parse(c.replaceAll('%', ''));
+                    return PercentIndicator(
+                      progress: progress,
+                      size: 6.w,
+                    );
+                  },
+                ),
+        ),
+        SizedBox(
+          width: width / 3,
           child: Column(
             children: const [
               PeersMoreCount(),
@@ -36,19 +52,6 @@ class MoreDetails extends StatelessWidget {
             ],
           ),
         ),
-        Provider.of<TaskTorrent?>(context) == null
-            ? const PercentIndicator(progress: 0.00)
-            : ValueListenableBuilder<String>(
-                valueListenable:
-                    Provider.of<TaskTorrent?>(context)!.progressValue,
-                builder: (_, c, __) {
-                  double progress = double.parse(c.replaceAll('%', ''));
-                  return PercentIndicator(
-                    progress: progress,
-                    size: 6.w,
-                  );
-                },
-              ),
       ],
     );
   }

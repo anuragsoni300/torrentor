@@ -11,19 +11,13 @@ class PeersMoreCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Icon(
-          Icons.people_alt_rounded,
-          size: 6.w,
-          color: Theme.of(context).colorScheme.brightness == Brightness.dark
-              ? Colors.grey
-              : Colors.black,
-        ),
         ValueListenableBuilder(
           valueListenable:
               Provider.of<TaskTorrent?>(context)!.connectedPeersNumber,
           builder: (_, c, __) => Text(
-            '  $c',
+            '$c',
             style: GoogleFonts.comfortaa(
               textStyle: TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
@@ -40,7 +34,7 @@ class PeersMoreCount extends StatelessWidget {
         ValueListenableBuilder(
           valueListenable: Provider.of<TaskTorrent?>(context)!.allPeersNumber,
           builder: (_, c, __) => Text(
-            ' / $c',
+            ' / $c  ',
             style: GoogleFonts.comfortaa(
               textStyle: TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
@@ -53,6 +47,13 @@ class PeersMoreCount extends StatelessWidget {
             ),
             maxLines: 1,
           ),
+        ),
+        Icon(
+          Icons.people_alt_rounded,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.brightness == Brightness.dark
+              ? Colors.grey
+              : Colors.black,
         ),
       ],
     );

@@ -13,23 +13,26 @@ class MyMoreSize extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Theme.of(context).brightness == Brightness.dark
-            ? SizedBox(
-                height: 6.w,
-                width: 6.w,
-                child: SvgPicture.asset(
-                  'assets/size.svg',
-                  color: Colors.grey,
+        Padding(
+          padding: const EdgeInsets.only(left: 2.5),
+          child: Theme.of(context).brightness == Brightness.dark
+              ? SizedBox(
+                  height: 6.w,
+                  width: 6.w,
+                  child: SvgPicture.asset(
+                    'assets/size.svg',
+                    color: Colors.grey,
+                  ),
+                )
+              : SizedBox(
+                  height: 6.w,
+                  width: 6.w,
+                  child: SvgPicture.asset(
+                    'assets/size.svg',
+                    color: Colors.black.withAlpha(200),
+                  ),
                 ),
-              )
-            : SizedBox(
-                height: 6.w,
-                width: 6.w,
-                child: SvgPicture.asset(
-                  'assets/size.svg',
-                  color: Colors.black.withAlpha(200),
-                ),
-              ),
+        ),
         Text(
           Provider.of<TaskTorrent?>(context) == null
               ? '  ?'
