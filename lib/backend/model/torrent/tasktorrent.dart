@@ -13,10 +13,15 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   ValueNotifier seedersValue = ValueNotifier(0);
   ValueNotifier<String> progressValue = ValueNotifier<String>('0.00 %');
   ValueNotifier downloadSpeedValue = ValueNotifier('0 B');
-  ValueNotifier ulploadSpeedValue = ValueNotifier('0 B');
   Torrent get model => _model;
   TorrentTask get task => _task;
   ValueNotifier<bool> isPaused = ValueNotifier<bool>(false);
+  ValueNotifier<int> allPeersNumber = ValueNotifier<int>(0);
+  ValueNotifier<String> averageDownloadSpeed = ValueNotifier<String>('0 B');
+  ValueNotifier<int> connectedPeersNumber = ValueNotifier<int>(0);
+  ValueNotifier<int?> downloaded = ValueNotifier<int?>(0);
+  ValueNotifier<int?> fileManagerDownloaded = ValueNotifier<int>(0);
+  ValueNotifier<int?> piecesNumber = ValueNotifier<int?>(0);
 
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
 
@@ -63,19 +68,17 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   void values() {
     Timer.periodic(const Duration(seconds: 2), (timer) async {
       var progress = '${(task.progress * 100).toStringAsFixed(2)}%';
-      // var ads = ((task.averageDownloadSpeed) * 1000 / 1024).toStringAsFixed(2);
-      // var aps = ((task.averageUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
-      var ds = ((task.currentDownloadSpeed) * 1000);
-      var ps = ((task.uploadSpeed) * 1000);
-      // var utpu = ((task.utpUploadSpeed) * 1000 / 1024).toStringAsFixed(2);
-      // var utpc = task.utpPeerCount;
-      // var active = task.connectedPeersNumber;
-      var seeders = task.seederNumber;
-      // var all = task.allPeersNumber;
-      seedersValue.value = seeders;
+      allPeersNumber.value = task.allPeersNumber;
+      connectedPeersNumber.value = task.connectedPeersNumber;
+      seedersValue.value = task.seederNumber;
       progressValue.value = progress;
-      downloadSpeedValue.value = formatBytes((ds).toInt(), 2);
-      ulploadSpeedValue.value = formatBytes((ps).toInt(), 2);
+      downloadSpeedValue.value =
+          formatBytes((task.currentDownloadSpeed * 1000).toInt(), 2);
+      averageDownloadSpeed.value =
+          formatBytes((task.averageDownloadSpeed * 1000).toInt(), 2);
+      downloaded.value = task.downloaded;
+      fileManagerDownloaded.value = task.fileManager?.downloaded;
+      piecesNumber.value = task.fileManager?.piecesNumber;
       if (progress == '100.00%') {
         pause();
         timer.cancel();
@@ -87,7 +90,7 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   @override
   void stopOnTaskComplete() {
     task.onTaskComplete(() {
-      task.stop();
+      stop();
     });
   }
 }
