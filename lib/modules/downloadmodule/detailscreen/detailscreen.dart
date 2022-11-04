@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/files.dart';
 import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/name.dart';
+import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/piecemap.dart';
 
 import 'detailscreenhelper/extradetails.dart/extradetails.dart';
 
@@ -12,10 +13,10 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Padding(
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
               padding: EdgeInsets.only(top: 5.h, left: 4.w, right: 4.w),
               child: Column(
                 children: [
@@ -24,12 +25,13 @@ class DetailScreen extends StatelessWidget {
                   const Files(),
                   const SizedBox(height: 20),
                   MoreDetails(width: 92.w),
+                  const PieceMap(),
                 ],
               ),
             ),
-            const BackButton(),
-          ],
-        ),
+          ),
+          const BackButton(),
+        ],
       ),
     );
   }

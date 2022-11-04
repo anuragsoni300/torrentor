@@ -59,6 +59,8 @@ abstract class TorrentTask {
   /// Downloaded percent
   double get progress;
 
+  List<int>? get completedPieces;
+
   /// File map
   DownloadFileManager? get fileManager;
 
@@ -154,6 +156,9 @@ class _TorrentTask implements TorrentTask, AnnounceOptionsProvider {
   _TorrentTask(this._metaInfo, this._savePath) {
     _peerId = generatePeerId();
   }
+
+  @override
+  List<int>? get completedPieces => _stateFile?.bitfield?.completedPieces;
 
   @override
   double get averageDownloadSpeed {

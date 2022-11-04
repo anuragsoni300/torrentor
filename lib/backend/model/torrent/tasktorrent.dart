@@ -15,13 +15,14 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   ValueNotifier downloadSpeedValue = ValueNotifier('0 B');
   Torrent get model => _model;
   TorrentTask get task => _task;
+  ValueNotifier<List<int>?> completedPieces = ValueNotifier([]);
   ValueNotifier<bool> isPaused = ValueNotifier<bool>(false);
   ValueNotifier<int> allPeersNumber = ValueNotifier<int>(0);
   ValueNotifier<String> averageDownloadSpeed = ValueNotifier<String>('0 B');
   ValueNotifier<int> connectedPeersNumber = ValueNotifier<int>(0);
   ValueNotifier<int?> downloaded = ValueNotifier<int?>(0);
   ValueNotifier<int?> fileManagerDownloaded = ValueNotifier<int>(0);
-  ValueNotifier<int?> piecesNumber = ValueNotifier<int?>(0);
+  int? get piecesNumber => task.fileManager?.piecesNumber;
 
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
 
@@ -78,7 +79,8 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
           formatBytes((task.averageDownloadSpeed * 1000).toInt(), 2);
       downloaded.value = task.downloaded;
       fileManagerDownloaded.value = task.fileManager?.downloaded;
-      piecesNumber.value = task.fileManager?.piecesNumber;
+      completedPieces.value = task.completedPieces;
+
       if (progress == '100.00%') {
         pause();
         timer.cancel();
