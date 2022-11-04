@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -72,7 +73,11 @@ mixin UDPTrackerBase {
   Future<void> _connect(
       Map? options, List<CompactAddress?>? address, Completer completer) async {
     if (isClosed) {
-      if (!completer.isCompleted) completer.completeError('Tracker closed');
+      try {
+        if (!completer.isCompleted) completer.completeError('Tracker closed');
+      } catch (e) {
+        log(e.toString());
+      }
       return;
     }
     var list = <int>[];
@@ -159,9 +164,10 @@ mixin UDPTrackerBase {
   /// This method will handle the whole process of receiving the message after the first sending of the message, and then receiving the second message
   Future<void> _processAnnounceResponseData(Uint8List? data, Map? options,
       List<CompactAddress?>? address, Completer completer) async {
-    if (isClosed) {
-      if (!completer.isCompleted) completer.completeError('Tracker Closed');
-      return;
+    try {
+      if (!completer.isCompleted) completer.completeError('Tracker closed');
+    } catch (e) {
+      log(e.toString());
     }
     var view = ByteData.view(data!.buffer);
     var tid = view.getUint32(4);
@@ -192,14 +198,18 @@ mixin UDPTrackerBase {
       // Announce get return result
       try {
         var result = processResponseData(data, action, address);
-        completer.complete(result);
+        if (!completer.isCompleted) completer.complete(result);
       } catch (e) {
-        completer.completeError('Response Announce Result Data error');
+        if (!completer.isCompleted) {
+          completer.completeError('Response Announce Result Data error');
+        }
       }
       await close();
     } else {
       if (!completer.isCompleted) {
-        completer.completeError('Transacation ID incorrect');
+        if (!completer.isCompleted) {
+          completer.completeError('Transacation ID incorrect');
+        }
       }
       await close();
     }

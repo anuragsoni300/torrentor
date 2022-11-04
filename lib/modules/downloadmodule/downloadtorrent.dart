@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,7 @@ class _TorrentDownloadState extends State<TorrentDownload>
     late List<dynamic> metaData;
     if (widget.metaData == null || widget.infoBuffer == null) {
       metaData = await getMetaData();
+      log('hello');
     }
     torrentRepository = TorrentRepository(path, widget.infoHash,
         widget.metaData ?? metaData[0], widget.infoBuffer ?? metaData[1]);

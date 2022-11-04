@@ -23,23 +23,26 @@ class Files extends StatelessWidget {
       spread: 0,
       child: files == null
           ? const SizedBox()
-          : ListView.builder(
-              itemCount: files.length,
-              itemBuilder: (_, i) => Text(
-                files[i].name,
-                style: GoogleFonts.comfortaa(
-                  textStyle: TextStyle(
-                    fontSize: 10.sp,
-                    color: Theme.of(context).colorScheme.background ==
-                            const Color.fromRGBO(242, 242, 242, 1)
-                        ? Colors.black
-                        : Colors.grey,
-                    fontWeight: FontWeight.w700,
+          : Padding(
+            padding: EdgeInsets.only(left: 4.w, right: 4.2, top: 2.h, bottom: 2.h),
+            child: ListView.builder(
+                itemCount: files.length,
+                itemBuilder: (_, i) => Text(
+                  files[i].name,
+                  style: GoogleFonts.comfortaa(
+                    textStyle: TextStyle(
+                      fontSize: 10.sp,
+                      color: Theme.of(context).colorScheme.background ==
+                              const Color.fromRGBO(242, 242, 242, 1)
+                          ? Colors.black
+                          : Colors.grey,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    height: 1.7,
                   ),
-                  height: 1.7,
                 ),
               ),
-            ),
+          ),
     );
   }
 }
