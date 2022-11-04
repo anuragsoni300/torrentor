@@ -3,6 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/files.dart';
 import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/name.dart';
 
+import 'detailscreenhelper/extradetails.dart/extradetails.dart';
+
 class DetailScreen extends StatelessWidget {
   final String name;
   const DetailScreen({super.key, required this.name});
@@ -20,6 +22,8 @@ class DetailScreen extends StatelessWidget {
                   MyName(name: name),
                   const SizedBox(height: 20),
                   const Files(),
+                  const SizedBox(height: 20),
+                  MoreDetails(width: 92.w),
                 ],
               ),
             ),
