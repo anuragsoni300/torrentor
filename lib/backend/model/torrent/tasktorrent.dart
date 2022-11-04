@@ -16,7 +16,7 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   ValueNotifier ulploadSpeedValue = ValueNotifier('0 B');
   Torrent get model => _model;
   TorrentTask get task => _task;
-  bool get isPaused => _task.isPaused;
+  ValueNotifier<bool> isPaused = ValueNotifier<bool>(false);
 
   TaskTorrent(this._task, this._infoHashBuffer, this._model);
 
@@ -28,16 +28,19 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
   @override
   void resume() {
     _task.resume();
+    isPaused.value = false;
   }
 
   @override
   void pause() {
     _task.pause();
+    isPaused.value = true;
   }
 
   @override
   void stop() {
     _task.stop();
+    isPaused.value = true;
   }
 
   @override
@@ -74,7 +77,7 @@ class TaskTorrent extends BaseTaskTorrent with ChangeNotifier {
       downloadSpeedValue.value = formatBytes((ds).toInt(), 2);
       ulploadSpeedValue.value = formatBytes((ps).toInt(), 2);
       if (progress == '100.00%') {
-        _task.stop();
+        pause();
         timer.cancel();
       }
       // log('Progress : $progress , Peers:($active/$seeders/$all)($utpc) upload speed : ($utpu)($aps/$ps)kb/s');

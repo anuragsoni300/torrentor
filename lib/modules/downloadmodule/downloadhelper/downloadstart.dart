@@ -20,7 +20,6 @@ class DownloadStart extends StatefulWidget {
 }
 
 class _DownloadStartState extends State<DownloadStart> {
-  bool isPaused = false;
   @override
   Widget build(BuildContext context) {
     var backC = Theme.of(context).colorScheme.background;
@@ -55,25 +54,26 @@ class _DownloadStartState extends State<DownloadStart> {
                 children: [
                   Provider.of<TaskTorrent?>(context) == null
                       ? const CircularProgressIndicator()
-                      : IconButton(
-                          onPressed: () {
-                            isPaused
-                                ? Provider.of<TaskTorrent?>(context,
-                                        listen: false)!
-                                    .resume()
-                                : Provider.of<TaskTorrent?>(context,
-                                        listen: false)!
-                                    .pause();
-                            setState(() {
-                              isPaused = !isPaused;
-                            });
-                          },
-                          icon: Icon(
-                            isPaused ? Icons.play_arrow_rounded : Icons.pause,
-                            color: Theme.of(context).colorScheme.brightness ==
-                                    Brightness.dark
-                                ? Colors.grey
-                                : Colors.black,
+                      : ValueListenableBuilder<bool>(
+                          valueListenable:
+                              Provider.of<TaskTorrent?>(context)!.isPaused,
+                          builder: (_, c, __) => IconButton(
+                            onPressed: () {
+                              c
+                                  ? Provider.of<TaskTorrent?>(context,
+                                          listen: false)!
+                                      .resume()
+                                  : Provider.of<TaskTorrent?>(context,
+                                          listen: false)!
+                                      .pause();
+                            },
+                            icon: Icon(
+                              c ? Icons.play_arrow_rounded : Icons.pause,
+                              color: Theme.of(context).colorScheme.brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey
+                                  : Colors.black,
+                            ),
                           ),
                         ),
                   Provider.of<TaskTorrent?>(context) == null

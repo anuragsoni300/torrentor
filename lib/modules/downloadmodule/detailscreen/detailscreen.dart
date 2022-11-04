@@ -18,6 +18,7 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   MyName(name: name),
+                  const SizedBox(height: 20),
                   const Files(),
                 ],
               ),

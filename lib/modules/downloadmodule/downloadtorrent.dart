@@ -72,11 +72,13 @@ class _TorrentDownloadState extends State<TorrentDownload>
     String name = widget.metaData == null
         ? widget.infoHash
         : String.fromCharCodes(widget.metaData["name"]);
-    return FutureProvider<TaskTorrent?>(
-      initialData: null,
-      create: (context) {
-        return torrentStarter();
-      },
+    return MultiProvider(
+      providers: [
+        FutureProvider<TaskTorrent?>(
+          initialData: null,
+          create: (context) => torrentStarter(),
+        ),
+      ],
       child: Padding(
         padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h),
         child: OpenContainer(
