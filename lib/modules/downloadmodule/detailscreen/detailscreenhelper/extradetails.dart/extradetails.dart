@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
+import 'package:torrentor/common/percentindicator.dart';
 
+import '../../../../../backend/model/torrent/tasktorrent.dart';
 import 'details/downloadspeed.dart';
 import 'details/peers.dart';
 import 'details/seeders.dart';
@@ -11,25 +15,41 @@ class MoreDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              SizedBox(width: width / 2, child: const MyMoreSize()),
-              SizedBox(width: width / 2, child: const CurrentMoreSeeders()),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(
+          width: width / 3,
+          child: Column(
+            children: const [
+              MyMoreSize(),
+              CurrentMoreSeeders(),
             ],
           ),
-          Row(
-            children: [
-              SizedBox(width: width / 2, child: const PeersMoreCount()),
-              SizedBox(width: width / 2, child: const DownloadMoreSpeed()),
+        ),
+        SizedBox(
+          width: width / 3,
+          child: Column(
+            children: const [
+              PeersMoreCount(),
+              DownloadMoreSpeed(),
             ],
           ),
-        ],
-      ),
+        ),
+        Provider.of<TaskTorrent?>(context) == null
+            ? const PercentIndicator(progress: 0.00)
+            : ValueListenableBuilder<String>(
+                valueListenable:
+                    Provider.of<TaskTorrent?>(context)!.progressValue,
+                builder: (_, c, __) {
+                  double progress = double.parse(c.replaceAll('%', ''));
+                  return PercentIndicator(
+                    progress: progress,
+                    size: 6.w,
+                  );
+                },
+              ),
+      ],
     );
   }
 }
