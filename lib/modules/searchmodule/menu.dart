@@ -196,8 +196,6 @@ class CheckedMyPopupMenuItem<T> extends MyPopupMenuItem<T> {
           child: child,
         );
   final bool checked;
-  @override
-  Widget? get child => super.child;
 
   @override
   MyPopupMenuItemState<T, CheckedMyPopupMenuItem<T>> createState() =>

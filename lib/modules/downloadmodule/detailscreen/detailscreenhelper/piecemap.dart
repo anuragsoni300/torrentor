@@ -18,13 +18,15 @@ class PieceMap extends StatelessWidget {
         crossAxisSpacing: 2,
         mainAxisSpacing: 2,
       ),
-      itemBuilder: (_, i) => ValueListenableBuilder<List<int>?>(
+      itemBuilder: (_, i) => ValueListenableBuilder<Set<int>?>(
         valueListenable: Provider.of<TaskTorrent?>(context)!.completedPieces,
-        builder: (_, c, __) => Container(
-          height: 1.h,
-          width: 1.h,
-          color: c!.contains(i) ? Colors.green : Colors.blueAccent,
-        ),
+        builder: (_, c, __) {
+          return Container(
+            height: 1.h,
+            width: 1.h,
+            color: c!.toList().contains(i) ? Colors.green : Colors.blueAccent,
+          );
+        },
       ),
     );
   }

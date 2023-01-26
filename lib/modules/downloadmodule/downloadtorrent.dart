@@ -33,11 +33,6 @@ class _TorrentDownloadState extends State<TorrentDownload>
   TaskTorrent? taskTorrent;
   CommonModel commonModel = CommonModel();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   Future<TaskTorrent> torrentStarter() async {
     String path = await commonModel.savePathFetcher();
     late List<dynamic> metaData;
