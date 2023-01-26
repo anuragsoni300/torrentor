@@ -53,7 +53,7 @@ class PeersMoreCount extends StatelessWidget {
           size: 6.w,
           color: Theme.of(context).colorScheme.brightness == Brightness.dark
               ? Colors.grey
-              : Colors.black,
+              : Colors.black87,
         ),
       ],
     );

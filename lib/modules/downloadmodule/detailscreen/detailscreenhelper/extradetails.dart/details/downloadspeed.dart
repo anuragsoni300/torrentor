@@ -55,7 +55,7 @@ class _DownloadMoreSpeedState extends State<DownloadMoreSpeed> {
           size: 7.w,
           color: Theme.of(context).colorScheme.brightness == Brightness.dark
               ? Colors.grey
-              : Colors.black,
+              : Colors.black87,
         ),
       ],
     );

@@ -5,48 +5,73 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:torrentor/backend/model/torrent/tasktorrent.dart';
 
-class Files extends StatelessWidget {
+class Files extends StatefulWidget {
   const Files({super.key});
 
   @override
+  State<Files> createState() => _FilesState();
+}
+
+class _FilesState extends State<Files> {
+  bool open = true;
+  @override
   Widget build(BuildContext context) {
-    var backC = Theme.of(context).colorScheme.background;
     var files = Provider.of<TaskTorrent?>(context)?.model.files;
-    return ClayContainer(
-      height: 300,
-      width: 92.w,
-      parentColor: backC,
-      surfaceColor: backC,
-      color: backC,
-      curveType: CurveType.convex,
-      borderRadius: 1.3.h,
-      spread: 0,
-      child: files == null
-          ? const SizedBox()
-          : ClipRRect(
-              borderRadius: BorderRadius.circular(1.3.h),
-              child: ListView.builder(
-                itemCount: files.length,
-                itemBuilder: (_, i) => Padding(
-                  padding: EdgeInsets.only(
-                      left: 4.w, right: 4.2, top: 2.h, bottom: 2.h),
-                  child: Text(
-                    files[i].name,
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                        fontSize: 10.sp,
-                        color: Theme.of(context).colorScheme.background ==
-                                const Color.fromRGBO(242, 242, 242, 1)
-                            ? Colors.black
-                            : Colors.grey,
+    return files == null
+        ? const SizedBox()
+        : Padding(
+            padding: EdgeInsets.only(bottom: 10.w),
+            child: ExpansionPanelList(
+              expandedHeaderPadding: EdgeInsets.zero,
+              elevation: 0,
+              animationDuration: const Duration(milliseconds: 400),
+              expansionCallback: (i, isOpen) => {
+                setState(() {
+                  open = !open;
+                })
+              },
+              children: [
+                ExpansionPanel(
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  isExpanded: open,
+                  canTapOnHeader: true,
+                  headerBuilder: (context, isOpen) => Padding(
+                    padding: EdgeInsets.only(top: 1.h),
+                    child: Text(
+                      'FILES - ${files.length}',
+                      style: TextStyle(
+                        color: Colors.deepOrange,
+                        height: 1.5,
+                        fontFamily: 'comfortaa',
                         fontWeight: FontWeight.w700,
+                        fontSize: 16.sp,
                       ),
-                      height: 1.7,
+                    ),
+                  ),
+                  body: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: files.length,
+                    itemBuilder: (_, i) => Padding(
+                      padding: EdgeInsets.only(top: 2.h),
+                      child: Text(
+                        files[i].name,
+                        style: GoogleFonts.comfortaa(
+                          textStyle: TextStyle(
+                            fontSize: 10.sp,
+                            color: Theme.of(context).colorScheme.background ==
+                                    const Color.fromRGBO(242, 242, 242, 1)
+                                ? Colors.black
+                                : Colors.grey,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          height: 1.7,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-    );
+          );
   }
 }
