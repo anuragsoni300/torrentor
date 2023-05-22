@@ -102,8 +102,8 @@ class SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ),
                     ),
-                    Wrap(
-                      children: const [
+                    const Wrap(
+                      children: [
                         SettingHelper(index: 0),
                         SettingHelper(index: 1),
                         SettingHelper(index: 2),
