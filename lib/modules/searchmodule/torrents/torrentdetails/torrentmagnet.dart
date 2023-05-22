@@ -56,7 +56,7 @@ class TorrentMagnetState extends State<TorrentMagnet>
         Clipboard.setData(
           ClipboardData(
             text: widget.data!.infoHash.toString().contains('magnet')
-                ? widget.data!.infoHash
+                ? widget.data!.infoHash!
                 : 'magnet:?xt=urn:btih:${widget.data!.infoHash}',
           ),
         );

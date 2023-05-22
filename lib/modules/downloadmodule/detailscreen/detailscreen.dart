@@ -5,7 +5,7 @@ import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper
 import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/name.dart';
 import 'package:torrentor/modules/downloadmodule/detailscreen/detailscreenhelper/piecemap.dart';
 import '../../../backend/model/torrent/tasktorrent.dart';
-import 'detailscreenhelper/extradetails.dart/extradetails.dart';
+// import 'detailscreenhelper/extradetails.dart/extradetails.dart';
 
 class DetailScreen extends StatelessWidget {
   final String name;
@@ -32,7 +32,7 @@ class DetailScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              MoreDetails(width: 92.w),
+              // MoreDetails(width: 92.w),
             ],
           ),
           Row(
